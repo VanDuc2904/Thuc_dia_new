@@ -132,10 +132,6 @@
     <h1>Bản đồ địa chất thực địa</h1>
     <input type="number" id="inputId" placeholder="Enter ID">
     <button onclick="fetchData()">Fetch Data</button>
-    <input type="number" id="x_tam" placeholder="Nhập X_tam" step="any">
-    <input type="number" id="y_tam" placeholder="Nhập Y_tam" step="any">
-    <button onclick="setCoordinatesFromXY()">Tìm kiếm theo tọa độ</button>
-
     <div id="resultContainer"> 
         <button class="close-btn" onclick="closeResult()">Đóng</button>
         <pre id="result"></pre>
@@ -195,36 +191,6 @@
         function closeResult() {
             document.getElementById('resultContainer').style.display = "none"; 
             document.getElementById('result').innerText = ''; 
-        }
-
-        function setCoordinatesFromXY() {
-            const xTam = parseFloat(document.getElementById('x_tam').value);
-            const yTam = parseFloat(document.getElementById('y_tam').value);
-
-            if (!isNaN(xTam) && !isNaN(yTam)) {
-                const userLocation = { lat: yTam, lng: xTam }; // Y_tam là latitude, X_tam là longitude
-
-                // Di chuyển bản đồ đến tọa độ nhập
-                map.setCenter(userLocation);
-                map.setZoom(14); // Tùy chọn để thay đổi mức zoom
-
-                // Tạo marker cho tọa độ người dùng nhập
-                new google.maps.Marker({
-                    position: userLocation,
-                    map: map,
-                    title: 'Vị trí đã tìm',
-                    icon: {
-                        path: google.maps.SymbolPath.CIRCLE,
-                        scale: 10,
-                        fillColor: 'red',
-                        fillOpacity: 1,
-                        strokeWeight: 2,
-                        strokeColor: 'white'
-                    }
-                });
-            } else {
-                alert('Vui lòng nhập tọa độ hợp lệ.');
-            }
         }
     </script>
 
