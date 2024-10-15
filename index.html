@@ -210,8 +210,8 @@
             });
         }
         function fetchDataByCoordinates() {
-            const inputX = document.getElementById('inputX').value.replace(",", "."); // Chuyển dấu phẩy thành dấu chấm
-            const inputY = document.getElementById('inputY').value.replace(",", "."); // Chuyển dấu phẩy thành dấu chấm
+            const inputX = document.getElementById('inputX').value.replace(",", "."); 
+            const inputY = document.getElementById('inputY').value.replace(",", "."); 
 
             const sheetId = '1iA07wmc0Fma1xiMfm1eUNP3pR3P6G-fPFM1ktmSBEiI'; 
             const range = 'Sheet1!A2:L'; 
@@ -225,10 +225,9 @@
                 let closestRow = null;
                 let closestDistance = Infinity;
 
-                // Tìm hàng có tọa độ gần nhất
                 data.forEach(row => {
-                    const X_tam = parseFloat(row[9].replace(",", ".")); // Chuyển đổi tọa độ từ bảng
-                    const Y_tam = parseFloat(row[10].replace(",", ".")); // Chuyển đổi tọa độ từ bảng
+                    const X_tam = parseFloat(row[9].replace(",", ".")); 
+                    const Y_tam = parseFloat(row[10].replace(",", ".")); 
 
                     const distance = getDistance(parseFloat(inputX), parseFloat(inputY), X_tam, Y_tam);
                     if (distance < closestDistance) {
@@ -237,7 +236,6 @@
                     }
                 });
 
-                // Hiển thị kết quả
                 if (closestRow) {
                     document.getElementById('resultContainer').style.display = "block";
                     document.getElementById('result').innerHTML = `
@@ -265,16 +263,15 @@
             });
         }
 
-        // Hàm tính khoảng cách giữa hai tọa độ (theo km)
         function getDistance(lat1, lon1, lat2, lon2) {
-            const R = 6371; // Bán kính trái đất (km)
+            const R = 6371; 
             const dLat = (lat2 - lat1) * Math.PI / 180;
             const dLon = (lon2 - lon1) * Math.PI / 180;
             const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
                       Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
                       Math.sin(dLon / 2) * Math.sin(dLon / 2);
             const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-            return R * c; // Trả về khoảng cách tính bằng km
+            return R * c; 
         }
 
         function closeResult() {
