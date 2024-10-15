@@ -148,6 +148,9 @@
 <body>
     <h1>Bản đồ địa chất thực địa</h1>
     <input type="number" id="inputId" placeholder="Nhập ID">
+    <input type="text" id="inputX" placeholder="Nhập X_tam (ví dụ: 105,005)">
+    <input type="text" id="inputY" placeholder="Nhập Y_tam (ví dụ: 21,8166)">
+    <button onclick="fetchDataByCoordinates()">Tìm theo tọa độ</button>
     <button onclick="fetchData()">Lấy Dữ Liệu</button>
     <div id="resultContainer"> 
         <button class="close-btn" onclick="closeResult()">Đóng</button>
@@ -205,6 +208,70 @@
                 console.error("Error fetching data:", error);
                 document.getElementById('result').innerText = `Lỗi khi lấy dữ liệu: ${error.result.error.message}`;
             });
+        }
+        function fetchDataByCoordinates() {
+            const inputX = document.getElementById('inputX').value.replace(",", "."); 
+            const inputY = document.getElementById('inputY').value.replace(",", "."); 
+
+            const sheetId = '1iA07wmc0Fma1xiMfm1eUNP3pR3P6G-fPFM1ktmSBEiI'; 
+            const range = 'Sheet1!A2:L'; 
+
+            gapi.client.sheets.spreadsheets.values.get({
+                spreadsheetId: sheetId,
+                range: range,
+            }).then(function (response) {
+                const data = response.result.values;
+
+                let closestRow = null;
+                let closestDistance = Infinity;
+
+                data.forEach(row => {
+                    const X_tam = parseFloat(row[9].replace(",", ".")); 
+                    const Y_tam = parseFloat(row[10].replace(",", ".")); 
+
+                    const distance = getDistance(parseFloat(inputX), parseFloat(inputY), X_tam, Y_tam);
+                    if (distance < closestDistance) {
+                        closestDistance = distance;
+                        closestRow = row;
+                    }
+                });
+
+                if (closestRow) {
+                    document.getElementById('resultContainer').style.display = "block";
+                    document.getElementById('result').innerHTML = `
+                        <table>
+                            <tr><th>FID</th><td>${closestRow[0]}</td></tr>
+                            <tr><th>Shape</th><td>${closestRow[1]}</td></tr>
+                            <tr><th>id</th><td>${closestRow[2]}</td></tr>
+                            <tr><th>DanhPhap</th><td>${closestRow[3]}</td></tr>
+                            <tr><th>Tuoi_DC</th><td><span class="mapsymbol-text">${closestRow[4]}</span></td></tr>
+                            <tr><th>Kyhieu_Tta</th><td><span class="mapsymbol-text">${closestRow[5]}</span></td></tr>
+                            <tr><th>Hetang_phu</th><td>${closestRow[6]}</td></tr>
+                            <tr><th>Diatang</th><td>${closestRow[7]}</td></tr>
+                            <tr><th>Stratigrap</th><td>${closestRow[8]}</td></tr>
+                            <tr><th>X_tam</th><td>${closestRow[9]}</td></tr>
+                            <tr><th>Y_tam</th><td>${closestRow[10]}</td></tr>
+                            <tr><th>Dientich</th><td>${closestRow[11]}</td></tr>
+                        </table>
+                    `;
+                } else {
+                    document.getElementById('result').innerText = 'Không tìm thấy dữ liệu cho tọa độ này.';
+                }
+            }, function (error) {
+                console.error("Error fetching data:", error);
+                document.getElementById('result').innerText = `Lỗi khi lấy dữ liệu: ${error.result.error.message}`;
+            });
+        }
+
+        function getDistance(lat1, lon1, lat2, lon2) {
+            const R = 6371; 
+            const dLat = (lat2 - lat1) * Math.PI / 180;
+            const dLon = (lon2 - lon1) * Math.PI / 180;
+            const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                      Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+                      Math.sin(dLon / 2) * Math.sin(dLon / 2);
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+            return R * c; 
         }
 
         function closeResult() {
