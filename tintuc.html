@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thông Tin Dự Báo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="tintuc.css">
+</head>
+<body>
+    <header class="bg-white shadow-sm py-3">
+        <div class="container d-flex justify-content-between align-items-center flex-wrap">
+            <!-- Logo and Title -->
+            <div class="d-flex align-items-center">
+                <a href="index.html">
+                    <img src="logo.jpg" alt="">
+                </a>
+                <div>
+                    <h1 class="fs-5 fw-bold mb-1">CỔNG THÔNG TIN TRƯỢT LỞ YÊN BÁI</h1>
+                    <p class="mb-0 text-muted small">Theo dõi và cập nhật thông tin thời gian thực</p>
+                </div>
+            </div>
+            <!-- Navigation Menu -->
+            <nav class="d-flex flex-wrap align-items-center">
+                <a href="index.html" class="text-dark text-decoration-none me-3">Trang chủ</a>
+                <a href="tintuc.html" class="text-dark text-decoration-none me-3">Tài liệu&Tin tức</a>
+                <!--<div class="dropdown">
+                    <a href="tintuc.htm", class="text-dark text-decoration-none"id="dropdownMenuLink"data-bs-toggle ="dropdown"aria-expanded="false"> 
+                        Tài liệu&Tin tức
+                    </a>
+                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <li><a class="dropdown-item" href="tintuc.htm">Tin tức</a></li>
+                        <li><a class="dropdown-item" href="#">Tài liệu tham khảo</a></li>
+                    </ul>
+                </div>-->
+                <div class="dropdown">
+                    <a href="#" class="text-dark text-decoration-none" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                        Thông tin dự báo trượt lở
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <li><a class="dropdown-item" href="theogio.html">Dự báo theo giờ</a></li>
+                        <li><a class="dropdown-item" href="theongay.html">Dự báo theo ngày</a></li>
+                        <li><a class="dropdown-item" href="#">Thống kê & Biểu đồ</a></li>
+                    </ul>
+                </div>
+                <a href="bandogis.html" class="text-dark text-decoration-none me-3">Bản đồ GIS</a>
+                <a href="lienhe.html" class="text-dark text-decoration-none">Liên hệ</a>
+                <a href="admin.html" class="text-dark text-decoration-none">Đăng nhập</a>
+                <!-- Biểu tượng -->
+                <div class="ms-3 d-flex align-items-center">
+                    <a href="#" class="text-success me-2" title="Chọn Ngôn Ngữ">
+                        <i class="fas fa-globe"></i>
+                    </a>
+                    <a href="#" class="text-success me-2" title="Chọn Kích Thước Văn Bản">
+                        <i class="fas fa-font"></i>
+                    </a>
+                    <a href="mailto:contact@example.com" class="text-success me-2" title="Liên Hệ Email">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                    <a href="#" class="text-success" title="Tìm Kiếm">
+                        <i class="fas fa-search"></i>
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <div class="container">
+        <!-- Left Side: Weather Forecast and Landslide Information -->
+        <div class="left-container">
+            <!-- Weather Forecast -->
+            <div class="weather-container">
+                <h3>DỰ BÁO THỜI TIẾT</h3>
+                <div>
+                    <label for="citySelect">Chọn huyện:</label>
+                    <select id="citySelect" class="form-select">
+                        <option value="Quy Nhơn">TP. Quy Nhơn</option>
+                        <option value="An Lão">An Lão</option>
+                        <option value="Yen Bai">Thành phố Yên Bái</option>
+                        <option value="Tran Yen">Trấn Yên</option>
+                        <option value="Van Chan">Văn Chấn</option>
+                    </select>
+                </div>
+                <div class="forecast">
+                    <p id="location">Khu vực: Đang tải...</p>
+                    <p id="temperature">Nhiệt độ: Đang tải...</p>
+                    <p id="humidity">Độ ẩm: Đang tải...</p>
+                    <p id="wind">Gió: Đang tải...</p>
+                    <p id="weather-status">Trạng thái: Đang tải...</p>
+                </div>
+            </div>
+            <div class="sidebar">
+                <h3>TÀI LIỆU THAM KHẢO</h3>
+                <div class="reference-container">
+                    <!-- Tài liệu 1 -->
+                    <div class="reference-card">
+                        <img src="/tailieuthamkhao/HD_windy.png" alt="Hướng dẫn sử dụng">
+                        <div class="card-content">
+                            <a href="#">HƯỚNG DẪN SỬ DỤNG CÁC THÔNG TIN THỜI TIẾT</a>
+                            <p>
+                                Tài liệu do Đề tài "Nghiên cứu xác định cơ chế hình thành, quy luật phân bố
+                                và cảnh báo sớm tai biến trượt đất quy mô lớn ở Việt Nam."
+                            </p>
+                            <p class="source">Nguồn: ĐTĐL.CN-37/23</p>
+                        </div>
+                    </div>
+                    <!-- Tài liệu 2 -->
+                    <div class="reference-card">
+                        <img src="/tailieuthamkhao/example.png" alt="Tài liệu mẫu">
+                        <div class="card-content">
+                            <a href="#">TÀI LIỆU 2: NGHIÊN CỨU SẠT LỞ ĐẤT</a>
+                            <p>
+                                Đề cập chi tiết đến hiện tượng sạt lở và biện pháp ứng phó hiệu quả.
+                            </p>
+                            <p class="source">Nguồn: Nghiên cứu ABC</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                     
+        </div>
+        <div class="right-section">
+            <!-- Tin tức 1 -->
+            <div class="reference-item">
+                <img src="bantin_1.jpg" alt="Tin tức 1">
+                <div class="content">
+                    <h4>Sạt Lở Đất Liên Tiếp Diễn Ra Tại Yên Bái</h4>
+                    <p>
+                        Lượng mưa từ 19h00' ngày 08/9 đến 6h00' ngày 09/9/2024 phổ biến từ 50 - 150mm...
+                    </p>
+                    <p>Ngày đăng: 10/09/2024</p>
+                </div>
+            </div>
+        
+            <!-- Tin tức 2 -->
+            <div class="reference-item">
+                <img src="bantin_2.jpg" alt="Tin tức 2">
+                <div class="content">
+                    <h4><a href=""></a>Yên Bái: Tập Trung Khắc Phục Sạt Lở Đường Tỉnh 164</h4>
+                    <p>
+                        Mưa lớn kéo dài đã làm sạt lở cả quả đồi, với hàng chục nghìn m3 đất đá sạt...
+                    </p>
+                    <p>Ngày đăng: 20/08/2024</p>
+                </div>
+            </div>
+            <div class="reference-item">
+                <img src="bantin_2.jpg" alt="Tin tức 2">
+                <div class="content">
+                    <h4><a href=""></a>Yên Bái: Tập Trung Khắc Phục Sạt Lở Đường Tỉnh 164</h4>
+                    <p>
+                        Mưa lớn kéo dài đã làm sạt lở cả quả đồi, với hàng chục nghìn m3 đất đá sạt...
+                    </p>
+                    <p>Ngày đăng: 20/08/2024</p>
+                </div>
+            </div>
+            <div class="reference-item">
+                <img src="bantin_2.jpg" alt="Tin tức 2">
+                <div class="content">
+                    <h4><a href=""></a>Yên Bái: Tập Trung Khắc Phục Sạt Lở Đường Tỉnh 164</h4>
+                    <p>
+                        Mưa lớn kéo dài đã làm sạt lở cả quả đồi, với hàng chục nghìn m3 đất đá sạt...
+                    </p>
+                    <p>Ngày đăng: 20/08/2024</p>
+                </div>
+            </div>
+            <div class="reference-item">
+                <img src="bantin_2.jpg" alt="Tin tức 2">
+                <div class="content">
+                    <h4><a href=""></a>Yên Bái: Tập Trung Khắc Phục Sạt Lở Đường Tỉnh 164</h4>
+                    <p>
+                        Mưa lớn kéo dài đã làm sạt lở cả quả đồi, với hàng chục nghìn m3 đất đá sạt...
+                    </p>
+                    <p>Ngày đăng: 20/08/2024</p>
+                </div>
+            </div>
+            <div class="reference-item">
+                <img src="bantin_2.jpg" alt="Tin tức 2">
+                <div class="content">
+                    <h4><a href=""></a>Yên Bái: Tập Trung Khắc Phục Sạt Lở Đường Tỉnh 164</h4>
+                    <p>
+                        Mưa lớn kéo dài đã làm sạt lở cả quả đồi, với hàng chục nghìn m3 đất đá sạt...
+                    </p>
+                    <p>Ngày đăng: 20/08/2024</p>
+                </div>
+            </div>
+            <div class="reference-item">
+                <img src="bantin_2.jpg" alt="Tin tức 2">
+                <div class="content">
+                    <h4><a href=""></a>Yên Bái: Tập Trung Khắc Phục Sạt Lở Đường Tỉnh 164</h4>
+                    <p>
+                        Mưa lớn kéo dài đã làm sạt lở cả quả đồi, với hàng chục nghìn m3 đất đá sạt...
+                    </p>
+                    <p>Ngày đăng: 20/08/2024</p>
+                </div>
+            </div>
+            <div class="reference-item">
+                <img src="bantin_2.jpg" alt="Tin tức 2">
+                <div class="content">
+                    <h4><a href=""></a>Yên Bái: Tập Trung Khắc Phục Sạt Lở Đường Tỉnh 164</h4>
+                    <p>
+                        Mưa lớn kéo dài đã làm sạt lở cả quả đồi, với hàng chục nghìn m3 đất đá sạt...
+                    </p>
+                    <p>Ngày đăng: 20/08/2024</p>
+                </div>
+            </div>
+            <div class="pagination">
+                <button class="page-btn" data-page="1">1</button>
+                <button class="page-btn" data-page="2">2</button>
+                <button class="page-btn" data-page="3">3</button>
+                <!-- Thêm các nút khác nếu cần -->
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

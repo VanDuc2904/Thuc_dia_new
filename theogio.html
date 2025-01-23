@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cổng thông tin trượt lở Yên Bái</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="cssdubao.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="bg-white shadow-sm py-3">
+        <div class="container d-flex justify-content-between align-items-center flex-wrap">
+
+            <div class="d-flex align-items-center">
+                <a href="index.html">
+                    <img src="logo.jpg" alt="">
+                </a>
+                <div>
+                    <h1 class="fs-5 fw-bold mb-1">CỔNG THÔNG TIN TRƯỢT LỞ YÊN BÁI</h1>
+                    <p class="mb-0 text-muted small">Theo dõi và cập nhật thông tin thời gian thực</p>
+                </div>
+            </div>
+            <nav class="d-flex flex-wrap align-items-center">
+                <a href="index.html" class="text-dark text-decoration-none me-3">Trang chủ</a>
+                <a href="tintuc.html" class="text-dark text-decoration-none me-3">Tài liệu&Tin tức</a>
+                <!--<div class="dropdown">
+                    <a href="tintuc.htm", class="text-dark text-decoration-none"id="dropdownMenuLink"data-bs-toggle ="dropdown"aria-expanded="false"> 
+                        Tài liệu&Tin tức
+                    </a>
+                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <li><a class="dropdown-item" href="tintuc.htm">Tin tức</a></li>
+                        <li><a class="dropdown-item" href="#">Tài liệu tham khảo</a></li>
+                    </ul>
+                </div>-->
+                <div class="dropdown">
+                    <a href="#" class="text-dark text-decoration-none" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                        Thông tin dự báo trượt lở
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <li><a class="dropdown-item" href="theogio.html">Dự báo theo giờ</a></li>
+                        <li><a class="dropdown-item" href="theongay.html">Dự báo theo ngày</a></li>
+                        <li><a class="dropdown-item" href="#">Thống kê & Biểu đồ</a></li>
+                    </ul>
+                </div>
+                <a href="bandogis.html" class="text-dark text-decoration-none me-3">Bản đồ GIS</a>
+                <a href="#" class="text-dark text-decoration-none">Liên hệ</a>
+                <a href="admin.html" class="text-dark text-decoration-none">Đăng nhập</a>
+                <!-- Biểu tượng -->
+                <div class="ms-3 d-flex align-items-center">
+                    <a href="#" class="text-success me-2" title="Chọn Ngôn Ngữ">
+                        <i class="fas fa-globe"></i>
+                    </a>
+                    <a href="#" class="text-success me-2" title="Chọn Kích Thước Văn Bản">
+                        <i class="fas fa-font"></i>
+                    </a>
+                    <a href="mailto:contact@example.com" class="text-success me-2" title="Liên Hệ Email">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                    <a href="#" class="text-success" title="Tìm Kiếm">
+                        <i class="fas fa-search"></i>
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <div class="container">
+        <div class="left-container">
+            <div class="col-md-6">
+                <div class="weather-container">
+                    <h3 class="text-center">DỰ BÁO THỜI TIẾT</h3>
+                    <div class="d-flex justify-content-between mb-3">
+                        <div>
+                            <label for="districtSelect">Chọn huyện:</label>
+                            <select id="districtSelect" class="form-select">
+                                <option value="">Chọn huyện</option>
+                                <option value="Mu Cang Chai">Mù Cang Chải</option>
+                                <option value="Yen Bai">Yên Bái</option>
+                                <option value="Tran Yen">Trấn Yên</option>
+                                <option value="Van Chan">Văn Chấn</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="wardSelect">Chọn xã:</label>
+                            <select id="wardSelect" class="form-select">
+                                <option value="">Chọn xã</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="current-weather">
+                        <div id="location" class="temperature">Khu vực: Đang tải...</div>
+                        <div id="temperature" class="details">Nhiệt độ: Đang tải...</div>
+                        <div id="humidity" class="details">Độ ẩm: Đang tải...</div>
+                        <div id="wind" class="details">Gió: Đang tải...</div>
+                        <div id="weather-status" class="details">Trạng thái: Đang tải...</div>
+                    </div>
+                    <div class="forecast">
+                        <h5>Dự Báo Thời Tiết 5 Ngày</h5>
+                        <div id="forecast-content">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script>
+                const defaultLocation = {
+                    lat: 21.7225,
+                    lon: 104.9113,
+                    name: "Thành phố Yên Bái",
+                };
+
+                const locationMap = {
+                    "Mu Cang Chai": {
+                        "Mồ Dề": { lat: 21.7008, lon: 104.1333 },
+                        "La Pán Tẩn": { lat: 21.7070, lon: 104.1753 },
+                        "Chế Tạo": { lat: 21.5946, lon: 104.0203 },
+                    },
+                    "Yen Bai": {
+                        "Nguyễn Thái Học": { lat: 21.7225, lon: 104.9113 },
+                        "Hồng Hà": { lat: 21.7345, lon: 104.9052 },
+                        "Minh Tân": { lat: 21.7402, lon: 104.9145 },
+                    },
+                    "Tran Yen": {
+                        "Tân Đồng": { lat: 21.6876, lon: 105.0567 },
+                        "Cường Thịnh": { lat: 21.6637, lon: 105.0378 },
+                        "Hưng Thịnh": { lat: 21.6468, lon: 105.0549 },
+                    },
+                    "Van Chan": {
+                        "Sơn Thịnh": { lat: 21.5098, lon: 104.7131 },
+                        "Suối Giàng": { lat: 21.5770, lon: 104.7102 },
+                        "Tú Lệ": { lat: 21.5770, lon: 104.4447 },
+                    },
+                };
+                document.getElementById("districtSelect").addEventListener("change", (event) => {
+                    const district = event.target.value;
+                    const wardSelect = document.getElementById("wardSelect");
+                    wardSelect.innerHTML = '<option value="">Chọn xã</option>';
+                    if (locationMap[district]) {
+                        for (const ward in locationMap[district]) {
+                            const option = document.createElement("option");
+                            option.value = ward;
+                            option.textContent = ward;
+                            wardSelect.appendChild(option);
+                        }
+                    }
+
+                    console.log("Selected district:", district);
+                    console.log("Available wards:", locationMap[district]);
+                });
+                document.getElementById("wardSelect").addEventListener("change", (event) => {
+                    const ward = event.target.value;
+                    const district = document.getElementById("districtSelect").value;
+
+                    if (ward && district && locationMap[district][ward]) {
+                        const { lat, lon } = locationMap[district][ward];
+                        fetchWeatherData(lat, lon, `${ward}, ${district}`);
+                    } else {
+                        console.error("Không tìm thấy dữ liệu vị trí!");
+                    }
+                });
+
+                async function fetchWeatherData(lat, lon, locationName = defaultLocation.name) {
+                    const apiKey = "12118cdb333f0039947273d009989237";
+                    const baseUrl = "https://api.openweathermap.org/data/2.5/";
+
+                    try {
+                        const weatherResponse = await fetch(
+                            `${baseUrl}weather?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}&lang=vi`
+                        );
+                        const forecastResponse = await fetch(
+                            `${baseUrl}forecast?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}&lang=vi`
+                        );
+
+                        if (!weatherResponse.ok || !forecastResponse.ok) {
+                            throw new Error("Không tìm thấy dữ liệu thời tiết!");
+                        }
+
+                        const weatherData = await weatherResponse.json();
+                        const forecastData = await forecastResponse.json();
+
+                        displayWeatherData(weatherData, locationName);
+                        displayForecastData(forecastData);
+                    } catch (error) {
+                        console.error("Lỗi khi lấy dữ liệu thời tiết:", error);
+                        document.getElementById("location").textContent = "Khu vực: Lỗi khi tải dữ liệu";
+                    }
+                }
+
+                function displayWeatherData(data, locationName) {
+                    const temperature = data.main.temp;
+                    const description = data.weather[0].description;
+                    const humidity = data.main.humidity;
+                    const windSpeed = data.wind.speed;
+
+                    document.getElementById("location").textContent = locationName;
+                    document.getElementById("temperature").textContent = `Nhiệt độ: ${temperature}°C`;
+                    document.getElementById("humidity").textContent = `Độ ẩm: ${humidity}%`;
+                    document.getElementById("wind").textContent = `Gió: ${windSpeed} km/h`;
+                    document.getElementById("weather-status").textContent = `Trạng thái: ${description}`;
+                }
+
+                function displayForecastData(data) {
+                    const forecastContainer = document.getElementById("forecast-content");
+                    forecastContainer.innerHTML = ""; 
+
+                    const dailyForecasts = data.list.filter(item => item.dt_txt.includes("12:00:00"));
+
+                    dailyForecasts.forEach(item => {
+                        const date = new Date(item.dt_txt);
+                        const day = date.toLocaleDateString("vi-VN", { weekday: "short", day: "2-digit", month: "2-digit" });
+                        const icon = item.weather[0].icon;
+                        const temp = item.main.temp;
+
+                        const forecastItem = document.createElement("div");
+                        forecastItem.className = "forecast-item";
+
+                        forecastItem.innerHTML = `
+                            <div>${day}</div>
+                            <img src="https://openweathermap.org/img/wn/${icon}@2x.png" alt="Weather Icon" style="width: 40px;">
+                            <div><strong>${temp}°C</strong></div>
+                        `;
+                        forecastContainer.appendChild(forecastItem);
+                    });
+                }
+
+fetchWeatherData(defaultLocation.lat, defaultLocation.lon, defaultLocation.name);
+
+            </script>
+            <div class="sidebar">
+                <h3>DỰ BÁO LÚC: 01:45 NGÀY 17/01</h3>
+                <div class="risk-info">
+                    <p>Số điểm có nguy cơ trượt nông <span class="text-warning">RẤT CAO:</span> 0</p>
+                    <p>Số điểm có nguy cơ trượt nông <span class="text-warning">CAO:</span> 0</p>
+                    <p>Số điểm có nguy cơ trượt nông <span class="text-info">TRUNG BÌNH:</span> 0</p>
+                    <p>Số điểm có nguy cơ trượt nông <span class="text-success">THẤP:</span> 1</p>
+                    <p>Số điểm có nguy cơ trượt nông <span class="text-success">RẤT THẤP:</span> 0</p>
+                </div>
+            </div>
+        </div>
+        <div class="main-content">
+            <h2>THÔNG TIN DỰ BÁO TRƯỢT LỞ THEO GIỜ</h2>
+            <p class="thongtintheogio"> Cập nhật lúc:......</p>
+            <p class="chugiaithongbaotheogio">(Thông tin dự báo chi tiết theo giờ đến cấp xã, liên hệ e-mail: quynhdtgeo @gmail.com hoặc contact@igevn.com)</p>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Huyện</th>
+                            <th>Vị trí</th>
+                            <th>16/01</th>
+                            <th>17/01</th>
+                            <th>18/01</th>
+                            <th>19/01</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Mù Cang Chải</td>
+                            <td>Mồ Dề</td>
+                            <td>⚠️</td>
+                            <td>⚠️</td>
+                            <td>⚠️</td>
+                            <td>⚠️</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>An Lão</td>
+                            <td></td>
+                            <td>⚠️</td>
+                            <td>⚠️</td>
+                            <td>⚠️</td>
+                            <td>⚠️</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="legend">
+                <h3>CHÚ GIẢI CÁC CẤP NGUY CƠ TRƯỢT LỞ</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Ký Hiệu</th>
+                            <th>Nguy Cơ</th>
+                            <th>Giải Thích</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>0</td>
+                            <td>KHÔNG CÓ</td>
+                            <td>Hiếm khi xảy ra trượt lở</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>RẤT THẤP</td>
+                            <td>Chỉ nguy cơ nhỏ phát sinh trượt lở</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>THẤP</td>
+                            <td>Nguy cơ thấp ở các điểm ít nguy hiểm</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>TRUNG BÌNH</td>
+                            <td>Cần chú ý tại các khu vực nguy cơ</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>CAO</td>
+                            <td>Cảnh báo nguy cơ lớn đến trung bình</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>RẤT CAO</td>
+                            <td>Trượt lở nghiêm trọng có thể xảy ra</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <footer class="text-white text-center py-3" style="background-color: #2a7f36;">
+        <div class="container">
+            <div class="d-flex justify-content-around align-items-center mb-3">
+                <div class="footer-item">
+                    <i class="fas fa-signal"></i> Đang online: <span id="onlineCount">1</span>
+                </div>
+                <div class="footer-item">
+                    <i class="fas fa-clock"></i> Hôm nay: <span id="todayVisitCount">11</span>
+                </div>
+                <div class="footer-item">
+                    <i class="fas fa-users"></i> Tổng lượt truy cập: <span id="totalVisitCount">2,998</span>
+                </div>
+            </div>
+            <p class="mb-0">© 2025 Cổng thông tin trượt lở Yên Bái</p>
+        </div>
+    </footer>
+</body>
+</html>
