@@ -1,0 +1,90 @@
+/* Reset mặc định */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #74ebd5, #acb6e5);
+    min-height: 100vh;
+    padding: 40px;
+    color: #333;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    font-size: 2.5em;
+    color: #2c3e50;
+    margin-bottom: 20px;
+}
+
+select {
+    padding: 12px 20px;
+    font-size: 1.1em;
+    border: none;
+    border-radius: 25px;
+    background: #ecf0f1;
+    color: #2c3e50;
+    cursor: pointer;
+    width: 250px;
+}
+
+.question {
+    margin: 20px 0;
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    border-left: 5px solid #3498db;
+}
+
+.option {
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+}
+
+.option input {
+    margin-right: 15px;
+}
+
+button {
+    padding: 10px 25px;
+    background: #3498db;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+}
+
+button.hidden {
+    display: none;
+}
+
+.correct {
+    color: #27ae60;
+    font-weight: 600;
+}
+
+.incorrect {
+    color: #e74c3c;
+    font-weight: 600;
+}
+
+.description-container, .dialogue-container {
+    margin: 30px 0;
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    border-left: 5px solid #e67e22;
+}
