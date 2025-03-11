@@ -113,14 +113,16 @@ const listeningData = {
         },
         part2: {
             description: "Work-related conversations and recommendations.",
-            dialogue: "Person A: Why can't she pick up her child?\nPerson B: Stay late at the office.\nPerson A: What movie does she recommend?\nPerson B: Action film.\nPerson A: A man is calling his friend. Where is he?\nPerson B: The town hall.\nPerson A: What means of transport does he use to get to work?\nPerson B: By bus.\nPerson A: What time do experts recommend eating fruit?\nPerson B: In the morning.\nPerson A: Why does she wake up early?\nPerson B: To have some quiet time.",
+            dialogue: "Person A: Why can't she pick up her child?\nPerson B: Stay late at the office.\nPerson A: What movie does she recommend?\nPerson B: Action film.\nPerson A: A man is calling his friend. Where is he?\nPerson B: The town hall.\nPerson A: What means of transport does he use to get to work?\nPerson B: By bus.\nPerson A: What time do experts recommend eating fruit?\nPerson B: In the morning.\nPerson A: Why does she wake up early?\nPerson B: To have some quiet time.\nPerson A: Why is he learning to drive?\nPerson B: He has to drive to work.\nPerson A: What does he buy directly at the shop?\nPerson B: Clothes.",
             questions: [
                 { id: 6, text: "Why can't she pick up her child?", options: ["Meet her client", "Have an urgent meeting", "Stay late at the office"], answer: "Stay late at the office" },
                 { id: 7, text: "What movie does she recommend?", options: ["Comedy film", "Action film", "Horror film"], answer: "Action film" },
                 { id: 8, text: "A man is calling his friend. Where is he?", options: ["The park", "The station", "The town hall"], answer: "The town hall" },
                 { id: 9, text: "What means of transport does he use to get to work?", options: ["By bus", "By train", "By car"], answer: "By bus" },
                 { id: 10, text: "What time do experts recommend eating fruit?", options: ["In the morning", "In the afternoon", "In the evening"], answer: "In the morning" },
-                { id: 11, text: "Why does she wake up early?", options: ["To exercise", "To have some quiet time", "To do housework"], answer: "To have some quiet time" }
+                { id: 11, text: "Why does she wake up early?", options: ["To exercise", "To have some quiet time", "To do housework"], answer: "To have some quiet time" },
+                { id: 12, text: "Why is he learning to drive?", options: ["Driving a car is his dream", "He hates public transport", "He has to drive to work"], answer: "He has to drive to work" },
+                { id: 13, text: "What does he buy directly at the shop?", options: ["Books", "Clothes", "Trousers"], answer: "Clothes" }
             ]
         },
         part3: {
@@ -149,23 +151,25 @@ const listeningData = {
     "test10": {
         part1: {
             description: "A suggestion to meet and activities.",
-            dialogue: "Person A: Why did he call his friend?\nPerson B: Suggest a drink.\nPerson A: When did they decide to meet?\nPerson B: 9am on Sunday.\nPerson A: A girl is calling her mother. Which dress does she want?\nPerson B: Long and red.\nPerson A: What day is the new appointment?\nPerson B: Thursday 13th.",
+            dialogue: "Person A: Why did he call his friend?\nPerson B: Suggest a drink.\nPerson A: When did they decide to meet?\nPerson B: 9am on Sunday.\nPerson A: A girl is calling her mother. Which dress does she want?\nPerson B: Long and red.\nPerson A: What day is the new appointment?\nPerson B: Thursday 13th.\nPerson A: A man is calling his wife. Where did they meet?\nPerson B: Outside a shop.",
             questions: [
                 { id: 1, text: "Why did he call his friend?", options: ["To make an appointment", "To say hello", "Suggest a drink"], answer: "Suggest a drink" },
                 { id: 2, text: "When did they decide to meet?", options: ["7am on Friday", "9am on Sunday", "9am on Saturday"], answer: "9am on Sunday" },
                 { id: 3, text: "A girl is calling her mother. Which dress does she want?", options: ["Long and green", "Long and red", "Short and red"], answer: "Long and red" },
-                { id: 4, text: "What day is the new appointment?", options: ["Thursday 13th", "Tuesday 13th", "Wednesday 10th"], answer: "Thursday 13th" }
+                { id: 4, text: "What day is the new appointment?", options: ["Thursday 13th", "Tuesday 13th", "Wednesday 10th"], answer: "Thursday 13th" },
+                { id: 5, text: "A man is calling his wife. Where did they meet?", options: ["At the park", "At the station", "Outside a shop"], answer: "Outside a shop" }
             ]
         },
         part2: {
             description: "Conversations about past activities and locations.",
-            dialogue: "Person A: A man is calling his wife. Where did they meet?\nPerson B: Outside a shop.\nPerson A: What did she do last weekend?\nPerson B: Stayed at home.\nPerson A: How many weeks have they been in India?\nPerson B: 2 weeks.\nPerson A: Where is the office?\nPerson B: Opposite the hotel.\nPerson A: Where do they wait for the bus?\nPerson B: By the hotel’s main entrance.",
+            dialogue: "Person A: What did she do last weekend?\nPerson B: Stayed at home.\nPerson A: How many weeks have they been in India?\nPerson B: 2 weeks.\nPerson A: Where is the office?\nPerson B: Opposite the hotel.\nPerson A: Where do they wait for the bus?\nPerson B: By the hotel’s main entrance.\nPerson A: What does his wife like to do?\nPerson B: Photography.\nPerson A: What outdoor activities do they do in the afternoon?\nPerson B: Play golf.",
             questions: [
-                { id: 5, text: "A man is calling his wife. Where did they meet?", options: ["At the park", "At the station", "Outside a shop"], answer: "Outside a shop" },
                 { id: 6, text: "What did she do last weekend?", options: ["Stayed at home", "Went shopping", "Went to the cinema"], answer: "Stayed at home" },
                 { id: 7, text: "How many weeks have they been in India?", options: ["1 week", "2 weeks", "3 weeks"], answer: "2 weeks" },
                 { id: 8, text: "Where is the office?", options: ["Opposite the hotel", "Near the park", "Opposite the station"], answer: "Opposite the hotel" },
-                { id: 9, text: "Where do they wait for the bus?", options: ["Next to the hotel", "Near the hotel's main entrance", "By the hotel’s main entrance"], answer: "By the hotel’s main entrance" }
+                { id: 9, text: "Where do they wait for the bus?", options: ["Next to the hotel", "Near the hotel's main entrance", "By the hotel’s main entrance"], answer: "By the hotel’s main entrance" },
+                { id: 10, text: "What does his wife like to do?", options: ["Sightseeing", "Going shopping", "Photography"], answer: "Photography" },
+                { id: 11, text: "What outdoor activities do they do in the afternoon?", options: ["Play golf", "Go to dance classes", "Play bridge"], answer: "Play golf" }
             ]
         },
         part3: {
@@ -187,7 +191,9 @@ const listeningData = {
                 { id: 1, text: "Who watches films online?", options: ["Watch films", "Complete assignments", "Communicate with friends", "Find transport information"], answer: "Watch films" },
                 { id: 2, text: "Who uses the internet for assignments?", options: ["Watch films", "Complete assignments", "Communicate with friends", "Find transport information"], answer: "Complete assignments" },
                 { id: 3, text: "Who communicates with friends online?", options: ["Watch films", "Complete assignments", "Communicate with friends", "Find transport information"], answer: "Communicate with friends" },
-                { id: 4, text: "Who finds transport information online?", options: ["Watch films", "Complete assignments", "Communicate with friends", "Find transport information"], answer: "Find transport information" }
+                { id: 4, text: "Who finds transport information online?", options: ["Watch films", "Complete assignments", "Communicate with friends", "Find transport information"], answer: "Find transport information" },
+                { id: 12, text: "The concert will end with?", options: ["A surprise performance", "Some special offers", "The city’s favorite group"], answer: "The city’s favorite group" },
+                { id: 13, text: "What was the writer's first job?", options: ["Cook", "Reporter", "Teacher"], answer: "Teacher" }
             ]
         }
     },
@@ -204,12 +210,14 @@ const listeningData = {
         },
         part2: {
             description: "Work and travel plans.",
-            dialogue: "Person A: What time is the meeting?\nPerson B: 2pm.\nPerson A: Why can't she pick up her child?\nPerson B: Stay late at the office.\nPerson A: How much do the cleaning products cost?\nPerson B: One pound fifty.\nPerson A: Where is she going with her family?\nPerson B: The mountains.",
+            dialogue: "Person A: What time is the meeting?\nPerson B: 2pm.\nPerson A: Why can't she pick up her child?\nPerson B: Stay late at the office.\nPerson A: How much do the cleaning products cost?\nPerson B: One pound fifty.\nPerson A: Where is she going with her family?\nPerson B: The mountains.\nPerson A: What did he usually do last year?\nPerson B: Cycling.\nPerson A: How many minutes did he have to speak?\nPerson B: 15.",
             questions: [
                 { id: 5, text: "What time is the meeting?", options: ["2pm", "10am", "11am"], answer: "2pm" },
                 { id: 6, text: "Why can't she pick up her child?", options: ["Meet her client", "Have an urgent meeting", "Stay late at the office"], answer: "Stay late at the office" },
                 { id: 7, text: "How much do the cleaning products cost?", options: ["One pound fifty", "Two pounds", "One pence"], answer: "One pound fifty" },
-                { id: 8, text: "Where is she going with her family?", options: ["The mountains", "The lake", "The park"], answer: "The mountains" }
+                { id: 8, text: "Where is she going with her family?", options: ["The mountains", "The lake", "The park"], answer: "The mountains" },
+                { id: 9, text: "What did he usually do last year?", options: ["Running", "Cycling", "Walking"], answer: "Cycling" },
+                { id: 10, text: "How many minutes did he have to speak?", options: ["10", "15", "25"], answer: "15" }
             ]
         },
         part3: {
@@ -231,7 +239,10 @@ const listeningData = {
                 { id: 1, text: "Who runs in the fitness centre?", options: ["In the fitness centre", "In the street", "At the seaside", "On the running track"], answer: "In the fitness centre" },
                 { id: 2, text: "Who runs in the street?", options: ["In the fitness centre", "In the street", "At the seaside", "On the running track"], answer: "In the street" },
                 { id: 3, text: "Who runs at the seaside?", options: ["In the fitness centre", "In the street", "At the seaside", "On the running track"], answer: "At the seaside" },
-                { id: 4, text: "Who runs on the running track?", options: ["In the fitness centre", "In the street", "At the seaside", "On the running track"], answer: "On the running track" }
+                { id: 4, text: "Who runs on the running track?", options: ["In the fitness centre", "In the street", "At the seaside", "On the running track"], answer: "On the running track" },
+                { id: 11, text: "Who does she live with?", options: ["Her colleague", "Her sister", "Best friends"], answer: "Best friends" },
+                { id: 12, text: "Why does she want to be a writer?", options: ["Help people", "Make money", "Her dream"], answer: "Help people" },
+                { id: 13, text: "Why was the flight canceled?", options: ["There are no flight staff", "Plane maintenance", "Poor weather conditions"], answer: "Poor weather conditions" }
             ]
         }
     },
@@ -248,13 +259,15 @@ const listeningData = {
         },
         part2: {
             description: "Past activities and plans.",
-            dialogue: "Person A: How many copies did he sell?\nPerson B: Over 300000 copies.\nPerson A: Where did they go last year?\nPerson B: Camping.\nPerson A: What do they plan to do together?\nPerson B: Make plans later.\nPerson A: What does the man drink?\nPerson B: Iced tea.\nPerson A: Who did she take the picture of?\nPerson B: The girl's team.",
+            dialogue: "Person A: How many copies did he sell?\nPerson B: Over 300000 copies.\nPerson A: Where did they go last year?\nPerson B: Camping.\nPerson A: What do they plan to do together?\nPerson B: Make plans later.\nPerson A: What does the man drink?\nPerson B: Iced tea.\nPerson A: Who did she take the picture of?\nPerson B: The girl's team.\nPerson A: Where do they go when they travel to India?\nPerson B: Go to the park.\nPerson A: What is the weather like today?\nPerson B: Cold and wet.",
             questions: [
                 { id: 5, text: "How many copies did he sell?", options: ["Over 300000 copies", "100.000 copies", "30.000 copies"], answer: "Over 300000 copies" },
                 { id: 6, text: "Where did they go last year?", options: ["Camping", "Cycling", "Bowling"], answer: "Camping" },
                 { id: 7, text: "What do they plan to do together?", options: ["Go to the coffee shop", "Make plans later", "Have dinner together"], answer: "Make plans later" },
                 { id: 8, text: "What does the man drink?", options: ["Water and iced tea", "Water", "Iced tea"], answer: "Iced tea" },
-                { id: 9, text: "Who did she take the picture of?", options: ["The girl's team", "The boy’s team", "Anna, Sara and the girl's team"], answer: "The girl's team" }
+                { id: 9, text: "Who did she take the picture of?", options: ["The girl's team", "The boy’s team", "Anna, Sara and the girl's team"], answer: "The girl's team" },
+                { id: 10, text: "Where do they go when they travel to India?", options: ["Go to the park", "Go to famous places", "Go out to eat"], answer: "Go to the park" },
+                { id: 11, text: "What is the weather like today?", options: ["Cold and not wet", "Hot and wet", "Cold and wet"], answer: "Cold and wet" }
             ]
         },
         part3: {
@@ -276,7 +289,9 @@ const listeningData = {
                 { id: 1, text: "Who likes home delivery?", options: ["The products are delivered", "It is cheaper", "It saves time", "There are more choices"], answer: "The products are delivered" },
                 { id: 2, text: "Who shops online to save money?", options: ["The products are delivered", "It is cheaper", "It saves time", "There are more choices"], answer: "It is cheaper" },
                 { id: 3, text: "Who shops online to save time?", options: ["The products are delivered", "It is cheaper", "It saves time", "There are more choices"], answer: "It saves time" },
-                { id: 4, text: "Who shops online for more choices?", options: ["The products are delivered", "It is cheaper", "It saves time", "There are more choices"], answer: "There are more choices" }
+                { id: 4, text: "Who shops online for more choices?", options: ["The products are delivered", "It is cheaper", "It saves time", "There are more choices"], answer: "There are more choices" },
+                { id: 12, text: "How did he adjust the meeting?", options: ["Cancel the meeting", "Having the meeting without him", "Having the meeting another day"], answer: "Having the meeting without him" },
+                { id: 13, text: "Which door do they need to take to get to Edinburgh?", options: ["Two", "Three", "Four"], answer: "Two" }
             ]
         }
     },
@@ -293,13 +308,15 @@ const listeningData = {
         },
         part2: {
             description: "Past activities and advice.",
-            dialogue: "Person A: What did he usually do last year?\nPerson B: Cycling.\nPerson A: How does he travel?\nPerson B: By train.\nPerson A: How long does it take her to ride her bike?\nPerson B: 35 minutes.\nPerson A: What does she usually do in her free time?\nPerson B: Go to the theatre and play sports.\nPerson A: Which sports is she good at?\nPerson B: Football.",
+            dialogue: "Person A: What did he usually do last year?\nPerson B: Cycling.\nPerson A: How does he travel?\nPerson B: By train.\nPerson A: How long does it take her to ride her bike?\nPerson B: 35 minutes.\nPerson A: What does she usually do in her free time?\nPerson B: Go to the theatre and play sports.\nPerson A: Which sports is she good at?\nPerson B: Football.\nPerson A: What are the similarities between his mom and aunt?\nPerson B: They were thin.\nPerson A: What time does she usually write?\nPerson B: In the afternoons.",
             questions: [
                 { id: 5, text: "What did he usually do last year?", options: ["Running", "Cycling", "Walking"], answer: "Cycling" },
                 { id: 6, text: "How does he travel?", options: ["By train", "By car", "By bus"], answer: "By train" },
                 { id: 7, text: "How long does it take her to ride her bike?", options: ["35 minutes", "25 minutes", "20 minutes"], answer: "35 minutes" },
                 { id: 8, text: "What does she usually do in her free time?", options: ["Go to the theatre and play sports", "Play sports and go shopping", "Stay at home and shop online"], answer: "Go to the theatre and play sports" },
-                { id: 9, text: "Which sports is she good at?", options: ["Running", "Swimming", "Football"], answer: "Football" }
+                { id: 9, text: "Which sports is she good at?", options: ["Running", "Swimming", "Football"], answer: "Football" },
+                { id: 10, text: "What are the similarities between his mom and aunt?", options: ["They were thin", "They have the same eye color", "They have the same hair color"], answer: "They were thin" },
+                { id: 11, text: "What time does she usually write?", options: ["In the evenings", "In the afternoons", "In the mornings"], answer: "In the afternoons" }
             ]
         },
         part3: {
@@ -321,29 +338,31 @@ const listeningData = {
                 { id: 1, text: "Who listens to music to relax?", options: ["To relax", "While studying", "While singing", "After waking up"], answer: "To relax" },
                 { id: 2, text: "Who listens to music while studying?", options: ["To relax", "While studying", "While singing", "After waking up"], answer: "While studying" },
                 { id: 3, text: "Who listens to music while singing?", options: ["To relax", "While studying", "While singing", "After waking up"], answer: "While singing" },
-                { id: 4, text: "Who listens to music after waking up?", options: ["To relax", "While studying", "While singing", "After waking up"], answer: "After waking up" }
+                { id: 4, text: "Who listens to music after waking up?", options: ["To relax", "While studying", "While singing", "After waking up"], answer: "After waking up" },
+                { id: 12, text: "What did she advise for people who lack motivation at work?", options: ["Quit the job", "Ask for a salary increase", "Request a transfer"], answer: "Request a transfer" }
             ]
         }
     },
     "test11": {
         part1: {
             description: "A conversation about daily routines and visits.",
-            dialogue: "Person A: What does her sister drink?\nPerson B: Tea.\nPerson A: What is the population of this village?\nPerson B: 10.000.\nPerson A: Where does he want to go tomorrow?\nPerson B: The town hall.\nPerson A: What floor is the office on?\nPerson B: On the first floor.",
+            dialogue: "Person A: What does her sister drink?\nPerson B: Tea.\nPerson A: What is the population of this village?\nPerson B: 10.000.\nPerson A: Where does he want to go tomorrow?\nPerson B: The town hall.\nPerson A: What floor is the office on?\nPerson B: On the first floor.\nPerson A: When can they play football at school?\nPerson B: Wednesday afternoon.",
             questions: [
                 { id: 1, text: "What does her sister drink?", options: ["Water", "Tea", "Coffee"], answer: "Tea" },
                 { id: 2, text: "What is the population of this village?", options: ["10.000", "2.000", "5.000"], answer: "10.000" },
                 { id: 3, text: "Where does he want to go tomorrow?", options: ["The town hall", "The city center", "The museum"], answer: "The town hall" },
-                { id: 4, text: "What floor is the office on?", options: ["On the first floor", "On the second floor", "On the third floor"], answer: "On the first floor" }
+                { id: 4, text: "What floor is the office on?", options: ["On the first floor", "On the second floor", "On the third floor"], answer: "On the first floor" },
+                { id: 5, text: "When can they play football at school?", options: ["Friday afternoon", "Wednesday afternoon", "Thursday afternoon"], answer: "Wednesday afternoon" }
             ]
         },
         part2: {
             description: "School activities and locations.",
-            dialogue: "Person A: When can they play football at school?\nPerson B: Wednesday afternoon.\nPerson A: Where is the office?\nPerson B: Opposite the hotel.\nPerson A: A man is calling his wife. Where did they meet?\nPerson B: Outside a shop.\nPerson A: What time do he have dinner these days?\nPerson B: 7 o'clock.",
+            dialogue: "Person A: Where is the office?\nPerson B: Opposite the hotel.\nPerson A: A man is calling his wife. Where did they meet?\nPerson B: Outside a shop.\nPerson A: What time do he have dinner these days?\nPerson B: 7 o'clock.\nPerson A: What does he do after work?\nPerson B: Play football.",
             questions: [
-                { id: 5, text: "When can they play football at school?", options: ["Friday afternoon", "Wednesday afternoon", "Thursday afternoon"], answer: "Wednesday afternoon" },
                 { id: 6, text: "Where is the office?", options: ["Opposite the hotel", "Near the park", "Opposite the station"], answer: "Opposite the hotel" },
                 { id: 7, text: "A man is calling his wife. Where did they meet?", options: ["At the park", "At the station", "Outside a shop"], answer: "Outside a shop" },
-                { id: 8, text: "What time do he have dinner these days?", options: ["6 o'clock", "7 o'clock", "8 o'clock"], answer: "7 o'clock" }
+                { id: 8, text: "What time do he have dinner these days?", options: ["6 o'clock", "7 o'clock", "8 o'clock"], answer: "7 o'clock" },
+                { id: 9, text: "What does he do after work?", options: ["Go to the coffee shop", "Play football", "Go home"], answer: "Play football" }
             ]
         },
         part3: {
@@ -365,95 +384,10 @@ const listeningData = {
                 { id: 1, text: "Who gives away used items?", options: ["Give away used items", "Buy environmentally friendly products", "Reuse containers for storing food", "Does not use commercial cleaning products"], answer: "Give away used items" },
                 { id: 2, text: "Who buys eco-friendly products?", options: ["Give away used items", "Buy environmentally friendly products", "Reuse containers for storing food", "Does not use commercial cleaning products"], answer: "Buy environmentally friendly products" },
                 { id: 3, text: "Who reuses containers?", options: ["Give away used items", "Buy environmentally friendly products", "Reuse containers for storing food", "Does not use commercial cleaning products"], answer: "Reuse containers for storing food" },
-                { id: 4, text: "Who avoids commercial cleaning products?", options: ["Give away used items", "Buy environmentally friendly products", "Reuse containers for storing food", "Does not use commercial cleaning products"], answer: "Does not use commercial cleaning products" }
-            ]
-        }
-    },
-    "test5": {
-        part1: {
-            description: "A conversation about purchases and activities.",
-            dialogue: "Person A: How much did he pay for the computer?\nPerson B: 250 pounds.\nPerson A: What did they bring for the picnic?\nPerson B: Food.\nPerson A: What colour is the teacher's house?\nPerson B: White.\nPerson A: What time is the football match?\nPerson B: 1pm.",
-            questions: [
-                { id: 1, text: "How much did he pay for the computer?", options: ["350 pounds", "150 pounds", "250 pounds"], answer: "250 pounds" },
-                { id: 2, text: "What did they bring for the picnic?", options: ["Clothes", "Fruit", "Food"], answer: "Food" },
-                { id: 3, text: "What colour is the teacher's house?", options: ["Blue", "Red", "White"], answer: "White" },
-                { id: 4, text: "What time is the football match?", options: ["1pm", "7pm", "4pm"], answer: "1pm" }
-            ]
-        },
-        part2: {
-            description: "Holidays and work-related advice.",
-            dialogue: "Person A: What does she do on her holidays?\nPerson B: Walking.\nPerson A: Why does she like the manager?\nPerson B: He taught her a lot.\nPerson A: What does he want to be?\nPerson B: Writer.\nPerson A: What does he drink?\nPerson B: Water.",
-            questions: [
-                { id: 5, text: "What does she do on her holidays?", options: ["Drawing", "Walking", "Cooking"], answer: "Walking" },
-                { id: 6, text: "Why does she like the manager?", options: ["He was good at his job", "He paid her a lot", "He taught her a lot"], answer: "He taught her a lot" },
-                { id: 7, text: "What does he want to be?", options: ["Reporter", "Chef", "Writer"], answer: "Writer" },
-                { id: 8, text: "What does he drink?", options: ["Tea", "Juice", "Water"], answer: "Water" }
-            ]
-        },
-        part3: {
-            description: "Multiple perspectives on a place for studying (Topic: A Place for Studying).",
-            descriptionSections: [
-                { subtitle: "On public transport", text: "The distance from my house to school is 20 km, and it usually takes me an hour to get there. So, when I'm on the train, I use the time to do homework and review the lessons for the day. Some people say that studying like this can be distracting, but I find it very effective for me." },
-                { subtitle: "At home", text: "I don't like studying in very crowded places because I can't focus well. I usually sit on the sofa in the living room to study. My parents often travel for work, so my house is very quiet." },
-                { subtitle: "In the coffee shop", text: "I don't like studying in very quiet places such as at home or in the library because I get sleepy easily and might even fall asleep while studying. There's a coffee shop near my house, and I often go there to study because the presence of other people makes me feel more motivated. I find that I achieve higher productivity and efficiency in my studies when I'm there." },
-                { subtitle: "In the park", text: "I notice that most people prefer doing their homework in the classroom, but for me, those chairs are way too hard and leave me sore all day. I prefer sitting under the trees in the park to study—it's cool, and the air is fresh. There's a famous coffee shop across from where I sit, and they serve really good coffee." }
-            ],
-            dialogue: "M: What do you think about casting actors before casting them?\nW: I think it's absolutely necessary and the most important thing because it determines whether the actor is suitable for the role or not.\nM: I understand that auditions are important. But if we only rely on a 15 to 20 minute audition, that short period of time cannot really show us the actor's full potential.\nW: That's a good point. So I think it's better to let actors perform freestyle, not relying on the script, so that they can improvise, thereby clearly showing their acting skills.\nM: But actors often respond best to a good script. And they also need a script provided by the director and directed to act according to the script. Actors can’t always act freely.\nW: What do you think about stage actors moving to film acting?\nM: I think they are two completely different fields. When I was studying acting in college, stage acting and film acting were two completely separate subjects. They require different skills and qualities from the actor. So, it’s not easy to move from stage acting to film acting and vice versa.\nW: That’s right. These are two very different forms of acting and they require different skills from the actor. However, as actors, I think we all need encouragement and support from the audience.\nM: I completely agree. Actors need praise and feedback to feel recognized for their efforts and contributions.",
-            dialogueKeypoints: [
-                "Auditions are the most important of casting: W",
-                "Actors respond best to a strong script: M",
-                "Theatre acting and movie acting require different skills: B",
-                "Actors need to be praised: B"
-            ],
-            questions: [
-                { id: 1, text: "Who studies on public transport?", options: ["On public transport", "At home", "In the coffee shop", "In the park"], answer: "On public transport" },
-                { id: 2, text: "Who studies at home?", options: ["On public transport", "At home", "In the coffee shop", "In the park"], answer: "At home" },
-                { id: 3, text: "Who studies in the coffee shop?", options: ["On public transport", "At home", "In the coffee shop", "In the park"], answer: "In the coffee shop" },
-                { id: 4, text: "Who studies in the park?", options: ["On public transport", "At home", "In the coffee shop", "In the park"], answer: "In the park" }
-            ]
-        }
-    },
-    "test6": {
-        part1: {
-            description: "A suggestion to meet and items.",
-            dialogue: "Person A: Why did he call his friend?\nPerson B: Suggest a drink.\nPerson A: How much does the smallest car cost?\nPerson B: 3250 pounds.\nPerson A: A woman is calling her friend. What did she lose?\nPerson B: Phone.\nPerson A: What did he forget?\nPerson B: Glasses.",
-            questions: [
-                { id: 1, text: "Why did he call his friend?", options: ["To make an appointment", "To say hello", "Suggest a drink"], answer: "Suggest a drink" },
-                { id: 2, text: "How much does the smallest car cost?", options: ["1250 pounds", "2250 pounds", "3250 pounds"], answer: "3250 pounds" },
-                { id: 3, text: "A woman is calling her friend. What did she lose?", options: ["Phone", "Bag", "Key"], answer: "Phone" },
-                { id: 4, text: "What did he forget?", options: ["Money", "Phone", "Glasses"], answer: "Glasses" }
-            ]
-        },
-        part2: {
-            description: "People and preferences.",
-            dialogue: "Person A: How many Americans are there?\nPerson B: One.\nPerson A: Which room is her favourite?\nPerson B: Bathroom.\nPerson A: Where did they go last year?\nPerson B: Camping.\nPerson A: What subject does her son like to study?\nPerson B: Art.",
-            questions: [
-                { id: 5, text: "How many Americans are there?", options: ["One", "Two", "Three"], answer: "One" },
-                { id: 6, text: "Which room is her favourite?", options: ["Bathroom", "Kitchen", "Bedroom"], answer: "Bathroom" },
-                { id: 7, text: "Where did they go last year?", options: ["Camping", "Cycling", "Bowling"], answer: "Camping" },
-                { id: 8, text: "What subject does her son like to study?", options: ["Science", "Art", "Math"], answer: "Art" }
-            ]
-        },
-        part3: {
-            description: "Multiple perspectives on outdoor activities (Topic: Outdoor Activities).",
-            descriptionSections: [
-                { subtitle: "Mountain biking", text: "My father often encourages me to ride horses because it’s a sport he enjoys. But I’m very afraid of this animal and never want to learn how to ride, even though there’s a riding school near my house. Instead, I prefer mountain biking with my friends to conquer high peaks." },
-                { subtitle: "Going for a run", text: "My husband and I often wake up early and go to a nearby forest for exercise. We usually go jogging in the early morning to stay healthy, and we really enjoy the fresh air and natural scenery in the forest." },
-                { subtitle: "Climbing", text: "I used to love mountain biking, enjoying the thrill of riding down steep slopes. It was really an amazing and adventurous feeling. However, after an injury from a fall, I became haunted by the fear of crashing and now I'm scared of this sport. But I still love the mountains, so I’ve decided to just go hiking every weekend instead." },
-                { subtitle: "Horse riding", text: "My hometown is in the countryside, and we have a very large and beautiful farm. I’ve been learning to ride horses since I was a child, and it’s still my hobby to this day. Whenever I want to relax or enjoy the scenery, I ride my horse along the farm and across the meadows." }
-            ],
-            dialogue: "M: What magazine are you reading?\nW: I'm reading about art.\nM: That sounds interesting. I think art is only for the wealthy. Poor people don’t have the opportunity or time to enjoy art.\nW: Actually, art isn’t limited to any one group. If we have an interest, we can access art because it’s all around us.\nM: I wish that when I was a child and in school, I had more exposure to the arts. I'm really glad that now, when my child goes to school, they can have more exposure to the arts.\nW: Yes, that's great news. I hope that the authorities and the government will invest more in the arts and make them accessible to everyone, especially by adding more art classes in schools so that students can be exposed to art early on.\nM: I agree. Children should be introduced to the arts early so they can develop their own sense of beauty sooner.\nW: I think with the development of technology, where we just scroll a bit and see art videos and images flooding social media, art is becoming more accessible than ever.\nM: Really? Let's wait and see how it unfolds.",
-            dialogueKeypoints: [
-                "Art is only suitable for the privileged few: M",
-                "The government should invest more in arts: W",
-                "Children should be exposed to art early: B",
-                "In the future, art will become more accessible: W"
-            ],
-            questions: [
-                { id: 1, text: "Who prefers mountain biking?", options: ["Mountain biking", "Going for a run", "Climbing", "Horse riding"], answer: "Mountain biking" },
-                { id: 2, text: "Who goes running?", options: ["Mountain biking", "Going for a run", "Climbing", "Horse riding"], answer: "Going for a run" },
-                { id: 3, text: "Who climbs mountains?", options: ["Mountain biking", "Going for a run", "Climbing", "Horse riding"], answer: "Climbing" },
-                { id: 4, text: "Who rides horses?", options: ["Mountain biking", "Going for a run", "Climbing", "Horse riding"], answer: "Horse riding" }
+                { id: 4, text: "Who avoids commercial cleaning products?", options: ["Give away used items", "Buy environmentally friendly products", "Reuse containers for storing food", "Does not use commercial cleaning products"], answer: "Does not use commercial cleaning products" },
+                { id: 10, text: "What did they both like about the movie?", options: ["The characters", "The ending", "The plot"], answer: "The ending" },
+                { id: 11, text: "What area is he describing?", options: ["A university area", "A park", "A library"], answer: "A university area" },
+                { id: 12, text: "A man wants to buy a new house. What is his biggest problem?", options: ["Choosing the proper area", "Financial problems", "Persuading his family"], answer: "Persuading his family" }
             ]
         }
     }
@@ -606,4 +540,19 @@ function loadContent() {
                             resultDiv.textContent = "Correct!";
                             resultDiv.className = "result correct";
                         } else {
-                            resultDiv.textContent
+                            resultDiv.textContent = `Incorrect! Correct answer: ${q.answer}`;
+                            resultDiv.className = "result incorrect";
+                        }
+                    }
+                });
+                part3Container.innerHTML = ""; // Clear Part 3
+            }
+
+            // Display score
+            if (totalQuestions > 0) {
+                const scorePercent = (totalScore / totalQuestions) * 100;
+                scoreContainer.innerHTML = `<h2>Score</h2><p>You scored ${totalScore} out of ${totalQuestions} (${scorePercent.toFixed(2)}%)</p>`;
+            }
+        };
+    }
+}
