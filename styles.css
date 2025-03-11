@@ -168,7 +168,7 @@ button:hover {
 }
 
 /* Phần mô tả và hội thoại */
-.description-container, .dialogue-container, #passage-container {
+.description-container, .dialogue-container, #part1-container, #part2-container, #part3-container {
     margin: 30px 0;
     padding: 20px;
     background: #fff;
@@ -177,14 +177,37 @@ button:hover {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
 }
 
-.description-container h2, .dialogue-container h2, #passage-container h2 {
+.description-container h2, .dialogue-container h2, #part1-container h2, #part2-container h2, #part3-container h2 {
     font-size: 1.8em;
     color: #e67e22;
     margin-bottom: 15px;
     font-weight: 600;
 }
 
-.description-container p, .dialogue-container pre, #passage-container p {
+.description-container p, .dialogue-container pre, #part1-container p, #part2-container p, #part3-container p {
+    font-size: 1.1em;
+    color: #555;
+    line-height: 1.6;
+}
+
+/* Điểm số */
+#score-container {
+    margin: 30px 0;
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    border-left: 5px solid #27ae60;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+#score-container h2 {
+    font-size: 1.8em;
+    color: #27ae60;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+#score-container p {
     font-size: 1.1em;
     color: #555;
     line-height: 1.6;
@@ -207,7 +230,7 @@ button:hover {
     .container { padding: 15px; }
     h1 { font-size: 1.8em; }
     select { width: 100%; }
-    .question h3, .description-container h2, .dialogue-container h2, #passage-container h2 { font-size: 1.4em; }
-    .option label, .description-container p, .dialogue-container pre, #passage-container p { font-size: 1em; }
+    .question h3, .description-container h2, .dialogue-container h2, #part1-container h2, #part2-container h2, #part3-container h2, #score-container h2 { font-size: 1.4em; }
+    .option label, .description-container p, .dialogue-container pre, #part1-container p, #part2-container p, #part3-container p, #score-container p { font-size: 1em; }
     button { width: 100%; }
 }
