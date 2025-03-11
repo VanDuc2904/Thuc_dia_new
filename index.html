@@ -42,12 +42,25 @@
             <option value="test11" class="reading-option">Test 11 - Tulip</option>
             <option value="test12" class="reading-option">Test 12 - Zoo</option>
         </select>
-        <!-- Containers for each part -->
-        <div id="part1-container"></div>
-        <div id="part2-container"></div>
-        <div id="part3-container"></div>
+        <!-- Accordion for each part -->
+        <div class="accordion">
+            <div class="accordion-item">
+                <button class="accordion-button" onclick="toggleAccordion('part1')">Part 1</button>
+                <div id="part1-container" class="accordion-content"></div>
+                <button id="submit-clear-part1" class="submit-clear hidden">Submit & Clear</button>
+            </div>
+            <div class="accordion-item">
+                <button class="accordion-button" onclick="toggleAccordion('part2')">Part 2</button>
+                <div id="part2-container" class="accordion-content"></div>
+                <button id="submit-clear-part2" class="submit-clear hidden">Submit & Clear</button>
+            </div>
+            <div class="accordion-item">
+                <button class="accordion-button" onclick="toggleAccordion('part3')">Part 3</button>
+                <div id="part3-container" class="accordion-content"></div>
+                <button id="submit-clear-part3" class="submit-clear hidden">Submit & Clear</button>
+            </div>
+        </div>
         <div id="score-container"></div>
-        <button id="submit-clear" class="hidden">Submit & Clear</button>
     </div>
     <script>
         let currentMode = "listening";
@@ -78,6 +91,12 @@
             }
             testSelect.selectedIndex = 0;
             loadContent();
+        }
+
+        function toggleAccordion(part) {
+            const content = document.getElementById(`${part}-container`);
+            const isActive = content.style.display === "block";
+            content.style.display = isActive ? "none" : "block";
         }
 
         window.onload = function() {
