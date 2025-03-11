@@ -35,8 +35,26 @@ h1 {
     letter-spacing: 2px;
 }
 
+/* Mode select */
+.mode-select {
+    margin-bottom: 20px;
+}
+
+.mode-select label {
+    font-size: 1.2em;
+    color: #34495e;
+    font-weight: 500;
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+.mode-select input {
+    margin-right: 5px;
+    accent-color: #3498db;
+}
+
 /* Nhãn và dropdown */
-label {
+label[for="test-select"] {
     font-size: 1.2em;
     color: #34495e;
     font-weight: 500;
@@ -118,7 +136,10 @@ button {
     font-size: 1em;
     cursor: pointer;
     transition: background 0.3s ease, transform 0.2s ease;
-    margin-top: 10px;
+    margin-top: 20px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 button:hover {
@@ -126,23 +147,28 @@ button:hover {
     transform: scale(1.05);
 }
 
+/* Ẩn nút mặc định */
+.hidden {
+    display: none;
+}
+
 /* Kết quả */
-.correct {
+.result.correct {
     color: #27ae60;
     font-weight: 600;
     margin-top: 10px;
     animation: slideIn 0.3s ease;
 }
 
-.incorrect {
+.result.incorrect {
     color: #e74c3c;
     font-weight: 600;
     margin-top: 10px;
     animation: slideIn 0.3s ease;
 }
 
-/* Phần mô tả (14) */
-.description-container, .dialogue-container {
+/* Phần mô tả và hội thoại */
+.description-container, .dialogue-container, #passage-container {
     margin: 30px 0;
     padding: 20px;
     background: #fff;
@@ -151,47 +177,17 @@ button:hover {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
 }
 
-.description-container h2, .dialogue-container h2 {
+.description-container h2, .dialogue-container h2, #passage-container h2 {
     font-size: 1.8em;
     color: #e67e22;
     margin-bottom: 15px;
     font-weight: 600;
 }
 
-.description-container h3, .dialogue-container h3 {
-    font-size: 1.3em;
-    color: #2c3e50;
-    margin: 10px 0;
-}
-
-.description-container p, .dialogue-container p {
+.description-container p, .dialogue-container pre, #passage-container p {
     font-size: 1.1em;
     color: #555;
     line-height: 1.6;
-}
-
-/* Phần key points tương tác */
-.keypoint {
-    margin: 15px 0;
-}
-
-.keypoint p {
-    font-size: 1.1em;
-    color: #2c3e50;
-    margin-bottom: 10px;
-}
-
-.keypoint .options {
-    display: flex;
-    gap: 20px;
-}
-
-.keypoint .option input {
-    margin-right: 10px;
-}
-
-.keypoint .option label {
-    font-size: 1em;
 }
 
 /* Hiệu ứng animation */
@@ -211,8 +207,7 @@ button:hover {
     .container { padding: 15px; }
     h1 { font-size: 1.8em; }
     select { width: 100%; }
-    .question h3, .description-container h3, .dialogue-container h3 { font-size: 1.1em; }
-    .option label, .description-container p, .dialogue-container p, .keypoint p { font-size: 1em; }
+    .question h3, .description-container h2, .dialogue-container h2, #passage-container h2 { font-size: 1.4em; }
+    .option label, .description-container p, .dialogue-container pre, #passage-container p { font-size: 1em; }
     button { width: 100%; }
-    .keypoint .options { flex-direction: column; gap: 10px; }
 }
