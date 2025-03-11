@@ -1,4 +1,130 @@
 const readingData = {
+    test2: {
+        part1: {
+            passage: "I (go/live/walk) in a flat. I (share/drink/hold) it with my friend. We are in the same (door/class/chair). We (drive/smile/say) to work. We like to (hold/cook/melt) dinner.",
+            questions: [
+                { id: 1, text: "I (go/live/walk) in a flat.", options: ["go", "live", "walk"], answer: "live" },
+                { id: 2, text: "I (share/drink/hold) it with my friend.", options: ["share", "drink", "hold"], answer: "share" },
+                { id: 3, text: "We are in the same (door/class/chair).", options: ["door", "class", "chair"], answer: "class" },
+                { id: 4, text: "We (drive/smile/say) to work.", options: ["drive", "smile", "say"], answer: "drive" },
+                { id: 5, text: "We like to (hold/cook/melt) dinner.", options: ["hold", "cook", "melt"], answer: "cook" }
+            ]
+        },
+        part2: {
+            topics: [
+                {
+                    title: "Delivery man",
+                    steps: [
+                        "You should arrive at the main office by 6.30am and collect your keys.",
+                        "In the office, you can also collect a map of your route.",
+                        "You must follow the route on the map to deliver packages.",
+                        "When you have completed all deliveries, return to your office.",
+                        "You must return your keys to the office manager after you get back."
+                    ]
+                },
+                {
+                    title: "Quy trình vào Conference hall",
+                    steps: [
+                        "When you arrive at the conference hall, give your booking number.",
+                        "A staff member will note this down and give you a welcome pack.",
+                        "Inside you will find a schedule of events and the information of the key speaker.",
+                        "If you would like to attend his talk, it will take place in the main hall at midday.",
+                        "After he finishes, there will be time for questions."
+                    ]
+                }
+            ]
+        },
+        part3: {
+            topic: "A new restaurant.",
+            people: [
+                { name: "A", traits: ["was impressed by the range of appetizers", "thought the music was too quiet"] },
+                { name: "B", traits: ["didn't eat anything at the restaurant", "enjoyed the atmosphere"] },
+                { name: "C", traits: ["thought his experience was probably unusual", "the food was of average quality"] },
+                { name: "D", traits: ["will definitely not return to the restaurant"] }
+            ],
+            descriptions: [
+                "A: This is my first time coming to this restaurant. The food is very cheap but the quality is excellent...",
+                "B: This is a very famous restaurant that I saw in the newspaper...",
+                "C: I'm not sure if I will return to this restaurant. I think the staff was arguing...",
+                "D: I don't understand why this restaurant is so famous..."
+            ]
+        },
+        part4: {
+            topic: "Children and Exercises",
+            points: [
+                "Factors contributing to inactivity",
+                "The situation has the potential of being worse",
+                "The success of a simple idea",
+                "The wider effects of regular activity",
+                "Ways in which the environment can influence behavior",
+                "A design for exercise and for study",
+                "Achieving the right balance"
+            ]
+        }
+    },
+    test1: {
+        part1: {
+            passage: "I saw some shows in the (market/window/shoe) of one store. I didn't (eat/drink/buy) it. I buy some food at the (classroom/park/market). I ate (watch/door/cake). I (ate/saw/watched) a program on TV.",
+            questions: [
+                { id: 1, text: "I saw some shows in the (market/window/shoe) of one store.", options: ["market", "window", "shoe"], answer: "window" },
+                { id: 2, text: "I didn't (eat/drink/buy) it.", options: ["eat", "drink", "buy"], answer: "buy" },
+                { id: 3, text: "I buy some food at the (classroom/park/market).", options: ["classroom", "park", "market"], answer: "market" },
+                { id: 4, text: "I ate (watch/door/cake).", options: ["watch", "door", "cake"], answer: "cake" },
+                { id: 5, text: "I (ate/saw/watched) a program on TV.", options: ["ate", "saw", "watched"], answer: "watched" }
+            ]
+        },
+        part2: {
+            topics: [
+                {
+                    title: "Tom Harper",
+                    steps: [
+                        "When he was young, he began writing short stories for a magazine.",
+                        "He soon wrote regularly for the magazine, but he was not satisfied.",
+                        "He almost left the magazine, but then he decided to create some unusual new characters.",
+                        "The characters he imagined were one of the most famous in the world.",
+                        "This popularity made Tom Harper rich and successful."
+                    ]
+                },
+                {
+                    title: "A scientist’s life - Albert",
+                    steps: [
+                        "As a child, he moved to a special school because he was so clever.",
+                        "His best friend in his new class was a girl named Lavime.",
+                        "She later became his wife and helped him with his earliest scientific discoveries.",
+                        "These were so advanced that he soon became famous all over the world.",
+                        "Princeton University in the USA offered him a job because he was so famous."
+                    ]
+                }
+            ]
+        },
+        part3: {
+            topic: "Opinions on flying",
+            people: [
+                { name: "A", traits: ["suggest making flights more expensive", "wants to work in other countries"] },
+                { name: "B", traits: ["visit relatives regularly", "try to protect the environment"] },
+                { name: "C", traits: ["like relaxing while they travel"] },
+                { name: "D", traits: ["find flying tiring", "need to fly for their work"] }
+            ],
+            descriptions: [
+                "A: I have a dream that I work as a tour guide...",
+                "B: My family and siblings live quite far from me...",
+                "C: I was a businessman so I had to fly many times a week...",
+                "D: If I have to go somewhere I will choose other means of public transport..."
+            ]
+        },
+        part4: {
+            topic: "Charles Dickens",
+            points: [
+                "Dicken for our time",
+                "Difficulties for modern readers",
+                "Keep the reader guessing",
+                "The influence of the media",
+                "Dicken’s early success",
+                "Trying to protect his property",
+                "Bring the books to life"
+            ]
+        }
+    },
     "test3": {
         part1: {
             passage: "I am living with a family ___ the city. The children are ___ to me. Seamus and Agnes ___ speaking English with me. Sometimes, I ___ to Seamus and Agnes. I hate the food, ___ yesterday I ate out.",
