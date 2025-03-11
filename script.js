@@ -356,6 +356,72 @@ const tests = {
                 "In the future, art will become more accessible: W"
             ]
         }
+    };
+     test13: {
+        questions: [
+            { question: "How much are the eggs?", options: ["1.25 pound", "1.50 pound", "2 pounds"], answer: "1.50 pound" },
+            { question: "What time does the train leave?", options: ["9.45", "8.45", "9.15"], answer: "9.15" },
+            { question: "How does she go to school?", options: ["She walks", "She drives", "She goes by bus"], answer: "She walks" },
+            { question: "What time is lunch ready?", options: ["1pm", "2pm", "3pm"], answer: "2pm" },
+            { question: "What does she usually do in the evening?", options: ["Listen to music", "Go for a walk", "Go to the coffee shop"], answer: "Go for a walk" },
+            { question: "Where will they meet?", options: ["At the university", "At the station", "At the park"], answer: "At the park" },
+            { question: "What does this family do most weekends?", options: ["Goes with their friends", "Goes bowling", "Goes for a walk"], answer: "Goes for a walk" },
+            { question: "What day do they meet?", options: ["Tuesday", "Thursday", "Friday"], answer: "Tuesday" },
+            { question: "What career did he choose?", options: ["To work in business", "To be a teacher", "To keep studying"], answer: "To work in business" },
+            { question: "What course did he take?", options: ["Management", "Computer", "Leadership"], answer: "Computer" }
+        ],
+        description: {
+            title: "Topic: Do exercise",
+            sections: [
+                { subtitle: "Help improve work performance", text: "I know that working out every day is good for my health and helps me get in shape. But what I've found is that exercising actually boosts my productivity a lot and really helps me focus better. So, I always try to squeeze in some exercise before heading to work—it definitely makes me more productive." },
+                { subtitle: "Find exercise tiring", text: "We’ve all heard about the many benefits of exercising, and I know about them too. My friends often invite me to work out, but after I exercise, I end up feeling extremely exhausted and spend the rest of the day just lying around to recover." },
+                { subtitle: "Has fun when exercising with friends", text: "I often go to the gym to work out, but what really motivates me to workout is catching up with my friends there, not just for improving my health. Plus, it’s a great way to meet and make new friends. For me, exercising is just another chance to socialize." },
+                { subtitle: "Hate exercising", text: "My friends often advise me to exercise to maintain a good physique and health. However, I am very busy with a tight work schedule. Even if I weren’t busy, I still wouldn’t like to exercise. I feel uncomfortable as soon as I put on workout clothes. I don’t think exercise is something that suits me." }
+            ]
+        },
+        dialogue: {
+            title: "Topic: University and technology",
+            conversation: "W: What course are you taking these days?\nM: I'm currently pursuing an online university degree. It's really suitable and convenient because I can study while working. Technology has truly made education much more accessible.\nW: That's amazing. I still remember the old days when you had to stand in long lines to borrow a book from the library, which took a lot of time. And by the time it was your turn, the book was often already gone. Now, when we want to read a book, we just type the title online and have it immediately.\nM: Exactly, study materials were really scarce back then, unlike now.\nW: That’s why I’m thinking, why not make all school classes online? It would save a lot of costs.\nM: I think attending school in person is still very necessary because meeting friends and socializing helps us gain more soft skills.\nW: Don’t forget that young people do have a reputation for being less social. They often prefer talking on social media rather than meeting in person.\nM: Additionally, I think the variety of courses available nowadays is also a good way to improve education.\nW: I don't think so. Offering too many diverse courses can make traditional and core subjects seem less important and neglected.\nM: We should also consider competition among universities. It’s essential for universities to continuously improve their programs and attract more funding, especially with the current trend of universities seeking financial autonomy.\nW: I don’t think we should turn education into a race like competing businesses. If universities need funding, they can report it to the government and educational organizations.",
+            keypoints: [
+                "Technology helps make education more accessible: B",
+                "Social interaction is important: W",
+                "The diverse curriculum is not an advantage: M",
+                "University competition should be encouraged: W"
+            ]
+        }
+    },
+    test14: {
+        questions: [
+            { question: "What time do they meet?", options: ["7.30pm", "6.30pm", "9.30pm"], answer: "6.30pm" },
+            { question: "What time does she meet her child?", options: ["7.00am", "3.00pm", "2.00pm"], answer: "3.00pm" },
+            { question: "What does her sister drink at the café?", options: ["Water", "Tea", "Coffee"], answer: "Tea" },
+            { question: "How many buildings will the town have?", options: ["1000", "2000", "3000"], answer: "2000" },
+            { question: "What does she usually do on Saturdays?", options: ["Play sports", "Go to the park", "See her family"], answer: "See her family" },
+            { question: "What do they both buy?", options: ["Books", "Trousers", "Clothes"], answer: "Clothes" },
+            { question: "What color shirt did he buy?", options: ["Blue", "Black", "Red"], answer: "Black" },
+            { question: "When is the assignment due?", options: ["Friday", "Saturday", "Thursday"], answer: "Saturday" },
+            { question: "What did the professor want her to do?", options: ["Do research", "Make a report", "Speak at the conference"], answer: "Speak at the conference" },
+            { question: "Where did she choose to go on holiday?", options: ["The South", "The Park", "The Mountain"], answer: "The South" }
+        ],
+        description: {
+            title: "Topic: Travel to Work",
+            sections: [
+                { subtitle: "Walk with a friend", text: "I often choose to walk to work to save on gas money and to keep in shape. I usually walk to the company with a close friend. Sometimes we feel really tired but still push ourselves to walk all the way. There are times when we see a bus stop and have to resist the urge to hop on the bus." },
+                { subtitle: "Travel by car", text: "I had to take driving lessons to be able to drive to work. My mother works along the same route, so we often drive to work together. Occasionally, she takes over the driving, and I'm happy because driving together gives us more time to chat." },
+                { subtitle: "Walk alone", text: "I used to use my car a lot to get to work. But since I moved closer to the company, I always go there on foot. I have a friend who cycles for 20 minutes every day to work—can you imagine? She must be super fit!" },
+                { subtitle: "Travel by bus", text: "I'm concerned about the Earth and the environment, so I always look for ways to use public transportation, like buses or trains, to reduce harmful emissions. I can't walk to work because it's too far from my home, but I always walk to the local market when I need to buy groceries." }
+            ]
+        },
+        dialogue: {
+            title: "Topic: Internet",
+            conversation: "W: These days, there's so much information on the internet that I feel overwhelmed.\nM: That's true. A lot of people feel the same way, especially with the mix of real and fake information. Sometimes we end up reading fake news.\nW: That's why using the internet requires both knowledge and skills. Without good information-searching skills, we can waste a lot of time. There’s so much content uploaded to the internet every day, and we have to be cautious because it might not be accurate. As a result, people are gradually changing how they perceive the information they encounter online. It’s not like in the past when we read newspapers and believed everything was true.\nM: Additionally, the internet has made people much more impatient than before. They want everything to yield quick results. People are losing the ability to wait for outcomes like they used to.\nW: Exactly, because the internet allows us to find millions of results in less than a second. We're getting used to that, which is leading to a decline in patience and tolerance.",
+            keypoints: [
+                "There is too much information on the internet: B",
+                "Using the internet requires skills: W",
+                "The internet is changing the way we think: W",
+                "Internet has made people less patient: B"
+            ]
+        }
     }
 };
 
