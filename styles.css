@@ -141,7 +141,7 @@ button:hover {
     animation: slideIn 0.3s ease;
 }
 
-/* Phần mô tả (14) */
+/* Phần mô tả */
 .description-container, .dialogue-container {
     margin: 30px 0;
     padding: 20px;
@@ -194,6 +194,50 @@ button:hover {
     font-size: 1em;
 }
 
+/* Phần menu điều hướng */
+.navigation {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.navigation h2 {
+    font-size: 1.5em;
+    color: #2c3e50;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.navigation-links {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.nav-button {
+    display: inline-block;
+    padding: 12px 25px;
+    background: #3498db;
+    color: white;
+    text-decoration: none;
+    border-radius: 25px;
+    font-size: 1.1em;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+}
+
+.nav-button:hover {
+    background: #2980b9;
+    transform: translateY(-2px);
+    box-shadow: 0 7px 20px rgba(52, 152, 219, 0.4);
+}
+
+.nav-button:active {
+    transform: translateY(0);
+    box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+}
+
 /* Hiệu ứng animation */
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(20px); }
@@ -214,5 +258,13 @@ button:hover {
     .question h3, .description-container h3, .dialogue-container h3 { font-size: 1.1em; }
     .option label, .description-container p, .dialogue-container p, .keypoint p { font-size: 1em; }
     button { width: 100%; }
+    .navigation-links {
+        flex-direction: column;
+        align-items: center;
+    }
+    .nav-button {
+        width: 80%;
+        margin-bottom: 10px;
+    }
     .keypoint .options { flex-direction: column; gap: 10px; }
 }
