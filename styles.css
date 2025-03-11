@@ -1,11 +1,11 @@
-/* Reset default margins and padding */
+/* Reset mặc định */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* General layout */
+/* Thiết kế tổng thể */
 body {
     font-family: 'Poppins', sans-serif;
     background: linear-gradient(135deg, #74ebd5, #acb6e5);
@@ -14,29 +14,28 @@ body {
     color: #333;
 }
 
-/* Main container */
+/* Container chính */
 .container {
     max-width: 900px;
     margin: 0 auto;
     background: rgba(255, 255, 255, 0.95);
-    padding: 40px;
+    padding: 30px;
     border-radius: 15px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     animation: fadeIn 0.5s ease-in-out;
 }
 
-/* Header styling */
+/* Tiêu đề */
 h1 {
     text-align: center;
-    font-size: 3em;
+    font-size: 2.5em;
     color: #2c3e50;
     margin-bottom: 20px;
     text-transform: uppercase;
     letter-spacing: 2px;
-    font-weight: bold;
 }
 
-/* Label and dropdown */
+/* Nhãn và dropdown */
 label {
     font-size: 1.2em;
     color: #34495e;
@@ -62,7 +61,7 @@ select:hover, select:focus {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Question styling */
+/* Câu hỏi */
 .question {
     margin: 20px 0;
     padding: 20px;
@@ -84,7 +83,7 @@ select:hover, select:focus {
     font-weight: 600;
 }
 
-/* Options styling */
+/* Tùy chọn */
 .option {
     margin: 10px 0;
     display: flex;
@@ -109,17 +108,17 @@ select:hover, select:focus {
     font-weight: 500;
 }
 
-/* Button styling */
+/* Nút kiểm tra */
 button {
-    padding: 12px 30px;
+    padding: 10px 25px;
     background: #3498db;
     color: white;
     border: none;
     border-radius: 25px;
-    font-size: 1.1em;
+    font-size: 1em;
     cursor: pointer;
     transition: background 0.3s ease, transform 0.2s ease;
-    margin-top: 15px;
+    margin-top: 10px;
 }
 
 button:hover {
@@ -127,7 +126,7 @@ button:hover {
     transform: scale(1.05);
 }
 
-/* Correct / Incorrect styling */
+/* Kết quả */
 .correct {
     color: #27ae60;
     font-weight: 600;
@@ -142,7 +141,7 @@ button:hover {
     animation: slideIn 0.3s ease;
 }
 
-/* Description and dialogue sections */
+/* Phần mô tả (14) */
 .description-container, .dialogue-container {
     margin: 30px 0;
     padding: 20px;
@@ -171,7 +170,7 @@ button:hover {
     line-height: 1.6;
 }
 
-/* Key points and interaction section */
+/* Phần key points tương tác */
 .keypoint {
     margin: 15px 0;
 }
@@ -195,7 +194,7 @@ button:hover {
     font-size: 1em;
 }
 
-/* Animation effects */
+/* Hiệu ứng animation */
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
@@ -206,11 +205,11 @@ button:hover {
     to { opacity: 1; transform: translateX(0); }
 }
 
-/* Responsive design */
+/* Responsive */
 @media (max-width: 600px) {
     body { padding: 20px; }
     .container { padding: 15px; }
-    h1 { font-size: 2em; }
+    h1 { font-size: 1.8em; }
     select { width: 100%; }
     .question h3, .description-container h3, .dialogue-container h3 { font-size: 1.1em; }
     .option label, .description-container p, .dialogue-container p, .keypoint p { font-size: 1em; }
