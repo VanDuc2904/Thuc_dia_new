@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Test</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Thêm một số kiểu CSS để dễ dàng nhìn thấy các câu hỏi đúng hay sai */
+        .question.correct {
+            background-color: lightgreen;
+        }
+        .question.incorrect {
+            background-color: lightcoral;
+        }
+    </style>
+</head>
+<body>
+    <h1>TEST</h1>
+    <button onclick="generateTest()">Generate Test</button>
+    <button onclick="submitTest()">Submit Test</button>
+
+    <div id="questions-container"></div>
+    <div id="result-container"></div>
+    
+    <script src="rd.js"></script>
+</body>
+</html>
+
