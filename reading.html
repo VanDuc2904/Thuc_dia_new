@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reading Practice Tests</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Reading Practice Tests</h1>
+        <label for="test-select">Choose a Test:</label>
+        <select id="test-select" onchange="loadContent()">
+            <option value="">Select a test</option>
+            <option value="test3">Test 3 - Coffee</option>
+            <option value="test4">Test 4 - Consumer Age</option>
+            <option value="test5">Test 5 - Dogget</option>
+            <option value="test6">Test 6 - Early Australia</option>
+            <option value="test7">Test 7 - Eating in China</option>
+            <option value="test8">Test 8 - Frozen Land</option>
+            <option value="test9">Test 9 - Meatless Diet</option>
+            <option value="test10">Test 10 - Music</option>
+            <option value="test11">Test 11 - Tulip</option>
+            <option value="test12">Test 12 - Zoo</option>
+        </select>
+
+        <div id="passage-container"></div>
+        <div id="questions-container"></div>
+        <div id="description-container"></div>
+        <div id="dialogue-container"></div>
+        <button id="check-answers" class="hidden">Check Answers</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
