@@ -20,7 +20,7 @@ body {
     margin: 0 auto;
     background: rgba(255, 255, 255, 0.95);
     padding: 30px;
-    border-radius: 20px;
+    border-radius: 15px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     animation: fadeIn 0.5s ease-in-out;
 }
@@ -33,7 +33,6 @@ h1 {
     margin-bottom: 20px;
     text-transform: uppercase;
     letter-spacing: 2px;
-    font-weight: 700;
 }
 
 /* Nhãn và dropdown */
@@ -44,7 +43,6 @@ label {
     margin-right: 15px;
 }
 
-/* Dropdown select */
 select {
     padding: 12px 20px;
     font-size: 1.1em;
@@ -68,24 +66,24 @@ select:hover, select:focus {
     margin: 20px 0;
     padding: 20px;
     background: #fff;
-    border-radius: 15px;
+    border-radius: 10px;
     border-left: 5px solid #3498db;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
     transition: transform 0.2s ease;
 }
 
 .question:hover {
-    transform: translateY(-5px);
+    transform: translateY(-3px);
 }
 
 .question h3 {
-    font-size: 1.4em;
+    font-size: 1.3em;
     color: #2c3e50;
     margin-bottom: 15px;
     font-weight: 600;
 }
 
-/* Tùy chọn câu hỏi */
+/* Tùy chọn */
 .option {
     margin: 10px 0;
     display: flex;
@@ -117,7 +115,7 @@ button {
     color: white;
     border: none;
     border-radius: 25px;
-    font-size: 1.1em;
+    font-size: 1em;
     cursor: pointer;
     transition: background 0.3s ease, transform 0.2s ease;
     margin-top: 10px;
@@ -128,7 +126,7 @@ button:hover {
     transform: scale(1.05);
 }
 
-/* Kết quả trả lời */
+/* Kết quả */
 .correct {
     color: #27ae60;
     font-weight: 600;
@@ -143,14 +141,14 @@ button:hover {
     animation: slideIn 0.3s ease;
 }
 
-/* Mô tả câu hỏi (14) */
+/* Phần mô tả (14) */
 .description-container, .dialogue-container {
     margin: 30px 0;
     padding: 20px;
     background: #fff;
-    border-radius: 15px;
+    border-radius: 10px;
     border-left: 5px solid #e67e22;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
 }
 
 .description-container h2, .dialogue-container h2 {
@@ -172,7 +170,7 @@ button:hover {
     line-height: 1.6;
 }
 
-/* Key points (tương tác với câu hỏi) */
+/* Phần key points tương tác */
 .keypoint {
     margin: 15px 0;
 }
@@ -207,13 +205,13 @@ button:hover {
     to { opacity: 1; transform: translateX(0); }
 }
 
-/* Responsive thiết bị di động */
+/* Responsive */
 @media (max-width: 600px) {
     body { padding: 20px; }
     .container { padding: 15px; }
     h1 { font-size: 1.8em; }
     select { width: 100%; }
-    .question h3, .description-container h3, .dialogue-container h3 { font-size: 1.2em; }
+    .question h3, .description-container h3, .dialogue-container h3 { font-size: 1.1em; }
     .option label, .description-container p, .dialogue-container p, .keypoint p { font-size: 1em; }
     button { width: 100%; }
     .keypoint .options { flex-direction: column; gap: 10px; }
