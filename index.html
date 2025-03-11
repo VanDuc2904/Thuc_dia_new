@@ -3,108 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>APTIS Practice</title>
+    <title>APTIS Listening Practice</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <h1>APTIS Practice</h1>
-        <div class="mode-select">
-            <label><input type="radio" name="mode" value="listening" checked onchange="updateMode()"> Listening</label>
-            <label><input type="radio" name="mode" value="reading" onchange="updateMode()"> Reading</label>
-        </div>
+        <h1>APTIS Listening Practice</h1>
         <label for="test-select">Choose a Test:</label>
         <select id="test-select" onchange="loadContent()">
             <option value="">Select a test</option>
-            <!-- Listening Tests -->
-            <option value="test7" class="listening-option">Test 7 - The College</option>
-            <option value="test3" class="listening-option">Test 3 - Quarter to Eight</option>
-            <option value="test4" class="listening-option">Test 4 - 10h15</option>
-            <option value="test10" class="listening-option">Test 10 - Suggest to Drink (9th Sunday)</option>
-            <option value="test9" class="listening-option">Test 9 - Sick</option>
-            <option value="test8" class="listening-option">Test 8 - Room 301</option>
-            <option value="test12" class="listening-option">Test 12 - On Thursday Morning</option>
-            <option value="test11" class="listening-option">Test 11 - Tea</option>
-            <option value="test5" class="listening-option">Test 5 - 250 Pound</option>
-            <option value="test6" class="listening-option">Test 6 - Suggest to Drink (3250 Pound)</option>
-            <!-- Reading Tests -->
-            <option value="test1" class="reading-option">Test 1 - Charles Dickens</option>
-            <option value="test2" class="reading-option">Test 2 - Children Exercise</option>
-            <option value="test3" class="reading-option">Test 3 - Coffee</option>
-            <option value="test4" class="reading-option">Test 4 - Consumer Age</option>
-            <option value="test5" class="reading-option">Test 5 - Doggett</option>
-            <option value="test6" class="reading-option">Test 6 - Early Australia</option>
-            <option value="test7" class="reading-option">Test 7 - Eating in China</option>
-            <option value="test8" class="reading-option">Test 8 - Frozen Land</option>
-            <option value="test9" class="reading-option">Test 9 - Meatless Diet</option>
-            <option value="test10" class="reading-option">Test 10 - Music</option>
-            <option value="test11" class="reading-option">Test 11 - Tulip</option>
-            <option value="test12" class="reading-option">Test 12 - Zoo</option>
+            <option value="test7">Test 7 - The College</option>
+            <option value="test3">Test 3 - Quarter to Eight</option>
+            <option value="test4">Test 4 - 10h15</option>
+            <option value="test10">Test 10 - Suggest to Drink (9th Sunday)</option>
+            <option value="test9">Test 9 - Sick</option>
+            <option value="test8">Test 8 - Room 301</option>
+            <option value="test12">Test 12 - On Thursday Morning</option>
+            <option value="test11">Test 11 - Tea</option>
+            <option value="test5">Test 5 - 250 Pound</option>
+            <option value="test6">Test 6 - Suggest to Drink (3250 Pound)</option>
         </select>
-        <!-- Accordion for each part -->
-        <div class="accordion">
-            <div class="accordion-item">
-                <button class="accordion-button" onclick="toggleAccordion('part1')">Part 1</button>
-                <div id="part1-container" class="accordion-content"></div>
-                <button id="submit-clear-part1" class="submit-clear hidden">Submit & Clear</button>
-            </div>
-            <div class="accordion-item">
-                <button class="accordion-button" onclick="toggleAccordion('part2')">Part 2</button>
-                <div id="part2-container" class="accordion-content"></div>
-                <button id="submit-clear-part2" class="submit-clear hidden">Submit & Clear</button>
-            </div>
-            <div class="accordion-item">
-                <button class="accordion-button" onclick="toggleAccordion('part3')">Part 3</button>
-                <div id="part3-container" class="accordion-content"></div>
-                <button id="submit-clear-part3" class="submit-clear hidden">Submit & Clear</button>
-            </div>
-        </div>
-        <div id="score-container"></div>
+        <div id="questions-container"></div>
+        <div id="description-container"></div>
+        <div id="dialogue-container"></div>
     </div>
-    <script>
-        let currentMode = "listening";
-        let scriptElement = null;
-
-        function updateMode() {
-            const mode = document.querySelector('input[name="mode"]:checked').value;
-            if (mode !== currentMode) {
-                currentMode = mode;
-                if (scriptElement) {
-                    document.body.removeChild(scriptElement);
-                }
-                scriptElement = document.createElement("script");
-                scriptElement.src = mode === "listening" ? "listening.js" : "reading.js";
-                document.body.appendChild(scriptElement);
-                filterTests();
-            }
-        }
-
-        function filterTests() {
-            const testSelect = document.getElementById("test-select");
-            const options = testSelect.options;
-            for (let i = 1; i < options.length; i++) {
-                const option = options[i];
-                option.style.display = (currentMode === "listening" && option.classList.contains("listening-option")) ||
-                                       (currentMode === "reading" && option.classList.contains("reading-option"))
-                                       ? "block" : "none";
-            }
-            testSelect.selectedIndex = 0;
-            loadContent();
-        }
-
-        function toggleAccordion(part) {
-            const content = document.getElementById(`${part}-container`);
-            const isActive = content.style.display === "block";
-            content.style.display = isActive ? "none" : "block";
-        }
-
-        window.onload = function() {
-            scriptElement = document.createElement("script");
-            scriptElement.src = "listening.js";
-            document.body.appendChild(scriptElement);
-            filterTests();
-        };
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
