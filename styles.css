@@ -168,26 +168,65 @@ button:hover {
 }
 
 /* Phần mô tả và hội thoại */
-.description-container, .dialogue-container, #part1-container, #part2-container, #part3-container {
+.description-container, .dialogue-container, .accordion-content {
     margin: 30px 0;
     padding: 20px;
     background: #fff;
     border-radius: 10px;
     border-left: 5px solid #e67e22;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    display: none; /* Ẩn ban đầu */
 }
 
-.description-container h2, .dialogue-container h2, #part1-container h2, #part2-container h2, #part3-container h2 {
+.accordion-content.active {
+    display: block;
+}
+
+.accordion-content h2, .accordion-content h3 {
     font-size: 1.8em;
     color: #e67e22;
     margin-bottom: 15px;
     font-weight: 600;
 }
 
-.description-container p, .dialogue-container pre, #part1-container p, #part2-container p, #part3-container p {
+.accordion-content p, .accordion-content pre {
     font-size: 1.1em;
     color: #555;
     line-height: 1.6;
+}
+
+.accordion-content ul {
+    list-style-type: disc;
+    padding-left: 20px;
+}
+
+/* Accordion */
+.accordion {
+    margin-top: 20px;
+}
+
+.accordion-item {
+    margin-bottom: 10px;
+}
+
+.accordion-button {
+    width: 100%;
+    padding: 15px;
+    background: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.accordion-button:hover {
+    background: #2980b9;
+}
+
+.submit-clear {
+    margin-top: 10px;
 }
 
 /* Điểm số */
@@ -230,7 +269,8 @@ button:hover {
     .container { padding: 15px; }
     h1 { font-size: 1.8em; }
     select { width: 100%; }
-    .question h3, .description-container h2, .dialogue-container h2, #part1-container h2, #part2-container h2, #part3-container h2, #score-container h2 { font-size: 1.4em; }
-    .option label, .description-container p, .dialogue-container pre, #part1-container p, #part2-container p, #part3-container p, #score-container p { font-size: 1em; }
+    .question h3, .accordion-content h2, .accordion-content h3, #score-container h2 { font-size: 1.4em; }
+    .option label, .accordion-content p, .accordion-content pre, #score-container p { font-size: 1em; }
     button { width: 100%; }
+    .accordion-button { font-size: 1em; padding: 10px; }
 }
