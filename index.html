@@ -29,6 +29,8 @@
             <option value="test5" class="listening-option">Test 5 - 250 Pound</option>
             <option value="test6" class="listening-option">Test 6 - Suggest to Drink (3250 Pound)</option>
             <!-- Reading Tests -->
+            <option value="test1" class="reading-option">Test 1 - Charles Dickens</option>
+            <option value="test2" class="reading-option">Test 2 - Children Exercise</option>
             <option value="test3" class="reading-option">Test 3 - Coffee</option>
             <option value="test4" class="reading-option">Test 4 - Consumer Age</option>
             <option value="test5" class="reading-option">Test 5 - Doggett</option>
@@ -40,11 +42,12 @@
             <option value="test11" class="reading-option">Test 11 - Tulip</option>
             <option value="test12" class="reading-option">Test 12 - Zoo</option>
         </select>
-        <div id="description-container"></div>
-        <div id="dialogue-container"></div>
-        <div id="passage-container"></div>
-        <div id="questions-container"></div>
-        <button id="check-answers" class="hidden">Check Answers</button>
+        <!-- Containers for each part -->
+        <div id="part1-container"></div>
+        <div id="part2-container"></div>
+        <div id="part3-container"></div>
+        <div id="score-container"></div>
+        <button id="submit-clear" class="hidden">Submit & Clear</button>
     </div>
     <script>
         let currentMode = "listening";
@@ -58,7 +61,7 @@
                     document.body.removeChild(scriptElement);
                 }
                 scriptElement = document.createElement("script");
-                scriptElement.src = mode === "listening" ? "script.js" : "reading.js";
+                scriptElement.src = mode === "listening" ? "listening.js" : "reading.js";
                 document.body.appendChild(scriptElement);
                 filterTests();
             }
@@ -79,7 +82,7 @@
 
         window.onload = function() {
             scriptElement = document.createElement("script");
-            scriptElement.src = "script.js";
+            scriptElement.src = "listening.js";
             document.body.appendChild(scriptElement);
             filterTests();
         };
