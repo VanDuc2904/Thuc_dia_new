@@ -645,7 +645,7 @@ function loadContent() {
     const dialogueContainer = document.getElementById("dialogue-container");
     const checkButton = document.getElementById("check-answers");
 
-    // Xóa tất cả các phần tử trong các container
+    // Clear all containers
     passageContainer.innerHTML = "";
     questionsContainer.innerHTML = "";
     descriptionContainer.innerHTML = "";
@@ -655,7 +655,7 @@ function loadContent() {
     if (selectedTest && readingData[selectedTest]) {
         const test = readingData[selectedTest];
 
-        // Part 1: Passage và Câu hỏi
+        // Part 1: Passage and Questions
         passageContainer.innerHTML = `<h2>Part 1</h2><p>${test.part1.passage}</p>`;
         questionsContainer.innerHTML = "<h2>Questions</h2>";
         test.part1.questions.forEach(q => {
@@ -674,65 +674,32 @@ function loadContent() {
             questionsContainer.appendChild(questionDiv);
         });
 
-        // Part 2: Chủ đề (Chọn lựa tương tác)
+        // Part 2: Topics
         descriptionContainer.innerHTML = "<h2>Part 2</h2>";
-        test.part2.topics.forEach((topic, index) => {
+        test.part2.topics.forEach(topic => {
             descriptionContainer.innerHTML += `
                 <h3>${topic.title}</h3>
-                <button class="show-steps-btn" id="show-steps-${index}">Hiển thị các bước</button>
-                <div id="steps-${index}" class="steps-container" style="display:none;">
-                    <ul>${topic.steps.map(step => `<li>${step}</li>`).join("")}</ul>
-                </div>
+                <ul>${topic.steps.map(step => `<li>${step}</li>`).join("")}</ul>
             `;
-            // Thêm sự kiện click cho nút mỗi chủ đề để hiển thị hoặc ẩn các bước
-            document.getElementById(`show-steps-${index}`).onclick = function() {
-                const stepsContainer = document.getElementById(`steps-${index}`);
-                stepsContainer.style.display = stepsContainer.style.display === "none" ? "block" : "none";
-            };
         });
 
-        // Part 3: Người và Mô tả (Chọn lựa mô tả)
+        // Part 3: People and Descriptions
         dialogueContainer.innerHTML = `<h2>Part 3: ${test.part3.topic}</h2>`;
         test.part3.people.forEach(person => {
             dialogueContainer.innerHTML += `
                 <p><strong>${person.name}:</strong> ${person.traits.join(", ")}</p>
             `;
         });
-        dialogueContainer.innerHTML += "<h3>Mô tả</h3>";
-        test.part3.descriptions.forEach((desc, index) => {
-            dialogueContainer.innerHTML += `
-                <div class="description-container">
-                    <p>${desc}</p>
-                    <button class="show-description-btn" id="show-description-${index}">Hiển thị mô tả</button>
-                    <div id="desc-details-${index}" class="description-details" style="display:none;">
-                        <p><strong>Chi tiết:</strong> Đây là các chi tiết bổ sung về mô tả này...</p>
-                    </div>
-                </div>
-            `;
-            document.getElementById(`show-description-${index}`).onclick = function() {
-                const detailsContainer = document.getElementById(`desc-details-${index}`);
-                detailsContainer.style.display = detailsContainer.style.display === "none" ? "block" : "none";
-            };
+        dialogueContainer.innerHTML += "<h3>Descriptions</h3>";
+        test.part3.descriptions.forEach(desc => {
+            dialogueContainer.innerHTML += `<p>${desc}</p>`;
         });
 
-        // Part 4: Các điểm chủ đề (Chọn lựa điểm)
+        // Part 4: Topic Points
         dialogueContainer.innerHTML += `<h2>Part 4: ${test.part4.topic}</h2>`;
-        dialogueContainer.innerHTML += `<ul>${test.part4.points.map((point, index) => `
-            <li>
-                <button class="show-point-btn" id="show-point-${index}">${point}</button>
-                <div id="point-details-${index}" class="point-details" style="display:none;">
-                    <p><strong>Chi tiết:</strong> Thông tin cho điểm này...</p>
-                </div>
-            </li>
-        `).join("")}</ul>`;
-        test.part4.points.forEach((_, index) => {
-            document.getElementById(`show-point-${index}`).onclick = function() {
-                const pointDetailsContainer = document.getElementById(`point-details-${index}`);
-                pointDetailsContainer.style.display = pointDetailsContainer.style.display === "none" ? "block" : "none";
-            };
-        });
+        dialogueContainer.innerHTML += `<ul>${test.part4.points.map(point => `<li>${point}</li>`).join("")}</ul>`;
 
-        // Hiển thị nút kiểm tra cho Part 1
+        // Show check button for Part 1
         checkButton.classList.remove("hidden");
         checkButton.onclick = () => {
             test.part1.questions.forEach(q => {
@@ -740,11 +707,10 @@ function loadContent() {
                 const resultDiv = document.getElementById(`result-q${q.id}`);
                 if (selectedOption) {
                     const userAnswer = selectedOption.value;
-                    resultDiv.textContent = userAnswer === q.answer ? "Đúng!" : `Sai! Đáp án đúng: ${q.answer}`;
+                    resultDiv.textContent = userAnswer === q.answer ? "Correct!" : `Incorrect! Correct answer: ${q.answer}`;
                     resultDiv.className = "result " + (userAnswer === q.answer ? "correct" : "incorrect");
                 }
             });
         };
     }
 }
-
