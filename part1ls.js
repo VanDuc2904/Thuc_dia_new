@@ -97,7 +97,6 @@ function displayRandomTest() {
     const allQuestionsSection = document.getElementById("allQuestions");
     const randomTestSection = document.getElementById("randomTest");
     
-    // Ẩn toàn bộ câu hỏi ôn tập và hiển thị bài thi ngẫu nhiên
     allQuestionsSection.style.display = "none";
     randomTestSection.style.display = "block";
     
@@ -119,5 +118,18 @@ function displayRandomTest() {
     });
 }
 
-// Sự kiện nút "Tạo đề thi ngẫu nhiên"
+// Hàm hiển thị ôn tập toàn bộ
+function displayAllQuestions() {
+    const allQuestionsSection = document.getElementById("allQuestions");
+    const randomTestSection = document.getElementById("randomTest");
+    
+    allQuestionsSection.style.display = "block";
+    randomTestSection.style.display = "none";
+}
+
+// Sự kiện cho hai nút
 document.getElementById("generateTest").addEventListener("click", displayRandomTest);
+document.getElementById("reviewAll").addEventListener("click", displayAllQuestions);
+
+// Mặc định hiển thị ôn tập toàn bộ khi tải trang
+displayAllQuestions();
