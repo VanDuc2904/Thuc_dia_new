@@ -10,10 +10,12 @@
     <header>
         <h1>APTIS Listening Practice - Part 1</h1>
         <p>Ôn tập đề thi trọng điểm APTIS SV - Zalo: 0346808595</p>
+        <button id="generateTest">Tạo đề thi ngẫu nhiên</button>
     </header>
-    <main>
-        <!-- TEST 8 -->
-        <section>
+    <main id="testContainer">
+        <!-- Phần ôn tập toàn bộ câu hỏi -->
+        <section id="allQuestions">
+            <!-- TEST 8 -->
             <h2>TEST 8 - ROOM 301</h2>
             <div class="question">
                 <p><strong>5. How many copies did he sell?</strong></p>
@@ -87,10 +89,8 @@
                 <button onclick="checkAnswer('t8q13', 'A')">Kiểm tra</button>
                 <p id="result-t8q13"></p>
             </div>
-        </section>
 
-        <!-- TEST 9 -->
-        <section>
+            <!-- TEST 9 -->
             <h2>TEST 9 - SICK</h2>
             <div class="question">
                 <p><strong>1. How does he feel?</strong></p>
@@ -196,10 +196,8 @@
                 <button onclick="checkAnswer('t9q13', 'C')">Kiểm tra</button>
                 <p id="result-t9q13"></p>
             </div>
-        </section>
 
-        <!-- TEST 10 -->
-        <section>
+            <!-- TEST 10 -->
             <h2>TEST 10 - SUGGEST TO DRINK (9th Sunday)</h2>
             <div class="question">
                 <p><strong>1. Why did he call his friend?</strong></p>
@@ -305,10 +303,8 @@
                 <button onclick="checkAnswer('t10q13', 'C')">Kiểm tra</button>
                 <p id="result-t10q13"></p>
             </div>
-        </section>
 
-        <!-- TEST 11 -->
-        <section>
+            <!-- TEST 11 -->
             <h2>TEST 11</h2>
             <div class="question">
                 <p><strong>1. What does her sister drink?</strong></p>
@@ -342,7 +338,6 @@
                 <button onclick="checkAnswer('t11q4', 'A')">Kiểm tra</button>
                 <p id="result-t11q4"></p>
             </div>
-            <!-- Câu 5 không đầy đủ, tạm bỏ qua -->
             <div class="question">
                 <p><strong>6. When can they play football at school?</strong></p>
                 <label><input type="radio" name="t11q6" value="A"> A. Friday afternoon</label><br>
@@ -407,10 +402,8 @@
                 <button onclick="checkAnswer('t11q13', 'C')">Kiểm tra</button>
                 <p id="result-t11q13"></p>
             </div>
-        </section>
 
-        <!-- TEST 12 -->
-        <section>
+            <!-- TEST 12 -->
             <h2>TEST 12 - ON THURSDAY MORNING</h2>
             <div class="question">
                 <p><strong>1. When do they meet each other?</strong></p>
@@ -468,7 +461,6 @@
                 <button onclick="checkAnswer('t12q7', 'A')">Kiểm tra</button>
                 <p id="result-t12q7"></p>
             </div>
-            <!-- Câu 8 không đầy đủ, tạm bỏ qua -->
             <div class="question">
                 <p><strong>9. What does she usually do in her free time?</strong></p>
                 <label><input type="radio" name="t12q9" value="A"> A. Go to the theatre and play sports</label><br>
@@ -494,6 +486,8 @@
                 <p id="result-t12q11"></p>
             </div>
         </section>
+        <!-- Phần hiển thị bài thi ngẫu nhiên -->
+        <section id="randomTest" style="display: none;"></section>
     </main>
     <footer>
         <p><a href="index.html">Quay lại trang chủ</a></p>
