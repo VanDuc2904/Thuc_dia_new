@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APTIS Part 3 Quiz - Choose M, W, or B</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        h2 {
+            color: #0066cc;
+        }
+        table {
+            border-collapse: collapse;
+            width: 90%;
+            margin: 20px auto;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+            color: #333;
+        }
+        button {
+            padding: 5px 10px;
+            margin-right: 5px;
+            background-color: #0066cc;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #004d99;
+        }
+        .options {
+            display: none;
+            margin-top: 5px;
+        }
+        .feedback {
+            margin-top: 5px;
+            font-weight: bold;
+        }
+        .correct { color: green; }
+        .wrong { color: red; }
+    </style>
+    <script>
+        function showOptions(questionId, correctAnswer) {
+            var options = document.getElementById("options-" + questionId);
+            var feedback = document.getElementById("feedback-" + questionId);
+            if (options.style.display === "none" || options.style.display === "") {
+                options.style.display = "block";
+                feedback.innerHTML = "";
+            } else {
+                options.style.display = "none";
+            }
+        }
+
+        function checkAnswer(questionId, selectedAnswer, correctAnswer) {
+            var feedback = document.getElementById("feedback-" + questionId);
+            if (selectedAnswer === correctAnswer) {
+                feedback.innerHTML = "Correct!";
+                feedback.className = "feedback correct";
+            } else {
+                feedback.innerHTML = "Wrong! Try again.";
+                feedback.className = "feedback wrong";
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>APTIS Part 3 Quiz - Choose M, W, or B</h1>
+
+    <!-- TEST 1 - University and technology -->
+    <h2>TEST 1 - University and technology</h2>
+    <table>
+        <tr>
+            <th>Question</th>
+            <th>Details</th>
+            <th>Action</th>
+        </tr>
+        <tr>
+            <td>1. Technology helps make education more accessible</td>
+            <td></td>
+            <td>
+                <button onclick="showOptions('test1-q1', 'B')">Check Answer</button>
+                <div id="options-test1-q1" class="options">
+                    <button onclick="checkAnswer('test1-q1', 'M', 'B')">M</button>
+                    <button onclick="checkAnswer('test1-q1', 'W', 'B')">W</button>
+                    <button onclick="checkAnswer('test1-q1', 'B', 'B')">B</button>
+                </div>
+                <div id="feedback-test1-q1" class="feedback"></div>
+            </td>
+        </tr>
+        <tr>
+            <td>2. Social interaction is important</td>
+            <td></td>
+            <td>
+                <button onclick="showOptions('test1-q2', 'W')">Check Answer</button>
+                <div id="options-test1-q2" class="options">
+                    <button onclick="checkAnswer('test1-q2', 'M', 'W')">M</button>
+                    <button onclick="checkAnswer('test1-q2', 'W', 'W')">W</button>
+                    <button onclick="checkAnswer('test1-q2', 'B', 'W')">B</button>
+                </div>
+                <div id="feedback-test1-q2" class="feedback"></div>
+            </td>
+        </tr>
+        <tr>
+            <td>3. The diverse curriculum is not an advantage</td>
+            <td></td>
+            <td>
+                <button onclick="showOptions('test1-q3', 'M')">Check Answer</button>
+                <div id="options-test1-q3" class="options">
+                    <button onclick="checkAnswer('test1-q3', 'M', 'M')">M</button>
+                    <button onclick="checkAnswer('test1-q3', 'W', 'M')">W</button>
+                    <button onclick="checkAnswer('test1-q3', 'B', 'M')">B</button>
+                </div>
+                <div id="feedback-test1-q3" class="feedback"></div>
+            </td>
+        </tr>
+        <tr>
+            <td>4. University competition should be encouraged</td>
+            <td></td>
+            <td>
+                <button onclick="showOptions('test1-q4', 'W')">Check Answer</button>
+                <div id="options-test1-q4" class="options">
+                    <button onclick="checkAnswer('test1-q4', 'M', 'W')">M</button>
+                    <button onclick="checkAnswer('test1-q4', 'W', 'W')">W</button>
+                    <button onclick="checkAnswer('test1-q4', 'B', 'W')">B</button>
+                </div>
+                <div id="feedback-test1-q4" class="feedback"></div>
+            </td>
+        </tr>
+    </table>
+
+    <!-- TEST 2 - Internet -->
+    <h2>TEST 2 - Internet</h2>
+    <table>
+        <tr>
+            <th>Question</th>
+            <th>Details</th>
+            <th>Action</th>
+        </tr>
+        <tr>
+            <td>1. There is too much information on the internet</td>
+            <td></td>
+            <td>
+                <button onclick="showOptions('test2-q1', 'B')">Check Answer</button>
+                <div id="options-test2-q1" class="options">
+                    <button onclick="checkAnswer('test2-q1', 'M', 'B')">M</button>
+                    <button onclick="checkAnswer('test2-q1', 'W', 'B')">W</button>
+                    <button onclick="checkAnswer('test2-q1', 'B', 'B')">B</button>
+                </div>
+                <div id="feedback-test2-q1" class="feedback"></div>
+            </td>
+        </tr>
+        <tr>
+            <td>2. Using internet requires skills</td>
+            <td></td>
+            <td>
+                <button onclick="showOptions('test2-q2', 'W')">Check Answer</button>
+                <div id="options-test2-q2" class="options">
+                    <button onclick="checkAnswer('test2-q2', 'M', 'W')">M</button>
+                    <button onclick="checkAnswer('test2-q2', 'W', 'W')">W</button>
+                    <button onclick="checkAnswer('test2-q2', 'B', 'W')">B</button>
+                </div>
+                <div id="feedback-test2-q2" class="feedback"></div>
+            </td>
+        </tr>
+        <tr>
+            <td>3. The internet is changing the way we think</td>
+            <td></td>
+            <td>
+                <button onclick="showOptions('test2-q3', 'W')">Check Answer</button>
+                <div id="options-test2-q3" class="options">
+                    <button onclick="checkAnswer('test2-q3', 'M', 'W')">M</button>
+                    <button onclick="checkAnswer('test2-q3', 'W', 'W')">W</button>
+                    <button onclick="checkAnswer('test2-q3', 'B', 'W')">B</button>
+                </div>
+                <div id="feedback-test2-q3" class="feedback"></div>
+            </td>
+        </tr>
+        <tr>
+            <td>4. Internet has made people less patient</td>
+            <td></td>
+            <td>
+                <button onclick="showOptions('test2-q4', 'B')">Check Answer</button>
+                <div id="options-test2-q4" class="options">
+                    <button onclick="checkAnswer('test2-q4', 'M', 'B')">M</button>
+                    <button onclick="checkAnswer('test2-q4', 'W', 'B')">W</button>
+                    <button onclick="checkAnswer('test2-q4', 'B', 'B')">B</button>
+                </div>
+                <div id="feedback-test2-q4" class="feedback"></div>
+            </td>
+        </tr>
+    </table>
+
+    <!-- TEST 3 - Music and singers -->
+    <h2>TEST 3 - Music and singers</h2>
+    <table>
+        <tr>
+            <th>Question</th>
+            <th>Details</th>
+            <th>Action</th>
+        </tr>
+        <tr>
+            <td>1. Singers play a good role for young people</td>
+            <td></td>
+            <td>
+                <button onclick="showOptions('test3-q1', 'W')">Check Answer</button>
+                <div id="options-test3-q1" class="options">
+                    <button onclick="checkAnswer('test3-q1', 'M', 'W')">M</button>
+                    <button onclick="checkAnswer('test3-q1', 'W', 'W')">W</button>
+                    <button onclick="checkAnswer('test3-q1', 'B', 'W')">B</button>
+                </div>
+                <div id="feedback-test3-q1" class="feedback"></div>
+            </td>
+        </tr>
+        <tr>
+            <td>2. Taste in music is a highly personal thing</td>
+            <td></td>
+            <td>
+                <button onclick="showOptions('test3-q2', 'B')">Check Answer</button>
+                <div id="options-test3-q2" class="options">
+                    <button onclick="checkAnswer('test3-q2', 'M', 'B')">M</button>
+                    <button onclick="checkAnswer('test3-q2', 'W', 'B')">W</button>
+                    <button onclick="checkAnswer('test3-q2', 'B', 'B')">B</button>
+                </div>
+                <div id="feedback-test3-q2" class="feedback"></div>
+            </td>
+        </tr>
+        <tr>
+            <td>3. Music is a universal language</td>
+            <td></td>
+            <td>
+                <button onclick="showOptions('test3-q3', 'M')">Check Answer</button>
+                <div id="options-test3-q3" class="options">
+                    <button onclick="checkAnswer('test3-q3', 'M', 'M')">M</button>
+                    <button onclick="checkAnswer('test3-q3', 'W', 'M')">W</button>
+                    <button onclick="checkAnswer('test3-q3', 'B', 'M')">B</button>
+                </div>
+                <div id="feedback-test3-q3" class="feedback"></div>
+            </td>
+        </tr>
+        <tr>
+            <td>4. Music can manipulate people's feelings</td>
+            <td></td>
+            <td>
+                <button onclick="showOptions('test3-q4', 'B')">Check Answer</button>
+                <div id="options-test3-q4" class="options">
+                    <button onclick="checkAnswer('test3-q4', 'M', 'B')">M</button>
+                    <button onclick="checkAnswer('test3-q4', 'W', 'B')">W</button>
+                    <button onclick="checkAnswer('test3-q4', 'B', 'B')">B</button>
+                </div>
+                <div id="feedback-test3-q4" class="feedback"></div>
+            </td>
+        </tr>
+    </table>
+
+    <!-- TEST 4 - The subject of beauty -->
+    <h2>TEST 4 - The subject of beauty</h2>
+    <table>
+        <tr>
+            <th>Question</th>
+            <th>Details</th>
+            <th>Action</th>
+        </tr>
+        <tr>
+            <td>1. People share very similar ideas about beauty</td>
+            <td></td>
+            <td>
+                <button onclick="showOptions('test4-q1', 'M')">Check Answer</button>
+                <div id="options-test4-q1" class="options">
+                    <button onclick="checkAnswer('test4-q1', 'M', 'M')">M</button>
+                    <button onclick="checkAnswer('test4-q1', 'W', 'M')">W</button>
+                    <button onclick="checkAnswer('test4-q1', 'B', 'M')">B</button>
+                </div>
+                <div id="feedback-test4-q1" class="feedback"></div>
+            </td>
+        </tr>
+        <tr>
+            <td>2. Views of beauty change over time</td>
+            <td></td>
+            <td>
+                <button onclick="showOptions('test4-q2', 'W')">Check Answer</button>
+                <div id="options-test4-q2" class="options">
+                    <button onclick="checkAnswer('test4-q2', 'M', 'W')">M</button>
+                    <button onclick="checkAnswer('test4-q2', 'W', 'W')">W</button>
+                    <button onclick="checkAnswer('test4-q2', 'B', 'W')">B</button>
+                </div>
+                <div id="feedback-test4-q2" class="feedback"></div>
+            </td>
+        </tr>
+        <tr>
+            <td>3. Beauty can be found in unlikely places</td>
+            <td></td>
+            <td>
+                <button onclick="showOptions('test4-q3', 'B')">Check Answer</button>
+                <div id="options-test4-q3" class="options">
+                    <button onclick="checkAnswer('test4-q3', 'M', 'B')">M</button>
+                    <button onclick="checkAnswer('test4-q3', 'W', 'B')">W</button>
+                    <button onclick="checkAnswer('test4-q3', 'B', 'B')">B</button>
+                </div>
+                <div id="feedback-test4-q3" class="feedback"></div>
+            </td>
+        </tr>
+        <tr>
+            <td>4. Traditional ideas of beauty are going to change</td>
+            <td></td>
+            <td>
+                <button onclick="showOptions('test4-q4', 'W')">Check Answer</button>
+                <div id="options-test4-q4" class="options">
+                    <button onclick="checkAnswer('test4-q4', 'M', 'W')">M</button>
+                    <button onclick="checkAnswer('test4-q4', 'W', 'W')">W</button>
+                    <button onclick="checkAnswer('test4-q4', 'B', 'W')">B</button>
+                </div>
+                <div id="feedback-test4-q4" class="feedback"></div>
+            </td>
+        </tr>
+    </table>
+
+    <!-- TEST 5 - Actors -->
+    <h2>TEST 5 - Actors</h2>
+    <table>
+        <tr>
+            <th>Question</th>
+            <th>Details</th>
+            <th>Action</th>
+        </tr>
+        <tr>
+            <td>1. Auditions are the most important of casting</td>
+            <td></td>
+            <td>
+                <button onclick="showOptions('test5-q1', 'W')">Check Answer</button>
+                <div id="options-test5-q1" class="options">
+                    <button onclick="checkAnswer('test5-q1', 'M', 'W')">M</button>
+                    <button onclick="checkAnswer('test5-q1', 'W', 'W')">W</button>
+                    <button onclick="checkAnswer('test5-q1', 'B', 'W')">B</button>
+                </div>
+                <div id="feedback-test5-q1" class="feedback"></div>
+            </td>
+        </tr>
+        <tr>
+            <td>2. Actors respond best to a strong script</td>
+            <td></td>
+            <td>
+                <button onclick="showOptions('test5-q2', 'M')">Check Answer</button>
+                <div id="options-test5-q2" class="options">
+                    <button onclick="checkAnswer('test5-q2', 'M', 'M')">M</button>
+                    <button onclick="checkAnswer('test5-q2', 'W', 'M')">W</button>
+                    <button onclick="checkAnswer('test5-q2', 'B', 'M')">B</button>
+                </div>
+                <div id="feedback-test5-q2" class="feedback"></div>
+            </td>
+        </tr>
+        <tr>
+            <td>3. Theatre acting and movie acting require different skills</td>
+            <td></td>
+            <td>
+                <button onclick="showOptions('test5-q3', 'B')">Check Answer</button>
+                <div id="options-test5-q3" class="options">
+                    <button onclick="checkAnswer('test5-q3', 'M', 'B')">M</button>
+                    <button onclick="checkAnswer('test5-q3', 'W', 'B')">W</button>
+                    <button onclick="checkAnswer('test5-q3', 'B', 'B')">B</button>
+                </div>
+                <div id="feedback-test5-q3" class="feedback"></div>
+            </td>
+        </tr>
+        <tr>
+            <td>4. Actors need to be praised</td>
+            <td></td>
+            <td>
+                <button onclick="showOptions('test5-q4', 'B')">Check Answer</button>
+                <div id="options-test5-q4" class="options">
+                    <button onclick="checkAnswer('test5-q4', 'M', 'B')">M</button>
+                    <button onclick="checkAnswer('test5-q4', 'W', 'B')">W</button>
+                    <button onclick="checkAnswer('test5-q4', 'B', 'B')">B</button>
+                </div>
+                <div id="feedback-test5-q4" class="feedback"></div>
+            </td>
+        </tr>
+    </table>
+
+    <!-- TEST 6 - Arts -->
+    <h2>TEST 6 - Arts</h2>
+    <table>
+        <tr>
+            <th>Question</th>
+            <th>Details</th>
+            <th>Action</th>
+        </tr>
+        <tr>
+            <td>1. Art is only suitable for the privileged few</td>
+            <td></td>
+            <td>
+                <button onclick="showOptions('test6-q1', 'M')">Check Answer</button>
+                <div id="options-test6-q1" class="options">
+                    <button onclick="checkAnswer('test6-q1', 'M', 'M')">M</button>
+                    <button onclick="checkAnswer('test6-q1', 'W', 'M')">W</button>
+                    <button onclick="checkAnswer('test6-q1', 'B', 'M')">B</button>
+                </div>
+                <div id="feedback-test6-q1" class="feedback"></div>
+            </td>
+        </tr>
+        <tr>
+            <td>2. The government should invest more in arts</td>
+            <td></td>
+            <td>
+                <button onclick="showOptions('test6-q2', 'W')">Check Answer</button>
+                <div id="options-test6-q2" class="options">
+                    <button onclick="checkAnswer('test6-q2', 'M', 'W')">M</button>
+                    <button onclick="checkAnswer('test6-q2', 'W', 'W')">W</button>
+                    <button onclick="checkAnswer('test6-q2', 'B', 'W')">B</button>
+                </div>
+                <div id="feedback-test6-q2" class="feedback"></div>
+            </td>
+        </tr>
+        <tr>
+            <td>3. Children should be exposed to art early</td>
+            <td></td>
+            <td>
+                <button onclick="showOptions('test6-q3', 'B')">Check Answer</button>
+                <div id="options-test6-q3" class="options">
+                    <button onclick="checkAnswer('test6-q3', 'M', 'B')">M</button>
+                    <button onclick="checkAnswer('test6-q3', 'W', 'B')">W</button>
+                    <button onclick="checkAnswer('test6-q3', 'B', 'B')">B</button>
+                </div>
+                <div id="feedback-test6-q3" class="feedback"></div>
+            </td>
+        </tr>
+        <tr>
+            <td>4. In the future, art will become more accessible</td>
+            <td></td>
+            <td>
+                <button onclick="showOptions('test6-q4', 'W')">Check Answer</button>
+                <div id="options-test6-q4" class="options">
+                    <button onclick="checkAnswer('test6-q4', 'M', 'W')">M</button>
+                    <button onclick="checkAnswer('test6-q4', 'W', 'W')">W</button>
+                    <button onclick="checkAnswer('test6-q4', 'B', 'W')">B</button>
+                </div>
+                <div id="feedback-test6-q4" class="feedback"></div>
+            </td>
+        </tr>
+    </table>
+
+    <!-- TEST 7 - Urban farming -->
+    <h2>TEST 7 - Urban farming</h2>
+    <table>
+        <tr>
+            <th>Question</th>
+            <th>Details</th>
+            <th>Action</th>
+        </tr>
+        <tr>
+            <td>1. Living space is more important than farming space</td>
+            <td></td>
+            <td>
+                <button onclick="showOptions('test7-q1', 'M')">Check Answer</button>
+                <div id="options-test7-q1" class="options">
+                    <button onclick="checkAnswer('test7-q1', 'M', 'M')">M</button>
+                    <button onclick="checkAnswer('test7-q1', 'W', 'M')">W</button>
+                    <button onclick="checkAnswer('test7-q1', 'B', 'M')">B</button>
+                </div>
+                <div id="feedback-test7-q1" class="feedback"></div>
+            </td>
+        </tr>
+        <tr>
+            <td>2. Urban farming sites can be visually appealing</td>
+            <td></td>
+            <td>
+                <button onclick="showOptions('test7-q2', 'B')">Check Answer</button>
+                <div id="options-test7-q2" class="options">
+                    <button onclick="checkAnswer('test7-q2', 'M', 'B')">M</button>
+                    <button onclick="checkAnswer('test7-q2', 'W', 'B')">W</button>
+                    <button onclick="checkAnswer('test7-q2', 'B', 'B')">B</button>
+                </div>
+                <div id="feedback-test7-q2" class="feedback"></div>
+            </td>
+        </tr>
+        <tr>
+            <td>3. Urban farming can benefit local economics</td>
+            <td></td>
+            <td>
+                <button onclick="showOptions('test7-q3', 'W')">Check Answer</button>
+                <div id="options-test7-q3" class="options">
+                    <button onclick="checkAnswer('test7-q3', 'M', 'W')">M</button>
+                    <button onclick="checkAnswer('test7-q3', 'W', 'W')">W</button>
+                    <button onclick="checkAnswer('test7-q3', 'B', 'W')">B</button>
+                </div>
+                <div id="feedback-test7-q3" class="feedback"></div>
+            </td>
+        </tr>
+        <tr>
+            <td>4. Urban farming cannot meet food needs</td>
+            <td></td>
+            <td>
+                <button onclick="showOptions('test7-q4', 'B')">Check Answer</button>
+                <div id="options-test7-q4" class="options">
+                    <button onclick="checkAnswer('test7-q4', 'M', 'B')">M</button>
+                    <button onclick="checkAnswer('test7-q4', 'W', 'B')">W</button>
+                    <button onclick="checkAnswer('test7-q4', 'B', 'B')">B</button>
+                </div>
+                <div id="feedback-test7-q4" class="feedback"></div>
+            </td>
+        </tr>
+    </table>
+
+    <!-- TEST 8 - Politics -->
+    <h2>TEST 8 - Politics</h2>
+    <table>
+        <tr>
+            <th>Question</th>
+            <th>Details</th>
+            <th>Action</th>
+        </tr>
+        <tr>
+            <td>1. Young people are becoming more interested in politics</td>
+            <td></td>
+            <td>
+                <button onclick="showOptions('test8-q1', 'B')">Check Answer</button>
+                <div id="options-test8-q1" class="options">
+                    <button onclick="checkAnswer('test8-q1', 'M', 'B')">M</button>
+                    <button onclick="checkAnswer('test8-q1', 'W', 'B')">W</button>
+                    <button onclick="checkAnswer('test8-q1', 'B', 'B')">B</button>
+                </div>
+                <div id="feedback-test8-q1" class="feedback"></div>
+            </td>
+        </tr>
+        <tr>
+            <td>2. Social media has changed political activism</td>
+            <td></td>
+            <td>
+                <button onclick="showOptions('test8-q2', 'M')">Check Answer</button>
+                <div id="options-test8-q2" class="options">
+                    <button onclick="checkAnswer('test8-q2', 'M', 'M')">M</button>
+                    <button onclick="checkAnswer('test8-q2', 'W', 'M')">W</button>
+                    <button onclick="checkAnswer('test8-q2', 'B', 'M')">B</button>
+                </div>
+                <div id="feedback-test8-q2" class="feedback"></div>
+            </td>
+        </tr>
+        <tr>
+            <td>3. People are better informed political issues</td>
+            <td></td>
+            <td>
+                <button onclick="showOptions('test8-q3', 'W')">Check Answer</button>
+                <div id="options-test8-q3" class="options">
+                    <button onclick="checkAnswer('test8-q3', 'M', 'W')">M</button>
+                    <button onclick="checkAnswer('test8-q3', 'W', 'W')">W</button>
+                    <button onclick="checkAnswer('test8-q3', 'B', 'W')">B</button>
+                </div>
+                <div id="feedback-test8-q3" class="feedback"></div>
+            </td>
+        </tr>
+        <tr>
+            <td>4. More women are likely to participate in politics</td>
+            <td></td>
+            <td>
+                <button onclick="showOptions('test8-q4', 'B')">Check Answer</button>
+                <div id="options-test8-q4" class="options">
+                    <button onclick="checkAnswer('test8-q4', 'M', 'B')">M</button>
+                    <button onclick="checkAnswer('test8-q4', 'W', 'B')">W</button>
+                    <button onclick="checkAnswer('test8-q4', 'B', 'B')">B</button>
+                </div>
+                <div id="feedback-test8-q4" class="feedback"></div>
+            </td>
+        </tr>
+    </table>
+
+    <!-- TEST 9 - Changes in the workplace -->
+    <h2>TEST 9 - Changes in the workplace</h2>
+    <table>
+        <tr>
+            <th>Question</th>
+            <th>Details</th>
+            <th>Action</th>
+        </tr>
+        <tr>
+            <td>1. Continuity is important when planning a career</td>
+            <td></td>
+            <td>
+                <button onclick="showOptions('test9-q1', 'M')">Check Answer</button>
+                <div id="options-test9-q1" class="options">
+                    <button onclick="checkAnswer('test9-q1', 'M', 'M')">M</button>
+                    <button onclick="checkAnswer('test9-q1', 'W', 'M')">W</button>
+                    <button onclick="checkAnswer('test9-q1', 'B', 'M')">B</button>
+                </div>
+                <div id="feedback-test9-q1" class="feedback"></div>
+            </td>
+        </tr>
+        <tr>
+            <td>2. Job security cannot be guaranteed</td>
+            <td></td>
+            <td>
+                <button onclick="showOptions('test9-q2', 'W')">Check Answer</button>
+                <div id="options-test9-q2" class="options">
+                    <button onclick="checkAnswer('test9-q2', 'M', 'W')">M</button>
+                    <button onclick="checkAnswer('test9-q2', 'W', 'W')">W</button>
+                    <button onclick="checkAnswer('test9-q2', 'B', 'W')">B</button>
+                </div>
+                <div id="feedback-test9-q2" class="feedback"></div>
+            </td>
+        </tr>
+        <tr>
+            <td>3. Job satisfaction is important for motivator</td>
+            <td></td>
+            <td>
+                <button onclick="showOptions('test9-q3', 'B')">Check Answer</button>
+                <div id="options-test9-q3" class="options">
+                    <button onclick="checkAnswer('test9-q3', 'M', 'B')">M</button>
+                    <button onclick="checkAnswer('test9-q3', 'W', 'B')">W</button>
+                    <button onclick="checkAnswer('test9-q3', 'B', 'B')">B</button>
+                </div>
+                <div id="feedback-test9-q3" class="feedback"></div>
+            </td>
+        </tr>
+        <tr>
+            <td>4. Technological improvement is good for the economy</td>
+            <td></td>
+            <td>
+                <button onclick="showOptions('test9-q4', 'M')">Check Answer</button>
+                <div id="options-test9-q4" class="options">
+                    <button onclick="checkAnswer('test9-q4', 'M', 'M')">M</button>
+                    <button onclick="checkAnswer('test9-q4', 'W', 'M')">W</button>
+                    <button onclick="checkAnswer('test9-q4', 'B', 'M')">B</button>
+                </div>
+                <div id="feedback-test9-q4" class="feedback"></div>
+            </td>
+        </tr>
+    </table>
+
+    <!-- TEST 10 - Politics (same as TEST 8) -->
+    <h2>TEST 10 - Politics</h2>
+    <table>
+        <tr>
+            <th>Question</th>
+            <th>Details</th>
+            <th>Action</th>
+        </tr>
+        <tr>
+            <td>1. Young people are becoming more interested in politics</td>
+            <td></td>
+            <td>
+                <button onclick="showOptions('test10-q1', 'B')">Check Answer</button>
+                <div id="options-test10-q1" class="options">
+                    <button onclick="checkAnswer('test10-q1', 'M', 'B')">M</button>
+                    <button onclick="checkAnswer('test10-q1', 'W', 'B')">W</button>
+                    <button onclick="checkAnswer('test10-q1', 'B', 'B')">B</button>
+                </div>
+                <div id="feedback-test10-q1" class="feedback"></div>
+            </td>
+        </tr>
+        <tr>
+            <td>2. Social media has changed political activism</td>
+            <td></td>
+            <td>
+                <button onclick="showOptions('test10-q2', 'M')">Check Answer</button>
+                <div id="options-test10-q2" class="options">
+                    <button onclick="checkAnswer('test10-q2', 'M', 'M')">M</button>
+                    <button onclick="checkAnswer('test10-q2', 'W', 'M')">W</button>
+                    <button onclick="checkAnswer('test10-q2', 'B', 'M')">B</button>
+                </div>
+                <div id="feedback-test10-q2" class="feedback"></div>
+            </td>
+        </tr>
+        <tr>
+            <td>3. People are better informed political issues</td>
+            <td></td>
+            <td>
+                <button onclick="showOptions('test10-q3', 'W')">Check Answer</button>
+                <div id="options-test10-q3" class="options">
+                    <button onclick="checkAnswer('test10-q3', 'M', 'W')">M</button>
+                    <button onclick="checkAnswer('test10-q3', 'W', 'W')">W</button>
+                    <button onclick="checkAnswer('test10-q3', 'B', 'W')">B</button>
+                </div>
+                <div id="feedback-test10-q3" class="feedback"></div>
+            </td>
+        </tr>
+        <tr>
+            <td>4. More women are likely to participate in politics</td>
+            <td></td>
+            <td>
+                <button onclick="showOptions('test10-q4', 'B')">Check Answer</button>
+                <div id="options-test10-q4" class="options">
+                    <button onclick="checkAnswer('test10-q4', 'M', 'B')">M</button>
+                    <button onclick="checkAnswer('test10-q4', 'W', 'B')">W</button>
+                    <button onclick="checkAnswer('test10-q4', 'B', 'B')">B</button>
+                </div>
+                <div id="feedback-test10-q4" class="feedback"></div>
+            </td>
+        </tr>
+    </table>
+
+    <!-- TEST 11 - Information and technology -->
+    <h2>TEST 11 - Information and technology</h2>
+    <table>
+        <tr>
+            <th>Question</th>
+            <th>Details</th>
+            <th>Action</th>
+        </tr>
+        <tr>
+            <td>1. The future generation will fail to cope with new information</td>
+            <td></td>
+            <td>
+                <button onclick="showOptions('test11-q1', 'M')">Check Answer</button>
+                <div id="options-test11-q1" class="options">
+                    <button onclick="checkAnswer('test11-q1', 'M', 'M')">M</button>
+                    <button onclick="checkAnswer('test11-q1', 'W', 'M')">W</button>
+                    <button onclick="checkAnswer('test11-q1', 'B', 'M')">B</button>
+                </div>
+                <div id="feedback-test11-q1" class="feedback"></div>
+            </td>
+        </tr>
+        <tr>
+            <td>2. The information revolution will be good for the economy</td>
+            <td></td>
+            <td>
+                <button onclick="showOptions('test11-q2', 'W')">Check Answer</button>
+                <div id="options-test11-q2" class="options">
+                    <button onclick="checkAnswer('test11-q2', 'M', 'W')">M</button>
+                    <button onclick="checkAnswer('test11-q2', 'W', 'W')">W</button>
+                    <button onclick="checkAnswer('test11-q2', 'B', 'W')">B</button>
+                </div>
+                <div id="feedback-test11-q2" class="feedback"></div>
+            </td>
+        </tr>
+        <tr>
+            <td>3. No computer is superior to the human brain</td>
+            <td></td>
+            <td>
+                <button onclick="showOptions('test11-q3', 'W')">Check Answer</button>
+                <div id="options-test11-q3" class="options">
+                    <button onclick="checkAnswer('test11-q3', 'M', 'W')">M</button>
+                    <button onclick="checkAnswer('test11-q3', 'W', 'W')">W</button>
+                    <button onclick="checkAnswer('test11-q3', 'B', 'W')">B</button>
+                </div>
+                <div id="feedback-test11-q3" class="feedback"></div>
+            </td>
+        </tr>
+        <tr>
+            <td>4. More should be done to protect individual privacy</td>
+            <td></td>
+            <td>
+                <button onclick="showOptions('test11-q4', 'B')">Check Answer</button>
+                <div id="options-test11-q4" class="options">
+                    <button onclick="checkAnswer('test11-q4', 'M', 'B')">M</button>
+                    <button onclick="checkAnswer('test11-q4', 'W', 'B')">W</button>
+                    <button onclick="checkAnswer('test11-q4', 'B', 'B')">B</button>
+                </div>
+                <div id="feedback-test11-q4" class="feedback"></div>
+            </td>
+        </tr>
+    </table>
+
+    <!-- TEST 12 - Politics (same as TEST 8 and 10) -->
+    <h2>TEST 12 - Politics</h2>
+    <table>
+        <tr>
+            <th>Question</th>
+            <th>Details</th>
+            <th>Action</th>
+        </tr>
+        <tr>
+            <td>1. Young people are becoming more interested in politics</td>
+            <td></td>
+            <td>
+                <button onclick="showOptions('test12-q1', 'B')">Check Answer</button>
+                <div id="options-test12-q1" class="options">
+                    <button onclick="checkAnswer('test12-q1', 'M', 'B')">M</button>
+                    <button onclick="checkAnswer('test12-q1', 'W', 'B')">W</button>
+                    <button onclick="checkAnswer('test12-q1', 'B', 'B')">B</button>
+                </div>
+                <div id="feedback-test12-q1" class="feedback"></div>
+            </td>
+        </tr>
+        <tr>
+            <td>2. Social media has changed political activism</td>
+            <td></td>
+            <td>
+                <button onclick="showOptions('test12-q2', 'M')">Check Answer</button>
+                <div id="options-test12-q2" class="options">
+                    <button onclick="checkAnswer('test12-q2', 'M', 'M')">M</button>
+                    <button onclick="checkAnswer('test12-q2', 'W', 'M')">W</button>
+                    <button onclick="checkAnswer('test12-q2', 'B', 'M')">B</button>
+                </div>
+                <div id="feedback-test12-q2" class="feedback"></div>
+            </td>
+        </tr>
+        <tr>
+            <td>3. People are better informed political issues</td>
+            <td></td>
+            <td>
+                <button onclick="showOptions('test12-q3', 'W')">Check Answer</button>
+                <div id="options-test12-q3" class="options">
+                    <button onclick="checkAnswer('test12-q3', 'M', 'W')">M</button>
+                    <button onclick="checkAnswer('test12-q3', 'W', 'W')">W</button>
+                    <button onclick="checkAnswer('test12-q3', 'B', 'W')">B</button>
+                </div>
+                <div id="feedback-test12-q3" class="feedback"></div>
+            </td>
+        </tr>
+        <tr>
+            <td>4. More women are likely to participate in politics</td>
+            <td></td>
+            <td>
+                <button onclick="showOptions('test12-q4', 'B')">Check Answer</button>
+                <div id="options-test12-q4" class="options">
+                    <button onclick="checkAnswer('test12-q4', 'M', 'B')">M</button>
+                    <button onclick="checkAnswer('test12-q4', 'W', 'B')">W</button>
+                    <button onclick="checkAnswer('test12-q4', 'B', 'B')">B</button>
+                </div>
+                <div id="feedback-test12-q4" class="feedback"></div>
+            </td>
+        </tr>
+    </table>
+
+</body>
+</html>
