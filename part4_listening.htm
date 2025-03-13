@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AptisWeb - Listening</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="timer">
+                <span id="minutes">32</span> : <span id="seconds">00</span>
+                <span class="mins-secs">MINS SECS</span>
+                <button class="hide-btn" onclick="hideTimer()">Hide time</button>
+            </div>
+            <div class="logo">AptisWeb</div>
+            <div class="section-title">Listening</div>
+            <div class="question-info" id="question-info">Question 16 of 17</div>
+        </div>
+
+        <!-- Test Navigation -->
+        <div class="test-navigation">
+            <label for="test-select">Select Test: </label>
+            <select id="test-select" onchange="loadTest(this.value)">
+                <option value="0">TEST 1: Script production</option>
+                <option value="1">TEST 1: A regional development plan</option>
+                <option value="2">TEST 2: Sport</option>
+                <option value="3">TEST 2: Work from home</option>
+                <option value="4">TEST 3: CCTV (Security cameras)</option>
+                <option value="5">TEST 3: Writer's block</option>
+                <option value="6">TEST 4: Television series</option>
+                <option value="7">TEST 4: Advertising and sponsoring</option>
+                <option value="8">TEST 5: Making plans</option>
+                <option value="9">TEST 5: A promotion campaign for a product</option>
+                <option value="10">TEST 6: A new guide</option>
+                <option value="11">TEST 6: Life after university</option>
+                <option value="12">TEST 7: A new restaurant</option>
+                <option value="13">TEST 7: New novel</option>
+                <option value="14">TEST 8: A research into happiness</option>
+                <option value="15">TEST 8: Criticism of the new novel</option>
+                <option value="16">TEST 9: Professionalism at work</option>
+                <option value="17">TEST 9: A musician's life</option>
+                <option value="18">TEST 10: A book about a life of a scientist</option>
+                <option value="19">TEST 10: A break from studying</option>
+                <option value="20">TEST 11: A promotion campaign for a product</option>
+                <option value="21">TEST 11: Managing financial spending</option>
+                <option value="22">TEST 12: The importance of sleep</option>
+                <option value="23">TEST 12: 2 famous writers</option>
+            </select>
+        </div>
+
+        <!-- Audio Player -->
+        <div class="audio-player">
+            <audio id="audio" controls>
+                <source src="audio-placeholder.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+            <span class="plays-remaining">2 of 2 plays remaining</span>
+        </div>
+
+        <!-- Question Section -->
+        <div class="question-section" id="question-section">
+            <p id="instruction"></p>
+            <div class="question" id="q1">
+                <strong id="q1-text"></strong>
+                <ul id="q1-options"></ul>
+                <p id="q1-feedback" class="feedback"></p>
+            </div>
+            <div class="question" id="q2">
+                <strong id="q2-text"></strong>
+                <ul id="q2-options"></ul>
+                <p id="q2-feedback" class="feedback"></p>
+            </div>
+            <div class="test-score" id="test-score"></div>
+        </div>
+
+        <!-- Navigation Buttons -->
+        <div class="navigation" id="navigation">
+            <button class="back-btn" onclick="previousTest()">Back</button>
+            <button class="check-btn" onclick="checkAnswers()">Check Answers</button>
+            <button class="flag-btn">Flag</button>
+            <button class="next-btn" onclick="nextTest()" disabled>Next</button>
+        </div>
+
+        <!-- Results -->
+        <div class="results" id="results" style="display: none;">
+            <h3>Your Results</h3>
+            <p id="score"></p>
+            <button onclick="restartTest()">Restart Test</button>
+        </div>
+    </div>
+
+    <script src="p4_ls.js"></script>
+</body>
+</html>
