@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AptisWeb - Listening Part 2</title>
+    <link rel="stylesheet" href="a.css"> <!-- Đổi tên thành a.css như bạn đã dùng -->
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="timer">
+                <span id="minutes">32</span> : <span id="seconds">00</span>
+                <span class="mins-secs">MINS SECS</span>
+                <button class="hide-btn" onclick="hideTimer()">Hide time</button>
+            </div>
+            <div class="logo">AptisWeb</div>
+            <div class="section-title">Listening Part 2</div>
+            <div class="question-info" id="question-info">Question 14 of 14</div>
+        </div>
+
+        <!-- Test Navigation -->
+        <div class="test-navigation">
+            <label for="test-select">Select Test: </label>
+            <select id="test-select" onchange="loadTest(this.value)">
+                <option value="0">TEST 1: Do exercise</option>
+                <option value="1">TEST 2: Travel to work</option>
+                <option value="2">TEST 3: Protecting the environment</option>
+                <option value="3">TEST 4: Studying habits</option>
+                <option value="4">TEST 5: A place for studying</option>
+                <option value="5">TEST 6: Outdoor activities</option>
+                <option value="6">TEST 7: Art</option>
+                <option value="7">TEST 8: Online shopping</option>
+                <option value="8">TEST 9: The place that they run</option>
+                <option value="9">TEST 10: The use of the internet</option>
+                <option value="10">TEST 11: Environmental problem</option>
+                <option value="11">TEST 12: Listening to music</option>
+            </select>
+        </div>
+
+        <!-- Audio Player -->
+        <div class="audio-player">
+            <audio id="audio" controls>
+                <source src="audio-placeholder.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+            <span class="plays-remaining">2 of 2 plays remaining</span>
+        </div>
+
+        <!-- Question Section -->
+        <div class="question-section" id="question-section">
+            <p id="instruction"></p>
+            <div class="question" id="q-a">
+                <strong id="q-a-text">A: What does speaker A say about the topic?</strong>
+                <ul id="q-a-options"></ul>
+                <p id="q-a-feedback" class="feedback"></p>
+            </div>
+            <div class="question" id="q-b">
+                <strong id="q-b-text">B: What does speaker B say about the topic?</strong>
+                <ul id="q-b-options"></ul>
+                <p id="q-b-feedback" class="feedback"></p>
+            </div>
+            <div class="question" id="q-c">
+                <strong id="q-c-text">C: What does speaker C say about the topic?</strong>
+                <ul id="q-c-options"></ul>
+                <p id="q-c-feedback" class="feedback"></p>
+            </div>
+            <div class="question" id="q-d">
+                <strong id="q-d-text">D: What does speaker D say about the topic?</strong>
+                <ul id="q-d-options"></ul>
+                <p id="q-d-feedback" class="feedback"></p>
+            </div>
+            <div class="test-score" id="test-score"></div>
+        </div>
+
+        <!-- Navigation Buttons -->
+        <div class="navigation" id="navigation">
+            <button class="back-btn" onclick="previousTest()">Back</button>
+            <button class="check-btn" onclick="checkAnswers()">Check Answers</button>
+            <button class="flag-btn">Flag</button>
+            <button class="next-btn" onclick="nextTest()" disabled>Next</button>
+        </div>
+
+        <!-- Results -->
+        <div class="results" id="results" style="display: none;">
+            <h3>Your Results</h3>
+            <p id="score"></p>
+            <button onclick="restartTest()">Restart Test</button>
+        </div>
+    </div>
+
+    <script src="parthai.js"></script> <!-- Đổi tên thành parthai.js như bạn đã dùng -->
+</body>
+</html>
