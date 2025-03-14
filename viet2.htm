@@ -7,703 +7,674 @@
     <link rel="stylesheet" href="styles.css">
     <style>
         body { font-family: Arial, sans-serif; margin: 20px; }
-        h1 { color: #2c3e50; text-align: center; }
         h2 { color: #2c3e50; }
-        .section { margin-bottom: 20px; border: 1px solid #ddd; padding: 15px; border-radius: 5px; }
+        .section { margin-bottom: 20px; }
         label { display: block; margin-top: 10px; font-weight: bold; }
         textarea { width: 80%; height: 40px; margin-top: 5px; }
-        .template { font-style: italic; color: #555; display: none; } /* Ẩn template ban đầu */
-        button { margin-top: 10px; padding: 5px 10px; background-color: #3498db; color: white; border: none; border-radius: 5px; cursor: pointer; }
-        button:hover { background-color: #2980b9; }
+        .template { font-style: italic; color: #555; }
+        button { margin-top: 10px; padding: 5px 10px; }
         .result { color: green; font-weight: bold; }
         .error { color: red; font-weight: bold; }
-        .correct-answer { color: blue; font-style: italic; display: none; } /* Ẩn đáp án ban đầu */
+        .correct-answer { color: blue; font-style: italic; }
     </style>
 </head>
 <body>
     <h1>Club Template - Adjusted Content Validation</h1>
     <p>Enter the full answer and click "Check" to verify. Follow the template structure.</p>
-
-    <!-- LANGUAGE CLUB -->
-    <div class="section">
-        <h2>LANGUAGE CLUB</h2>
-        <h3>Part 1: Basic Questions (1-5 words)</h3>
-        <p class="template part1-template">Template: I ______ ______ ______ (1-5 words).</p>
-        <label>Where are you from?</label>
-        <textarea id="langp1q1"></textarea>
-        <button onclick="checkPart1('langp1q1', 'I come from Vietnam', 'part1-template')">Check</button>
-        <span id="langp1q1-result"></span>
-        <div id="langp1q1-correct" class="correct-answer">Correct answer: I come from Vietnam</div><br><br>
-
-        <label>What’s the weather like today?</label>
-        <textarea id="langp1q2"></textarea>
-        <button onclick="checkPart1('langp1q2', 'It is raining cats and dogs', 'part1-template')">Check</button>
-        <span id="langp1q2-result"></span>
-        <div id="langp1q2-correct" class="correct-answer">Correct answer: It is raining cats and dogs</div><br><br>
-
-        <label>What do you do in your free time?</label>
-        <textarea id="langp1q3"></textarea>
-        <button onclick="checkPart1('langp1q3', 'I often watch action films', 'part1-template')">Check</button>
-        <span id="langp1q3-result"></span>
-        <div id="langp1q3-correct" class="correct-answer">Correct answer: I often watch action films</div><br><br>
-
-        <h3>Part 2: Specific Question (20-30 words)</h3>
-        <p class="template part2-template">Template: I joined this club because I’m passionate about [topic]. A friend recommended it, and I love exploring [activity] in my free time. It’s a great way to connect!</p>
-        <label>Tell me about your free time and interests?</label>
-        <textarea id="langp2"></textarea>
-        <button onclick="checkPart2('langp2', 'I joined this club because I’m passionate about languages. A friend recommended it, and I love exploring novels in my free time. It’s a great way to connect!', 'part2-template')">Check</button>
-        <span id="langp2-result"></span>
-        <div id="langp2-correct" class="correct-answer">Correct answer: I joined this club because I’m passionate about languages. A friend recommended it, and I love exploring novels in my free time. It’s a great way to connect!</div><br><br>
-
-        <h3>Part 3: Chat with Members</h3>
-        <p class="template part3-template">Template: Hi [A/B/C], I [agree/disagree] because [reason]. For me, [activity] is awesome since it brings [benefit]. Once, I [experience] and it was eye-opening. What’s your take? How does it work for you?</p>
-        <p>A (30-35 words):</p>
-        <label>Why did you choose this course?</label>
-        <textarea id="langp3a"></textarea>
-        <button onclick="checkPart3('langp3a', 'Hi A, I enjoy languages too! Last weekend, I tried French and found it really exciting. It helps me relax and learn more about culture. What about you? Any fun experiences?', 'part3-template')">Check</button>
-        <span id="langp3a-result"></span>
-        <div id="langp3a-correct" class="correct-answer">Correct answer: Hi A, I enjoy languages too! Last weekend, I tried French and found it really exciting. It helps me relax and learn more about culture. What about you? Any fun experiences?</div><br><br>
-
-        <p>B (35-40 words):</p>
-        <label>How have you found the course so far? What’s been difficult?</label>
-        <textarea id="langp3b"></textarea>
-        <button onclick="checkPart3('langp3b', 'Hi B, that’s cool! I also like learning because it’s a great way to unwind. Sometimes it’s tricky, like when I mixed up words last month. How do you handle it? Any tips?', 'part3-template')">Check</button>
-        <span id="langp3b-result"></span>
-        <div id="langp3b-correct" class="correct-answer">Correct answer: Hi B, that’s cool! I also like learning because it’s a great way to unwind. Sometimes it’s tricky, like when I mixed up words last month. How do you handle it? Any tips?</div><br><br>
-
-        <p>C (35-40 words):</p>
-        <label>What are you hoping to do when you finish the course?</label>
-        <textarea id="langp3c"></textarea>
-        <button onclick="checkPart3('langp3c', 'Hi C, I agree because learning opens doors. For me, speaking fluently is awesome since it brings connections. Once, I spoke with a tourist and it was eye-opening. What’s your take? How does it work for you?', 'part3-template')">Check</button>
-        <span id="langp3c-result"></span>
-        <div id="langp3c-correct" class="correct-answer">Correct answer: Hi C, I agree because learning opens doors. For me, speaking fluently is awesome since it brings connections. Once, I spoke with a tourist and it was eye-opening. What’s your take? How does it work for you?</div>
-    </div>
-
-    <!-- FOOD CLUB -->
-    <div class="section">
-        <h2>FOOD CLUB</h2>
-        <h3>Part 1: Basic Questions (1-5 words)</h3>
-        <p class="template part1-template">Template: I ______ ______ ______ (1-5 words).</p>
-        <label>What do you like to do in the evening?</label>
-        <textarea id="foodp1q1"></textarea>
-        <button onclick="checkPart1('foodp1q1', 'I often cook dinner for my family', 'part1-template')">Check</button>
-        <span id="foodp1q1-result"></span>
-        <div id="foodp1q1-correct" class="correct-answer">Correct answer: I often cook dinner for my family</div><br><br>
-
-        <label>What is your hobby?</label>
-        <textarea id="foodp1q2"></textarea>
-        <button onclick="checkPart1('foodp1q2', 'I am keen on listening to music', 'part1-template')">Check</button>
-        <span id="foodp1q2-result"></span>
-        <div id="foodp1q2-correct" class="correct-answer">Correct answer: I am keen on listening to music</div><br><br>
-
-        <label>The sport you love?</label>
-        <textarea id="foodp1q3"></textarea>
-        <button onclick="checkPart1('foodp1q3', 'Soccer is my cup of tea', 'part1-template')">Check</button>
-        <span id="foodp1q3-result"></span>
-        <div id="foodp1q3-correct" class="correct-answer">Correct answer: Soccer is my cup of tea</div><br><br>
-
-        <h3>Part 2: Specific Question (20-30 words)</h3>
-        <p class="template part2-template">Template: I joined this club because I’m passionate about [topic]. A friend recommended it, and I love exploring [activity] in my free time. It’s a great way to connect!</p>
-        <label>What was the last time you ate out and where did you eat it?</label>
-        <textarea id="foodp2"></textarea>
-        <button onclick="checkPart2('foodp2', 'I joined this club because I’m passionate about food. A friend recommended it, and I love exploring recipes in my free time. It’s a great way to connect!', 'part2-template')">Check</button>
-        <span id="foodp2-result"></span>
-        <div id="foodp2-correct" class="correct-answer">Correct answer: I joined this club because I’m passionate about food. A friend recommended it, and I love exploring recipes in my free time. It’s a great way to connect!</div><br><br>
-
-        <h3>Part 3: Chat with Members</h3>
-        <p class="template part3-template">Template: Hi [A/B/C], I [agree/disagree] because [reason]. For me, [activity] is awesome since it brings [benefit]. Once, I [experience] and it was eye-opening. What’s your take? How does it work for you?</p>
-        <p>A (30-35 words):</p>
-        <label>Kelly had a truly amazing meal of her life, tell me about the most memorable meal of your life?</label>
-        <textarea id="foodp3a"></textarea>
-        <button onclick="checkPart3('foodp3a', 'Hi A, I enjoy food too! Last weekend, I tried cooking and found it really exciting. It helps me relax and learn more about flavors. What about you? Any fun experiences?', 'part3-template')">Check</button>
-        <span id="foodp3a-result"></span>
-        <div id="foodp3a-correct" class="correct-answer">Correct answer: Hi A, I enjoy food too! Last weekend, I tried cooking and found it really exciting. It helps me relax and learn more about flavors. What about you? Any fun experiences?</div><br><br>
-
-        <p>B (35-40 words):</p>
-        <label>Some people like to eat out with friends, do you like eating out or eating at home?</label>
-        <textarea id="foodp3b"></textarea>
-        <button onclick="checkPart3('foodp3b', 'Hi B, that’s cool! I also like cooking because it’s a great way to unwind. Sometimes it’s tricky, like when I overcooked pasta last month. How do you handle it? Any tips?', 'part3-template')">Check</button>
-        <span id="foodp3b-result"></span>
-        <div id="foodp3b-correct" class="correct-answer">Correct answer: Hi B, that’s cool! I also like cooking because it’s a great way to unwind. Sometimes it’s tricky, like when I overcooked pasta last month. How do you handle it? Any tips?</div><br><br>
-
-        <p>C (35-40 words):</p>
-        <label>Nowadays, people in other countries have too many unhealthy food choices, should there be a tax on fast food to improve this situation, why?</label>
-        <textarea id="foodp3c"></textarea>
-        <button onclick="checkPart3('foodp3c', 'Hi C, I agree because health matters. For me, cooking fresh is awesome since it brings energy. Once, I ate too much fast food and it was eye-opening. What’s your take? How does it work for you?', 'part3-template')">Check</button>
-        <span id="foodp3c-result"></span>
-        <div id="foodp3c-correct" class="correct-answer">Correct answer: Hi C, I agree because health matters. For me, cooking fresh is awesome since it brings energy. Once, I ate too much fast food and it was eye-opening. What’s your take? How does it work for you?</div>
-    </div>
-
-    <!-- SCIENCE CLUB -->
-    <div class="section">
-        <h2>SCIENCE CLUB</h2>
-        <h3>Part 1: Basic Questions (1-5 words)</h3>
-        <p class="template part1-template">Template: I ______ ______ ______ (1-5 words).</p>
-        <label>What is your favorite color?</label>
-        <textarea id="scip1q1"></textarea>
-        <button onclick="checkPart1('scip1q1', 'My favorite color is blue', 'part1-template')">Check</button>
-        <span id="scip1q1-result"></span>
-        <div id="scip1q1-correct" class="correct-answer">Correct answer: My favorite color is blue</div><br><br>
-
-        <label>What is your first school?</label>
-        <textarea id="scip1q2"></textarea>
-        <button onclick="checkPart1('scip1q2', 'Minh Ha primary', 'part1-template')">Check</button>
-        <span id="scip1q2-result"></span>
-        <div id="scip1q2-correct" class="correct-answer">Correct answer: Minh Ha primary</div><br><br>
-
-        <label>What do you do in your free time?</label>
-        <textarea id="scip1q3"></textarea>
-        <button onclick="checkPart1('scip1q3', 'I play badminton', 'part1-template')">Check</button>
-        <span id="scip1q3-result"></span>
-        <div id="scip1q3-correct" class="correct-answer">Correct answer: I play badminton</div><br><br>
-
-        <h3>Part 2: Specific Question (20-30 words)</h3>
-        <p class="template part2-template">Template: I joined this club because I’m passionate about [topic]. A friend recommended it, and I love exploring [activity] in my free time. It’s a great way to connect!</p>
-        <label>Do you like Science? Why?</label>
-        <textarea id="scip2"></textarea>
-        <button onclick="checkPart2('scip2', 'I joined this club because I’m passionate about science. A friend recommended it, and I love exploring experiments in my free time. It’s a great way to connect!', 'part2-template')">Check</button>
-        <span id="scip2-result"></span>
-        <div id="scip2-correct" class="correct-answer">Correct answer: I joined this club because I’m passionate about science. A friend recommended it, and I love exploring experiments in my free time. It’s a great way to connect!</div><br><br>
-
-        <h3>Part 3: Chat with Members</h3>
-        <p class="template part3-template">Template: Hi [A/B/C], I [agree/disagree] because [reason]. For me, [activity] is awesome since it brings [benefit]. Once, I [experience] and it was eye-opening. What’s your take? How does it work for you?</p>
-        <p>A (30-35 words):</p>
-        <label>Why do you decide to join in our Science Club? How often can you go to the club?</label>
-        <textarea id="scip3a"></textarea>
-        <button onclick="checkPart3('scip3a', 'Hi A, I enjoy science too! Last weekend, I tried an experiment and found it really exciting. It helps me relax and learn more about nature. What about you? Any fun experiences?', 'part3-template')">Check</button>
-        <span id="scip3a-result"></span>
-        <div id="scip3a-correct" class="correct-answer">Correct answer: Hi A, I enjoy science too! Last weekend, I tried an experiment and found it really exciting. It helps me relax and learn more about nature. What about you? Any fun experiences?</div><br><br>
-
-        <p>B (35-40 words):</p>
-        <label>In the past, you learnt about Science in school. Do you remember something about Science?</label>
-        <textarea id="scip3b"></textarea>
-        <button onclick="checkPart3('scip3b', 'Hi B, that’s cool! I also like science because it’s a great way to unwind. Sometimes it’s tricky, like when I forgot a fact last month. How do you handle it? Any tips?', 'part3-template')">Check</button>
-        <span id="scip3b-result"></span>
-        <div id="scip3b-correct" class="correct-answer">Correct answer: Hi B, that’s cool! I also like science because it’s a great way to unwind. Sometimes it’s tricky, like when I forgot a fact last month. How do you handle it? Any tips?</div><br><br>
-
-        <p>C (35-40 words):</p>
-        <label>Who is your favorite inventor or scientist? Why?</label>
-        <textarea id="scip3c"></textarea>
-        <button onclick="checkPart3('scip3c', 'Hi C, I agree because science inspires. For me, learning facts is awesome since it brings knowledge. Once, I read about Einstein and it was eye-opening. What’s your take? How does it work for you?', 'part3-template')">Check</button>
-        <span id="scip3c-result"></span>
-        <div id="scip3c-correct" class="correct-answer">Correct answer: Hi C, I agree because science inspires. For me, learning facts is awesome since it brings knowledge. Once, I read about Einstein and it was eye-opening. What’s your take? How does it work for you?</div>
-    </div>
-
-    <!-- NATURE CLUB -->
-    <div class="section">
-        <h2>NATURE CLUB</h2>
-        <h3>Part 1: Basic Questions (1-5 words)</h3>
-        <p class="template part1-template">Template: I ______ ______ ______ (1-5 words).</p>
-        <label>What is your favorite sport?</label>
-        <textarea id="naturep1q1"></textarea>
-        <button onclick="checkPart1('naturep1q1', 'I like playing badminton', 'part1-template')">Check</button>
-        <span id="naturep1q1-result"></span>
-        <div id="naturep1q1-correct" class="correct-answer">Correct answer: I like playing badminton</div><br><br>
-
-        <label>How many people are in your family?</label>
-        <textarea id="naturep1q2"></textarea>
-        <button onclick="checkPart1('naturep1q2', 'There are 7 people in my family', 'part1-template')">Check</button>
-        <span id="naturep1q2-result"></span>
-        <div id="naturep1q2-correct" class="correct-answer">Correct answer: There are 7 people in my family</div><br><br>
-
-        <label>What did you do yesterday?</label>
-        <textarea id="naturep1q3"></textarea>
-        <button onclick="checkPart1('naturep1q3', 'I went shopping with my mother', 'part1-template')">Check</button>
-        <span id="naturep1q3-result"></span>
-        <div id="naturep1q3-correct" class="correct-answer">Correct answer: I went shopping with my mother</div><br><br>
-
-        <h3>Part 2: Specific Question (20-30 words)</h3>
-        <p class="template part2-template">Template: I joined this club because I’m passionate about [topic]. A friend recommended it, and I love exploring [activity] in my free time. It’s a great way to connect!</p>
-        <label>Please tell me about your free time and hobbies?</label>
-        <textarea id="naturep2"></textarea>
-        <button onclick="checkPart2('naturep2', 'I joined this club because I’m passionate about nature. A friend recommended it, and I love exploring parks in my free time. It’s a great way to connect!', 'part2-template')">Check</button>
-        <span id="naturep2-result"></span>
-        <div id="naturep2-correct" class="correct-answer">Correct answer: I joined this club because I’m passionate about nature. A friend recommended it, and I love exploring parks in my free time. It’s a great way to connect!</div><br><br>
-
-        <h3>Part 3: Chat with Members</h3>
-        <p class="template part3-template">Template: Hi [A/B/C], I [agree/disagree] because [reason]. For me, [activity] is awesome since it brings [benefit]. Once, I [experience] and it was eye-opening. What’s your take? How does it work for you?</p>
-        <p>A (30-35 words):</p>
-        <label>Hi! Welcome to the club. Where do you like to visit?</label>
-        <textarea id="naturep3a"></textarea>
-        <button onclick="checkPart3('naturep3a', 'Hi A, I enjoy nature too! Last weekend, I tried hiking and found it really exciting. It helps me relax and learn more about trees. What about you? Any fun experiences?', 'part3-template')">Check</button>
-        <span id="naturep3a-result"></span>
-        <div id="naturep3a-correct" class="correct-answer">Correct answer: Hi A, I enjoy nature too! Last weekend, I tried hiking and found it really exciting. It helps me relax and learn more about trees. What about you? Any fun experiences?</div><br><br>
-
-        <p>B (35-40 words):</p>
-        <label>Hi! Why did you decide to join the club?</label>
-        <textarea id="naturep3b"></textarea>
-        <button onclick="checkPart3('naturep3b', 'Hi B, that’s cool! I also like nature because it’s a great way to unwind. Sometimes it’s tricky, like when I forgot my map last month. How do you handle it? Any tips?', 'part3-template')">Check</button>
-        <span id="naturep3b-result"></span>
-        <div id="naturep3b-correct" class="correct-answer">Correct answer: Hi B, that’s cool! I also like nature because it’s a great way to unwind. Sometimes it’s tricky, like when I forgot my map last month. How do you handle it? Any tips?</div><br><br>
-
-        <p>C (35-40 words):</p>
-        <label>The bigger the club, the more environmentally conscious people are, right?</label>
-        <textarea id="naturep3c"></textarea>
-        <button onclick="checkPart3('naturep3c', 'Hi C, I agree because it spreads awareness. For me, planting trees is awesome since it brings change. Once, I joined a tree-planting event and it was eye-opening. What’s your take? How does it work for you?', 'part3-template')">Check</button>
-        <span id="naturep3c-result"></span>
-        <div id="naturep3c-correct" class="correct-answer">Correct answer: Hi C, I agree because it spreads awareness. For me, planting trees is awesome since it brings change. Once, I joined a tree-planting event and it was eye-opening. What’s your take? How does it work for you?</div>
-    </div>
-
-    <!-- GARDEN CLUB -->
-    <div class="section">
-        <h2>GARDEN CLUB</h2>
-        <h3>Part 1: Basic Questions (1-5 words)</h3>
-        <p class="template part1-template">Template: I ______ ______ ______ (1-5 words).</p>
-        <label>What’s your favorite sport?</label>
-        <textarea id="gardenp1q1"></textarea>
-        <button onclick="checkPart1('gardenp1q1', 'I like playing badminton', 'part1-template')">Check</button>
-        <span id="gardenp1q1-result"></span>
-        <div id="gardenp1q1-correct" class="correct-answer">Correct answer: I like playing badminton</div><br><br>
-
-        <h3>Part 2: Specific Question (20-30 words)</h3>
-        <p class="template part2-template">Template: I joined this club because I’m passionate about [topic]. A friend recommended it, and I love exploring [activity] in my free time. It’s a great way to connect!</p>
-        <label>Why did you join our club?</label>
-        <textarea id="gardenp2"></textarea>
-        <button onclick="checkPart2('gardenp2', 'I joined this club because I’m passionate about gardening. A friend recommended it, and I love exploring plants in my free time. It’s a great way to connect!', 'part2-template')">Check</button>
-        <span id="gardenp2-result"></span>
-        <div id="gardenp2-correct" class="correct-answer">Correct answer: I joined this club because I’m passionate about gardening. A friend recommended it, and I love exploring plants in my free time. It’s a great way to connect!</div><br><br>
-
-        <h3>Part 3: Chat with Members</h3>
-        <p class="template part3-template">Template: Hi [A/B/C], I [agree/disagree] because [reason]. For me, [activity] is awesome since it brings [benefit]. Once, I [experience] and it was eye-opening. What’s your take? How does it work for you?</p>
-        <p>A (30-35 words):</p>
-        <label>Hi! Describe your garden?</label>
-        <textarea id="gardenp3a"></textarea>
-        <button onclick="checkPart3('gardenp3a', 'Hi A, I enjoy gardening too! Last weekend, I tried planting and found it really exciting. It helps me relax and learn more about flowers. What about you? Any fun experiences?', 'part3-template')">Check</button>
-        <span id="gardenp3a-result"></span>
-        <div id="gardenp3a-correct" class="correct-answer">Correct answer: Hi A, I enjoy gardening too! Last weekend, I tried planting and found it really exciting. It helps me relax and learn more about flowers. What about you? Any fun experiences?</div><br><br>
-
-        <p>B (35-40 words):</p>
-        <label>Is gardening popular in your country?</label>
-        <textarea id="gardenp3b"></textarea>
-        <button onclick="checkPart3('gardenp3b', 'Hi B, that’s cool! I also like gardening because it’s a great way to unwind. Sometimes it’s tricky, like when I overwatered last month. How do you handle it? Any tips?', 'part3-template')">Check</button>
-        <span id="gardenp3b-result"></span>
-        <div id="gardenp3b-correct" class="correct-answer">Correct answer: Hi B, that’s cool! I also like gardening because it’s a great way to unwind. Sometimes it’s tricky, like when I overwatered last month. How do you handle it? Any tips?</div><br><br>
-
-        <p>C (35-40 words):</p>
-        <label>What is your favorite season?</label>
-        <textarea id="gardenp3c"></textarea>
-        <button onclick="checkPart3('gardenp3c', 'Hi C, I agree because seasons affect growth. For me, spring gardening is awesome since it brings blooms. Once, I planted in spring and it was eye-opening. What’s your take? How does it work for you?', 'part3-template')">Check</button>
-        <span id="gardenp3c-result"></span>
-        <div id="gardenp3c-correct" class="correct-answer">Correct answer: Hi C, I agree because seasons affect growth. For me, spring gardening is awesome since it brings blooms. Once, I planted in spring and it was eye-opening. What’s your take? How does it work for you?</div>
-    </div>
-
-    <!-- READING CLUB -->
-    <div class="section">
-        <h2>READING CLUB</h2>
-        <h3>Part 1: Basic Questions (3-5 words)</h3>
-        <p class="template part1-template">Template: I ______ ______ ______ (3-5 words).</p>
-        <label>How is the weather today?</label>
-        <textarea id="readp1q1"></textarea>
-        <button onclick="checkPart1('readp1q1', 'It is cool good reading weather', 'part1-template')">Check</button>
-        <span id="readp1q1-result"></span>
-        <div id="readp1q1-correct" class="correct-answer">Correct answer: It is cool good reading weather</div><br><br>
-
-        <label>What is your favorite season of the year?</label>
-        <textarea id="readp1q2"></textarea>
-        <button onclick="checkPart1('readp1q2', 'I like summer', 'part1-template')">Check</button>
-        <span id="readp1q2-result"></span>
-        <div id="readp1q2-correct" class="correct-answer">Correct answer: I like summer</div><br><br>
-
-        <label>What do you like to do every morning?</label>
-        <textarea id="readp1q3"></textarea>
-        <button onclick="checkPart1('readp1q3', 'I read books', 'part1-template')">Check</button>
-        <span id="readp1q3-result"></span>
-        <div id="readp1q3-correct" class="correct-answer">Correct answer: I read books</div><br><br>
-
-        <h3>Part 2: Specific Question (20-30 words)</h3>
-        <p class="template part2-template">Template: I joined this club because I’m passionate about [topic]. A friend recommended it, and I love exploring [activity] in my free time. It’s a great way to connect!</p>
-        <label>When was the last time you read a book and how was the book?</label>
-        <textarea id="readp2"></textarea>
-        <button onclick="checkPart2('readp2', 'I joined this club because I’m passionate about reading. A friend recommended it, and I love exploring stories in my free time. It’s a great way to connect!', 'part2-template')">Check</button>
-        <span id="readp2-result"></span>
-        <div id="readp2-correct" class="correct-answer">Correct answer: I joined this club because I’m passionate about reading. A friend recommended it, and I love exploring stories in my free time. It’s a great way to connect!</div><br><br>
-
-        <h3>Part 3: Chat with Members</h3>
-        <p class="template part3-template">Template: Hi [A/B/C], I [agree/disagree] because [reason]. For me, [activity] is awesome since it brings [benefit]. Once, I [experience] and it was eye-opening. What’s your take? How does it work for you?</p>
-        <p>A (30-35 words):</p>
-        <label>I like reading sports magazines? Do you like k? Why?</label>
-        <textarea id="readp3a"></textarea>
-        <button onclick="checkPart3('readp3a', 'Hi A, I enjoy reading too! Last weekend, I tried a novel and found it really exciting. It helps me relax and learn more about life. What about you? Any fun experiences?', 'part3-template')">Check</button>
-        <span id="readp3a-result"></span>
-        <div id="readp3a-correct" class="correct-answer">Correct answer: Hi A, I enjoy reading too! Last weekend, I tried a novel and found it really exciting. It helps me relax and learn more about life. What about you? Any fun experiences?</div><br><br>
-
-        <p>B (35-40 words):</p>
-        <label>What type of books do you enjoy?</label>
-        <textarea id="readp3b"></textarea>
-        <button onclick="checkPart3('readp3b', 'Hi B, that’s cool! I also like novels because it’s a great way to unwind. Sometimes it’s tricky, like when I couldn’t focus last month. How do you handle it? Any tips?', 'part3-template')">Check</button>
-        <span id="readp3b-result"></span>
-        <div id="readp3b-correct" class="correct-answer">Correct answer: Hi B, that’s cool! I also like novels because it’s a great way to unwind. Sometimes it’s tricky, like when I couldn’t focus last month. How do you handle it? Any tips?</div><br><br>
-
-        <p>C (35-40 words):</p>
-        <label>Children nowadays prefer playing games to reading books. Do you think this is worrying, why?</label>
-        <textarea id="readp3c"></textarea>
-        <button onclick="checkPart3('readp3c', 'Hi C, I agree because reading builds knowledge. For me, books are awesome since they bring imagination. Once, I skipped reading and it was eye-opening. What’s your take? How does it work for you?', 'part3-template')">Check</button>
-        <span id="readp3c-result"></span>
-        <div id="readp3c-correct" class="correct-answer">Correct answer: Hi C, I agree because reading builds knowledge. For me, books are awesome since they bring imagination. Once, I skipped reading and it was eye-opening. What’s your take? How does it work for you?</div>
-    </div>
-
-    <!-- BOOK CLUB -->
-    <div class="section">
-        <h2>BOOK CLUB</h2>
-        <h3>Part 1: Basic Questions (1-5 words)</h3>
-        <p class="template part1-template">Template: I ______ ______ ______ (1-5 words).</p>
-        <label>What’s your favorite hobby?</label>
-        <textarea id="bookp1q1"></textarea>
-        <button onclick="checkPart1('bookp1q1', 'I like listening to music', 'part1-template')">Check</button>
-        <span id="bookp1q1-result"></span>
-        <div id="bookp1q1-correct" class="correct-answer">Correct answer: I like listening to music</div><br><br>
-
-        <label>How do you get to work?</label>
-        <textarea id="bookp1q2"></textarea>
-        <button onclick="checkPart1('bookp1q2', 'I get to work by bus', 'part1-template')">Check</button>
-        <span id="bookp1q2-result"></span>
-        <div id="bookp1q2-correct" class="correct-answer">Correct answer: I get to work by bus</div><br><br>
-
-        <label>What do you like to do in the evening?</label>
-        <textarea id="bookp1q3"></textarea>
-        <button onclick="checkPart1('bookp1q3', 'I like watching movies', 'part1-template')">Check</button>
-        <span id="bookp1q3-result"></span>
-        <div id="bookp1q3-correct" class="correct-answer">Correct answer: I like watching movies</div><br><br>
-
-        <h3>Part 2: Specific Question (20-30 words)</h3>
-        <p class="template part2-template">Template: I joined this club because I’m passionate about [topic]. A friend recommended it, and I love exploring [activity] in my free time. It’s a great way to connect!</p>
-        <label>Please tell me about your free time and hobbies?</label>
-        <textarea id="bookp2"></textarea>
-        <button onclick="checkPart2('bookp2', 'I joined this club because I’m passionate about books. A friend recommended it, and I love exploring stories in my free time. It’s a great way to connect!', 'part2-template')">Check</button>
-        <span id="bookp2-result"></span>
-        <div id="bookp2-correct" class="correct-answer">Correct answer: I joined this club because I’m passionate about books. A friend recommended it, and I love exploring stories in my free time. It’s a great way to connect!</div><br><br>
-
-        <h3>Part 3: Chat with Members</h3>
-        <p class="template part3-template">Template: Hi [A/B/C], I [agree/disagree] because [reason]. For me, [activity] is awesome since it brings [benefit]. Once, I [experience] and it was eye-opening. What’s your take? How does it work for you?</p>
-        <p>A (30-35 words):</p>
-        <label>Hi! Welcome to the club. When and where do you like reading books?</label>
-        <textarea id="bookp3a"></textarea>
-        <button onclick="checkPart3('bookp3a', 'Hi A, I enjoy books too! Last weekend, I tried reading and found it really exciting. It helps me relax and learn more about ideas. What about you? Any fun experiences?', 'part3-template')">Check</button>
-        <span id="bookp3a-result"></span>
-        <div id="bookp3a-correct" class="correct-answer">Correct answer: Hi A, I enjoy books too! Last weekend, I tried reading and found it really exciting. It helps me relax and learn more about ideas. What about you? Any fun experiences?</div><br><br>
-
-        <p>B (35-40 words):</p>
-        <label>Hi! I would like to give my friend a book. What would you suggest for me to buy?</label>
-        <textarea id="bookp3b"></textarea>
-        <button onclick="checkPart3('bookp3b', 'Hi B, that’s cool! I also like books because it’s a great way to unwind. Sometimes it’s tricky, like when I picked a dull book last month. How do you handle it? Any tips?', 'part3-template')">Check</button>
-        <span id="bookp3b-result"></span>
-        <div id="bookp3b-correct" class="correct-answer">Correct answer: Hi B, that’s cool! I also like books because it’s a great way to unwind. Sometimes it’s tricky, like when I picked a dull book last month. How do you handle it? Any tips?</div><br><br>
-
-        <p>C (35-40 words):</p>
-        <label>Online books replace traditional books? What do you think about that?</label>
-        <textarea id="bookp3c"></textarea>
-        <button onclick="checkPart3('bookp3c', 'Hi C, I agree because technology grows. For me, online books are awesome since they bring convenience. Once, I used an e-reader and it was eye-opening. What’s your take? How does it work for you?', 'part3-template')">Check</button>
-        <span id="bookp3c-result"></span>
-        <div id="bookp3c-correct" class="correct-answer">Correct answer: Hi C, I agree because technology grows. For me, online books are awesome since they bring convenience. Once, I used an e-reader and it was eye-opening. What’s your take? How does it work for you?</div>
-    </div>
-
-    <!-- HOME LIVING -->
-    <div class="section">
-        <h2>HOME LIVING</h2>
-        <h3>Part 1: Basic Questions (1-5 words)</h3>
-        <p class="template part1-template">Template: I ______ ______ ______ (1-5 words).</p>
-        <label>What’s the weather like today?</label>
-        <textarea id="homep1q1"></textarea>
-        <button onclick="checkPart1('homep1q1', 'It is raining cats and dogs', 'part1-template')">Check</button>
-        <span id="homep1q1-result"></span>
-        <div id="homep1q1-correct" class="correct-answer">Correct answer: It is raining cats and dogs</div><br><br>
-
-        <h3>Part 2: Specific Question (20-30 words)</h3>
-        <p class="template part2-template">Template: I joined this club because I’m passionate about [topic]. A friend recommended it, and I love exploring [activity] in my free time. It’s a great way to connect!</p>
-        <label>Describe where you live?</label>
-        <textarea id="homep2"></textarea>
-        <button onclick="checkPart2('homep2', 'I joined this club because I’m passionate about homes. A friend recommended it, and I love exploring designs in my free time. It’s a great way to connect!', 'part2-template')">Check</button>
-        <span id="homep2-result"></span>
-        <div id="homep2-correct" class="correct-answer">Correct answer: I joined this club because I’m passionate about homes. A friend recommended it, and I love exploring designs in my free time. It’s a great way to connect!</div><br><br>
-
-        <h3>Part 3: Chat with Members</h3>
-        <p class="template part3-template">Template: Hi [A/B/C], I [agree/disagree] because [reason]. For me, [activity] is awesome since it brings [benefit]. Once, I [experience] and it was eye-opening. What’s your take? How does it work for you?</p>
-        <p>A (30-35 words):</p>
-        <label>You have to stay in the bedroom but have to share with your brother. How do you feel?</label>
-        <textarea id="homep3a"></textarea>
-        <button onclick="checkPart3('homep3a', 'Hi A, I enjoy homes too! Last weekend, I tried rearranging and found it really exciting. It helps me relax and learn more about space. What about you? Any fun experiences?', 'part3-template')">Check</button>
-        <span id="homep3a-result"></span>
-        <div id="homep3a-correct" class="correct-answer">Correct answer: Hi A, I enjoy homes too! Last weekend, I tried rearranging and found it really exciting. It helps me relax and learn more about space. What about you? Any fun experiences?</div><br><br>
-
-        <p>B (35-40 words):</p>
-        <label>It is better to live in the city than in the countryside. Do you agree? Why?</label>
-        <textarea id="homep3b"></textarea>
-        <button onclick="checkPart3('homep3b', 'Hi B, that’s cool! I also like cities because it’s a great way to unwind. Sometimes it’s tricky, like when I faced noise last month. How do you handle it? Any tips?', 'part3-template')">Check</button>
-        <span id="homep3b-result"></span>
-        <div id="homep3b-correct" class="correct-answer">Correct answer: Hi B, that’s cool! I also like cities because it’s a great way to unwind. Sometimes it’s tricky, like when I faced noise last month. How do you handle it? Any tips?</div><br><br>
-
-        <p>C (35-40 words):</p>
-        <label>Nowadays, old buildings are demolished and replaced with modern buildings. I feel we should protect historic buildings. What do you think?</label>
-        <textarea id="homep3c"></textarea>
-        <button onclick="checkPart3('homep3c', 'Hi C, I disagree because safety matters. For me, modern homes are awesome since they bring comfort. Once, I lived in an old house and it was eye-opening. What’s your take? How does it work for you?', 'part3-template')">Check</button>
-        <span id="homep3c-result"></span>
-        <div id="homep3c-correct" class="correct-answer">Correct answer: Hi C, I disagree because safety matters. For me, modern homes are awesome since they bring comfort. Once, I lived in an old house and it was eye-opening. What’s your take? How does it work for you?</div>
-    </div>
-
-    <!-- WALKING CLUB -->
-    <div class="section">
-        <h2>WALKING CLUB</h2>
-        <h3>Part 1: Basic Questions (1-5 words)</h3>
-        <p class="template part1-template">Template: I ______ ______ ______ (1-5 words).</p>
-        <label>How is the weather today?</label>
-        <textarea id="walkp1q1"></textarea>
-        <button onclick="checkPart1('walkp1q1', 'It’s raining cats and dogs', 'part1-template')">Check</button>
-        <span id="walkp1q1-result"></span>
-        <div id="walkp1q1-correct" class="correct-answer">Correct answer: It’s raining cats and dogs</div><br><br>
-
-        <label>What’s your favorite season?</label>
-        <textarea id="walkp1q2"></textarea>
-        <button onclick="checkPart1('walkp1q2', 'I love summer', 'part1-template')">Check</button>
-        <span id="walkp1q2-result"></span>
-        <div id="walkp1q2-correct" class="correct-answer">Correct answer: I love summer</div><br><br>
-
-        <label>What do you like to do in your free time?</label>
-        <textarea id="walkp1q3"></textarea>
-        <button onclick="checkPart1('walkp1q3', 'I usually listen to music', 'part1-template')">Check</button>
-        <span id="walkp1q3-result"></span>
-        <div id="walkp1q3-correct" class="correct-answer">Correct answer: I usually listen to music</div><br><br>
-
-        <h3>Part 2: Specific Question (20-30 words)</h3>
-        <p class="template part2-template">Template: I joined this club because I’m passionate about [topic]. A friend recommended it, and I love exploring [activity] in my free time. It’s a great way to connect!</p>
-        <label>When and where do you like to walk?</label>
-        <textarea id="walkp2"></textarea>
-        <button onclick="checkPart2('walkp2', 'I joined this club because I’m passionate about walking. A friend recommended it, and I love exploring paths in my free time. It’s a great way to connect!', 'part2-template')">Check</button>
-        <span id="walkp2-result"></span>
-        <div id="walkp2-correct" class="correct-answer">Correct answer: I joined this club because I’m passionate about walking. A friend recommended it, and I love exploring paths in my free time. It’s a great way to connect!</div><br><br>
-
-        <h3>Part 3: Chat with Members</h3>
-        <p class="template part3-template">Template: Hi [A/B/C], I [agree/disagree] because [reason]. For me, [activity] is awesome since it brings [benefit]. Once, I [experience] and it was eye-opening. What’s your take? How does it work for you?</p>
-        <p>A (30-35 words):</p>
-        <label>I often go walking. Do you like walking?</label>
-        <textarea id="walkp3a"></textarea>
-        <button onclick="checkPart3('walkp3a', 'Hi A, I enjoy walking too! Last weekend, I tried a new route and found it really exciting. It helps me relax and learn more about fitness. What about you? Any fun experiences?', 'part3-template')">Check</button>
-        <span id="walkp3a-result"></span>
-        <div id="walkp3a-correct" class="correct-answer">Correct answer: Hi A, I enjoy walking too! Last weekend, I tried a new route and found it really exciting. It helps me relax and learn more about fitness. What about you? Any fun experiences?</div><br><br>
-
-        <p>B (35-40 words):</p>
-        <label>I like walking but I get wet when it rains. Tell me about a bad walking experience you had?</label>
-        <textarea id="walkp3b"></textarea>
-        <button onclick="checkPart3('walkp3b', 'Hi B, that’s cool! I also like walking because it’s a great way to unwind. Sometimes it’s tricky, like when I forgot my umbrella last month. How do you handle it? Any tips?', 'part3-template')">Check</button>
-        <span id="walkp3b-result"></span>
-        <div id="walkp3b-correct" class="correct-answer">Correct answer: Hi B, that’s cool! I also like walking because it’s a great way to unwind. Sometimes it’s tricky, like when I forgot my umbrella last month. How do you handle it? Any tips?</div><br><br>
-
-        <p>C (35-40 words):</p>
-        <label>Walking is the best type of exercise. What do you think when more people walk and know it is good for health?</label>
-        <textarea id="walkp3c"></textarea>
-        <button onclick="checkPart3('walkp3c', 'Hi C, I agree because health improves. For me, walking daily is awesome since it brings energy. Once, I walked a marathon and it was eye-opening. What’s your take? How does it work for you?', 'part3-template')">Check</button>
-        <span id="walkp3c-result"></span>
-        <div id="walkp3c-correct" class="correct-answer">Correct answer: Hi C, I agree because health improves. For me, walking daily is awesome since it brings energy. Once, I walked a marathon and it was eye-opening. What’s your take? How does it work for you?</div>
-    </div>
-    <!-- COMMUNITY CLUB -->
-    <div class="section">
-        <h2>COMMUNITY CLUB</h2>
-        <h3>Part 1: Basic Questions (1-5 words)</h3>
-        <p class="template part1-template">Template: I ______ ______ ______ (1-5 words).</p>
-        <label>What’s the weather like today?</label>
-        <textarea id="comp1q1"></textarea>
-        <button onclick="checkPart1('comp1q1', 'It is raining cats and dogs', 'part1-template')">Check</button>
-        <span id="comp1q1-result"></span>
-        <div id="comp1q1-correct" class="correct-answer">Correct answer: It is raining cats and dogs</div><br><br>
-
-        <label>What do you usually do in the evening?</label>
-        <textarea id="comp1q2"></textarea>
-        <button onclick="checkPart1('comp1q2', 'I frequently chat with my friends', 'part1-template')">Check</button>
-        <span id="comp1q2-result"></span>
-        <div id="comp1q2-correct" class="correct-answer">Correct answer: I frequently chat with my friends</div><br><br>
-
-        <label>Where would you like to live?</label>
-        <textarea id="comp1q3"></textarea>
-        <button onclick="checkPart1('comp1q3', 'I’m keen on living in Hanoi', 'part1-template')">Check</button>
-        <span id="comp1q3-result"></span>
-        <div id="comp1q3-correct" class="correct-answer">Correct answer: I’m keen on living in Hanoi</div><br><br>
-
-        <h3>Part 2: Specific Question (20-30 words)</h3>
-        <p class="template part2-template">Template: I joined this club because I’m passionate about [topic]. A friend recommended it, and I love exploring [activity] in my free time. It’s a great way to connect!</p>
-        <label>What do you do to help your community?</label>
-        <textarea id="comp2"></textarea>
-        <button onclick="checkPart2('comp2', 'I joined this club because I’m passionate about helping. A friend recommended it, and I love exploring community work in my free time. It’s a great way to connect!', 'part2-template')">Check</button>
-        <span id="comp2-result"></span>
-        <div id="comp2-correct" class="correct-answer">Correct answer: I joined this club because I’m passionate about helping. A friend recommended it, and I love exploring community work in my free time. It’s a great way to connect!</div><br><br>
-
-        <h3>Part 3: Chat with Members</h3>
-        <p class="template part3-template">Template: Hi [A/B/C], I [agree/disagree] because [reason]. For me, [activity] is awesome since it brings [benefit]. Once, I [experience] and it was eye-opening. What’s your take? How does it work for you?</p>
-        <p>A (30-35 words):</p>
-        <label>My friend wants to go to the hair salon, but her car is not working. Can you suggest some ways for her to get there?</label>
-        <textarea id="comp3a"></textarea>
-        <button onclick="checkPart3('comp3a', 'Hi A, I enjoy helping too! Last weekend, I tried assisting a friend and found it really exciting. It helps me relax and learn more about solutions. What about you? Any fun experiences?', 'part3-template')">Check</button>
-        <span id="comp3a-result"></span>
-        <div id="comp3a-correct" class="correct-answer">Correct answer: Hi A, I enjoy helping too! Last weekend, I tried assisting a friend and found it really exciting. It helps me relax and learn more about solutions. What about you? Any fun experiences?</div><br><br>
-
-        <p>B (35-40 words):</p>
-        <label>Volunteering provides great learning opportunities and helps others a lot. Do you agree with this?</label>
-        <textarea id="comp3b"></textarea>
-        <button onclick="checkPart3('comp3b', 'Hi B, that’s cool! I also like volunteering because it’s a great way to unwind. Sometimes it’s tricky, like when I was late last month. How do you handle it? Any tips?', 'part3-template')">Check</button>
-        <span id="comp3b-result"></span>
-        <div id="comp3b-correct" class="correct-answer">Correct answer: Hi B, that’s cool! I also like volunteering because it’s a great way to unwind. Sometimes it’s tricky, like when I was late last month. How do you handle it? Any tips?</div><br><br>
-
-        <p>C (35-40 words):</p>
-        <label>Do you agree with the view that volunteering is a form of learning, especially for young people? Why?</label>
-        <textarea id="comp3c"></textarea>
-        <button onclick="checkPart3('comp3c', 'Hi C, I agree because it teaches skills. For me, helping others is awesome since it brings growth. Once, I volunteered at a shelter and it was eye-opening. What’s your take? How does it work for you?', 'part3-template')">Check</button>
-        <span id="comp3c-result"></span>
-        <div id="comp3c-correct" class="correct-answer">Correct answer: Hi C, I agree because it teaches skills. For me, helping others is awesome since it brings growth. Once, I volunteered at a shelter and it was eye-opening. What’s your take? How does it work for you?</div>
-    </div>
-
     <!-- HOME LIVING CLUB -->
-    <div class="section">
-        <h2>HOME LIVING CLUB</h2>
-        <h3>Part 1: Basic Questions (1-5 words)</h3>
-        <p class="template part1-template">Template: I ______ ______ ______ (1-5 words).</p>
-        <label>What’s the weather like today?</label>
-        <textarea id="homelp1q1"></textarea>
-        <button onclick="checkPart1('homelp1q1', 'It is raining cats and dogs', 'part1-template')">Check</button>
-        <span id="homelp1q1-result"></span>
-        <div id="homelp1q1-correct" class="correct-answer">Correct answer: It is raining cats and dogs</div><br><br>
+<div class="section">
+    <h2>HOME LIVING CLUB</h2>
+    <h3>Part 1: Basic Questions (3-5 words)</h3>
+    <label>What’s your favorite room?</label>
+    <p class="template">I ______ ______ ______ (3-5 words).</p>
+    <textarea id="homep1q1"></textarea>
+    <button onclick="checkPart1('homep1q1', 'I love my sunny kitchen')">Check</button>
+    <span id="homep1q1-result"></span><br><br>
 
-        <h3>Part 2: Specific Question (20-30 words)</h3>
-        <p class="template part2-template">Template: I joined this club because I’m passionate about [topic]. A friend recommended it, and I love exploring [activity] in my free time. It’s a great way to connect!</p>
-        <label>Describe where you live?</label>
-        <textarea id="homelp2"></textarea>
-        <button onclick="checkPart2('homelp2', 'I joined this club because I’m passionate about homes. A friend recommended it, and I love exploring designs in my free time. It’s a great way to connect!', 'part2-template')">Check</button>
-        <span id="homelp2-result"></span>
-        <div id="homelp2-correct" class="correct-answer">Correct answer: I joined this club because I’m passionate about homes. A friend recommended it, and I love exploring designs in my free time. It’s a great way to connect!</div><br><br>
+    <label>How do you get home?</label>
+    <p class="template">I ______ ______ ______ (3-5 words).</p>
+    <textarea id="homep1q2"></textarea>
+    <button onclick="checkPart1('homep1q2', 'I take a quick bus')">Check</button>
+    <span id="homep1q2-result"></span><br><br>
 
-        <h3>Part 3: Chat with Members</h3>
-        <p class="template part3-template">Template: Hi [A/B/C], I [agree/disagree] because [reason]. For me, [activity] is awesome since it brings [benefit]. Once, I [experience] and it was eye-opening. What’s your take? How does it work for you?</p>
-        <p>A (30-35 words):</p>
-        <label>You have to stay in the bedroom but have to share with your brother. How do you feel?</label>
-        <textarea id="homelp3a"></textarea>
-        <button onclick="checkPart3('homelp3a', 'Hi A, I enjoy homes too! Last weekend, I tried rearranging and found it really exciting. It helps me relax and learn more about space. What about you? Any fun experiences?', 'part3-template')">Check</button>
-        <span id="homelp3a-result"></span>
-        <div id="homelp3a-correct" class="correct-answer">Correct answer: Hi A, I enjoy homes too! Last weekend, I tried rearranging and found it really exciting. It helps me relax and learn more about space. What about you? Any fun experiences?</div><br><br>
+    <label>What do you do evenings?</label>
+    <p class="template">I ______ ______ ______ (3-5 words).</p>
+    <textarea id="homep1q3"></textarea>
+    <button onclick="checkPart1('homep1q3', 'I cook with my family')">Check</button>
+    <span id="homep1q3-result"></span><br><br>
 
-        <p>B (35-40 words):</p>
-        <label>It is better to live in the city than in the countryside. Do you agree? Why?</label>
-        <textarea id="homelp3b"></textarea>
-        <button onclick="checkPart3('homelp3b', 'Hi B, that’s cool! I also like cities because it’s a great way to unwind. Sometimes it’s tricky, like when I faced noise last month. How do you handle it? Any tips?', 'part3-template')">Check</button>
-        <span id="homelp3b-result"></span>
-        <div id="homelp3b-correct" class="correct-answer">Correct answer: Hi B, that’s cool! I also like cities because it’s a great way to unwind. Sometimes it’s tricky, like when I faced noise last month. How do you handle it? Any tips?</div><br><br>
+    <label>Who do you live with?</label>
+    <p class="template">I ______ ______ ______ (3-5 words).</p>
+    <textarea id="homep1q4"></textarea>
+    <button onclick="checkPart1('homep1q4', 'I live with my siblings')">Check</button>
+    <span id="homep1q4-result"></span>
+    <h3>Part 3: Chat with Members</h3>
+    <p>A (40 words):</p>
+    <label>You have to share a bedroom with your brother. How do you feel?</label>
+    <p class="template">I feel [emotion] because [reason]. It’s [benefit/drawback] and I usually [activity].</p>
+    <textarea id="homep3a"></textarea>
+    <button onclick="checkPart3('homep3a', 'I feel happy because we share funny stories and secrets every night. It’s great bonding time for us, and I usually help him with homework while we talk and laugh.')">Check</button>
+    <span id="homep3a-result"></span><br><br>
 
-        <p>C (35-40 words):</p>
-        <label>Nowadays, old buildings are demolished and replaced with modern buildings. I feel we should protect historic buildings. What do you think?</label>
-        <textarea id="homelp3c"></textarea>
-        <button onclick="checkPart3('homelp3c', 'Hi C, I disagree because safety matters. For me, modern homes are awesome since they bring comfort. Once, I lived in an old house and it was eye-opening. What’s your take? How does it work for you?', 'part3-template')">Check</button>
-        <span id="homelp3c-result"></span>
-        <div id="homelp3c-correct" class="correct-answer">Correct answer: Hi C, I disagree because safety matters. For me, modern homes are awesome since they bring comfort. Once, I lived in an old house and it was eye-opening. What’s your take? How does it work for you?</div>
-    </div>
+    <p>B (40 words):</p>
+    <label>It is better to live in the city than countryside. Do you agree? Why?</label>
+    <p class="template">I [agree/disagree] because [reason]. For me, [city/countryside] is [benefit/drawback] and I prefer [choice].</p>
+    <textarea id="homep3b"></textarea>
+    <button onclick="checkPart3('homep3b', 'I agree because cities have better jobs and schools for young people. For me, the city is vibrant and full of life, and I prefer its fast-paced exciting rhythm.')">Check</button>
+    <span id="homep3b-result"></span><br><br>
 
-    <!-- SPORTS CLUB -->
-    <div class="section">
-        <h2>SPORTS CLUB</h2>
-        <h3>Part 1: Basic Questions (1-5 words)</h3>
-        <p class="template part1-template">Template: I ______ ______ ______ (1-5 words).</p>
-        <label>What is your favorite sport?</label>
-        <textarea id="sportp1q1"></textarea>
-        <button onclick="checkPart1('sportp1q1', 'I like playing soccer', 'part1-template')">Check</button>
-        <span id="sportp1q1-result"></span>
-        <div id="sportp1q1-correct" class="correct-answer">Correct answer: I like playing soccer</div><br><br>
+    <p>C (40 words):</p>
+    <label>Old buildings are demolished for modern ones. What do you think?</label>
+    <p class="template">I think it’s [opinion] because [reason]. For example, [observation] shows [impact].</p>
+    <textarea id="homep3c"></textarea>
+    <button onclick="checkPart3('homep3c', 'I think it’s fine because modern buildings are safer and fit our needs. For example, old houses often collapse in storms, and new ones improve safety and city beauty.')">Check</button>
+    <span id="homep3c-result"></span>
+</div>
+<!-- READING CLUB -->
+<div class="section">
+    <h2>READING CLUB</h2>
+    <h3>Part 1: Basic Questions (3-5 words)</h3>
+    <label>How is the weather today?</label>
+    <p class="template">It is ______ ______ ______ (3-5 words).</p>
+    <textarea id="readp1q1"></textarea>
+    <button onclick="checkPart1('readp1q1', 'It is sunny and warm')">Check</button>
+    <span id="readp1q1-result"></span><br><br>
 
-        <label>How often do you exercise?</label>
-        <textarea id="sportp1q2"></textarea>
-        <button onclick="checkPart1('sportp1q2', 'I exercise three times a week', 'part1-template')">Check</button>
-        <span id="sportp1q2-result"></span>
-        <div id="sportp1q2-correct" class="correct-answer">Correct answer: I exercise three times a week</div><br><br>
+    <label>What is your favorite season of the year?</label>
+    <p class="template">I like ______ ______ ______ (3-5 words).</p>
+    <textarea id="readp1q2"></textarea>
+    <button onclick="checkPart1('readp1q2', 'I like cozy winter nights')">Check</button>
+    <span id="readp1q2-result"></span><br><br>
 
-        <label>What do you do in your free time?</label>
-        <textarea id="sportp1q3"></textarea>
-        <button onclick="checkPart1('sportp1q3', 'I often play basketball', 'part1-template')">Check</button>
-        <span id="sportp1q3-result"></span>
-        <div id="sportp1q3-correct" class="correct-answer">Correct answer: I often play basketball</div><br><br>
+    <label>What do you like to do every morning?</label>
+    <p class="template">I ______ ______ ______ (3-5 words).</p>
+    <textarea id="readp1q3"></textarea>
+    <button onclick="checkPart1('readp1q3', 'I enjoy reading short stories')">Check</button>
+    <span id="readp1q3-result"></span><br><br>
 
-        <h3>Part 2: Specific Question (20-30 words)</h3>
-        <p class="template part2-template">Template: I joined this club because I’m passionate about [topic]. A friend recommended it, and I love exploring [activity] in my free time. It’s a great way to connect!</p>
-        <label>Why did you join our sports club?</label>
-        <textarea id="sportp2"></textarea>
-        <button onclick="checkPart2('sportp2', 'I joined this club because I’m passionate about sports. A friend recommended it, and I love exploring games in my free time. It’s a great way to connect!', 'part2-template')">Check</button>
-        <span id="sportp2-result"></span>
-        <div id="sportp2-correct" class="correct-answer">Correct answer: I joined this club because I’m passionate about sports. A friend recommended it, and I love exploring games in my free time. It’s a great way to connect!</div><br><br>
+    <label>What do you like to do in your free time?</label>
+    <p class="template">I ______ ______ ______ (3-5 words).</p>
+    <textarea id="readp1q4"></textarea>
+    <button onclick="checkPart1('readp1q4', 'I browse new book genres')">Check</button>
+    <span id="readp1q4-result"></span>
 
-        <h3>Part 3: Chat with Members</h3>
-        <p class="template part3-template">Template: Hi [A/B/C], I [agree/disagree] because [reason]. For me, [activity] is awesome since it brings [benefit]. Once, I [experience] and it was eye-opening. What’s your take? How does it work for you?</p>
-        <p>A (30-35 words):</p>
-        <label>Hi! What’s your favorite sport to play?</label>
-        <textarea id="sportp3a"></textarea>
-        <button onclick="checkPart3('sportp3a', 'Hi A, I enjoy sports too! Last weekend, I tried soccer and found it really exciting. It helps me relax and learn more about teamwork. What about you? Any fun experiences?', 'part3-template')">Check</button>
-        <span id="sportp3a-result"></span>
-        <div id="sportp3a-correct" class="correct-answer">Correct answer: Hi A, I enjoy sports too! Last weekend, I tried soccer and found it really exciting. It helps me relax and learn more about teamwork. What about you? Any fun experiences?</div><br><br>
+    <h3>Part 2: Specific Question (20-30 words)</h3>
+    <label>When was the last time you read a book and how was the book?</label>
+    <p class="template">I read a book [time] and it was [description]. I enjoyed it because [reason].</p>
+    <textarea id="readp2"></textarea>
+    <button onclick="checkPart2('readp2', 'I read a book last night and it was thrilling. I enjoyed it because the mystery kept me hooked.')">Check</button>
+    <span id="readp2-result"></span>
 
-        <p>B (35-40 words):</p>
-        <label>I love playing sports with friends. Do you prefer team sports or individual sports?</label>
-        <textarea id="sportp3b"></textarea>
-        <button onclick="checkPart3('sportp3b', 'Hi B, that’s cool! I also like sports because it’s a great way to unwind. Sometimes it’s tricky, like when I missed a goal last month. How do you handle it? Any tips?', 'part3-template')">Check</button>
-        <span id="sportp3b-result"></span>
-        <div id="sportp3b-correct" class="correct-answer">Correct answer: Hi B, that’s cool! I also like sports because it’s a great way to unwind. Sometimes it’s tricky, like when I missed a goal last month. How do you handle it? Any tips?</div><br><br>
+    <h3>Part 3: Chat with Members</h3>
+    <p>A (40 words):</p>
+    <label>I like reading sports magazines. Do you like it? Why?</label>
+    <p class="template">Yes/No, I like/don’t like them because [reason]. For me, they [benefit/drawback] and I usually read them [where/when].</p>
+    <textarea id="readp3a"></textarea>
+    <button onclick="checkPart3('readp3a', 'No, I don’t like them because they’re too simple and lack deep stories. For me, they’re boring and short, and I usually read thicker novels at home every evening.')">Check</button>
+    <span id="readp3a-result"></span><br><br>
 
-        <p>C (35-40 words):</p>
-        <label>Do you think sports help build community? Why?</label>
-        <textarea id="sportp3c"></textarea>
-        <button onclick="checkPart3('sportp3c', 'Hi C, I agree because sports unite people. For me, playing games is awesome since it brings friendship. Once, I joined a match and it was eye-opening. What’s your take? How does it work for you?', 'part3-template')">Check</button>
-        <span id="sportp3c-result"></span>
-        <div id="sportp3c-correct" class="correct-answer">Correct answer: Hi C, I agree because sports unite people. For me, playing games is awesome since it brings friendship. Once, I joined a match and it was eye-opening. What’s your take? How does it work for you?</div>
-    </div>
+    <p>B (40 words):</p>
+    <label>What type of books do you enjoy?</label>
+    <p class="template">I like [type] books because [reason]. I often read them [when/where] and they make me [feeling].</p>
+    <textarea id="readp3b"></textarea>
+    <button onclick="checkPart3('readp3b', 'I like mystery books because they keep me guessing and spark my curiosity nightly. I often read them in my cozy room and they make me feel thrilled always.')">Check</button>
+    <span id="readp3b-result"></span><br><br>
+
+    <p>C (40 words):</p>
+    <label>Children nowadays prefer playing games to reading books. Do you think this is worrying, why?</label>
+    <p class="template">I think it is [yes/no] because [reason]. For example, [observation] and it shows [impact].</p>
+    <textarea id="readp3c"></textarea>
+    <button onclick="checkPart3('readp3c', 'I think it is worrying because reading boosts imagination and teaches kids valuable lessons. For example, my cousins play games all day, and it shows less interest in learning.')">Check</button>
+    <span id="readp3c-result"></span>
+</div>
+<!-- SPORTS CLUB -->
+<div class="section">
+    <h2>SPORTS CLUB</h2>
+    <h3>Part 1: Basic Questions (1-8 words)</h3>
+    <label>What’s the weather like today?</label>
+    <p class="template">It is ______ ______ ______ (1-8 words).</p>
+    <textarea id="sportp1q1"></textarea>
+    <button onclick="checkPart1('sportp1q1', 'It is windy but nice')">Check</button>
+    <span id="sportp1q1-result"></span><br><br>
+
+    <label>How are you?</label>
+    <p class="template">I ______ ______ ______ (1-8 words).</p>
+    <textarea id="sportp1q2"></textarea>
+    <button onclick="checkPart1('sportp1q2', 'I feel strong and ready')">Check</button>
+    <span id="sportp1q2-result"></span><br><br>
+
+    <label>What’s your favorite hobby?</label>
+    <p class="template">I ______ ______ ______ (1-8 words).</p>
+    <textarea id="sportp1q3"></textarea>
+    <button onclick="checkPart1('sportp1q3', 'I enjoy playing soccer outdoors')">Check</button>
+    <span id="sportp1q3-result"></span><br><br>
+
+    <label>How do you get to work?</label>
+    <p class="template">I ______ ______ ______ (1-8 words).</p>
+    <textarea id="sportp1q4"></textarea>
+    <button onclick="checkPart1('sportp1q4', 'I cycle every morning')">Check</button>
+    <span id="sportp1q4-result"></span><br><br>
+
+    <label>What do you do in the evening?</label>
+    <p class="template">I ______ ______ ______ (1-8 words).</p>
+    <textarea id="sportp1q5"></textarea>
+    <button onclick="checkPart1('sportp1q5', 'I stretch after sports')">Check</button>
+    <span id="sportp1q5-result"></span>
+
+    <h3>Part 2: Specific Question (20-30 words)</h3>
+    <label>Why did you decide to join the club?</label>
+    <p class="template">I joined because [reason]. It’s [description] and I want to [goal].</p>
+    <textarea id="sportp2"></textarea>
+    <button onclick="checkPart2('sportp2', 'I joined because I love sports. It’s fun and active, and I want to stay fit.')">Check</button>
+    <span id="sportp2-result"></span>
+
+    <h3>Part 3: Chat with Members</h3>
+    <p>A (40 words):</p>
+    <label>When was the last time you played sports?</label>
+    <p class="template">I played [time] and it was [description]. I enjoyed it because [reason].</p>
+    <textarea id="sportp3a"></textarea>
+    <button onclick="checkPart3('sportp3a', 'I played last Saturday and it was thrilling with lots of energy flowing. I enjoyed it because my team won the match after a tough fight against strong opponents.')">Check</button>
+    <span id="sportp3a-result"></span><br><br>
+
+    <p>B (40 words):</p>
+    <label>I usually play sports with friends and watch sports programs. What about you?</label>
+    <p class="template">I [agree/differ] because [reason]. I usually [activity] and it’s [benefit].</p>
+    <textarea id="sportp3b"></textarea>
+    <button onclick="checkPart3('sportp3b', 'I agree because friends make sports more fun and lively every single time. I usually play basketball with them on weekends, and it’s great for bonding and staying fit.')">Check</button>
+    <span id="sportp3b-result"></span><br><br>
+
+    <p>C (40 words):</p>
+    <label>I like playing sports with friends but my brother likes playing alone. What do you think?</label>
+    <p class="template">I think it’s [opinion] because [reason]. For example, [observation] shows [impact].</p>
+    <textarea id="sportp3c"></textarea>
+    <button onclick="checkPart3('sportp3c', 'I think it’s fine because everyone enjoys sports in their own unique way. For example, my brother trains alone daily, and it shows he focuses better on his goals.')">Check</button>
+    <span id="sportp3c-result"></span>
+</div>
+<!-- WALKING CLUB -->
+<div class="section">
+    <h2>WALKING CLUB</h2>
+    <h3>Part 1: Basic Questions (1-8 words)</h3>
+    <label>Thời tiết hôm nay như thế nào?</label>
+    <p class="template">It’s ______ ______ ______ (1-8 words).</p>
+    <textarea id="walkp1q1"></textarea>
+    <button onclick="checkPart1('walkp1q1', 'It’s cloudy but pleasant')">Check</button>
+    <span id="walkp1q1-result"></span><br><br>
+
+    <label>Khoảng thời gian bạn yêu thích nhất trong năm?</label>
+    <p class="template">I ______ ______ ______ (1-8 words).</p>
+    <textarea id="walkp1q2"></textarea>
+    <button onclick="checkPart1('walkp1q2', 'I love cool spring days')">Check</button>
+    <span id="walkp1q2-result"></span><br><br>
+
+    <label>Bạn thường làm gì khi bạn rảnh?</label>
+    <p class="template">I ______ ______ ______ (1-8 words).</p>
+    <textarea id="walkp1q3"></textarea>
+    <button onclick="checkPart1('walkp1q3', 'I walk around the park')">Check</button>
+    <span id="walkp1q3-result"></span><br><br>
+
+    <label>Môn thể thao yêu thích của bạn là gì?</label>
+    <p class="template">______ ______ ______ (1-8 words).</p>
+    <textarea id="walkp1q4"></textarea>
+    <button onclick="checkPart1('walkp1q4', 'Walking is my favorite')">Check</button>
+    <span id="walkp1q4-result"></span><br><br>
+
+    <label>Một nơi bạn muốn đến thăm ở đất nước bạn?</label>
+    <p class="template">I ______ ______ ______ (1-8 words).</p>
+    <textarea id="walkp1q5"></textarea>
+    <button onclick="checkPart1('walkp1q5', 'I’d visit Nha Trang beach')">Check</button>
+    <span id="walkp1q5-result"></span>
+
+    <h3>Part 2: Specific Question (20-30 words)</h3>
+    <label>Bạn thích đi bộ khi nào và ở đâu?</label>
+    <p class="template">I walk [time] at [place]. It’s [description] and I enjoy it because [reason].</p>
+    <textarea id="walkp2"></textarea>
+    <button onclick="checkPart2('walkp2', 'I walk evenings at the park. It’s peaceful and I enjoy it because it relaxes me.')">Check</button>
+    <span id="walkp2-result"></span>
+
+    <h3>Part 3: Chat with Members</h3>
+    <p>A (40 words):</p>
+    <label>Tôi thường hay đi bộ. Bạn có thích đi bộ hay không?</label>
+    <p class="template">Yes/No, I [like/dislike] it because [reason]. I usually [activity] and it’s [benefit].</p>
+    <textarea id="walkp3a"></textarea>
+    <button onclick="checkPart3('walkp3a', 'Yes, I like it because it keeps me healthy and refreshed after long days. I usually walk in the park every evening, and it’s perfect for clearing my mind.')">Check</button>
+    <span id="walkp3a-result"></span><br><br>
+
+    <p>B (40 words):</p>
+    <label>Tôi thích đi bộ nhưng khi trời mưa tôi bị ướt. Bạn hãy kể về lần bạn có trải nghiệm xấu khi đi bộ?</label>
+    <p class="template">I once [experience] and it was [description]. It happened because [reason] and I felt [emotion].</p>
+    <textarea id="walkp3b"></textarea>
+    <button onclick="checkPart3('walkp3b', 'I once got soaked and it was cold and miserable on my walk home. It happened because I forgot my umbrella during rain, and I felt annoyed afterwards.')">Check</button>
+    <span id="walkp3b-result"></span><br><br>
+
+    <p>C (40 words):</p>
+    <label>Đi bộ là thể loại thể dục tốt nhất. Bạn nghĩ sao khi nhiều người đi bộ và biết nó tốt cho sức khỏe?</label>
+    <p class="template">I [agree/disagree] because [reason]. For example, [observation] shows [impact].</p>
+    <textarea id="walkp3c"></textarea>
+    <button onclick="checkPart3('walkp3c', 'I agree because walking is easy and boosts health for everyone who tries it. For example, more people walk daily now, and it shows improved fitness and happiness.')">Check</button>
+    <span id="walkp3c-result"></span>
+</div>
+<!-- NATURE CLUB -->
+<div class="section">
+    <h2>NATURE CLUB</h2>
+    <h3>Part 1: Basic Questions (1-8 words)</h3>
+    <label>What’s your favorite sport?</label>
+    <p class="template">I ______ ______ ______ (1-8 words).</p>
+    <textarea id="naturep1q1"></textarea>
+    <button onclick="checkPart1('naturep1q1', 'I love hiking in forests')">Check</button>
+    <span id="naturep1q1-result"></span><br><br>
+
+    <label>How many people are in your family?</label>
+    <p class="template">There are ______ ______ ______ (1-8 words).</p>
+    <textarea id="naturep1q2"></textarea>
+    <button onclick="checkPart1('naturep1q2', 'There are four of us')">Check</button>
+    <span id="naturep1q2-result"></span><br><br>
+
+    <label>What did you do yesterday?</label>
+    <p class="template">I ______ ______ ______ (1-8 words).</p>
+    <textarea id="naturep1q3"></textarea>
+    <button onclick="checkPart1('naturep1q3', 'I explored a nearby park')">Check</button>
+    <span id="naturep1q3-result"></span><br><br>
+
+    <label>How do you go to school?</label>
+    <p class="template">I ______ ______ ______ (1-8 words).</p>
+    <textarea id="naturep1q4"></textarea>
+    <button onclick="checkPart1('naturep1q4', 'I walk every day')">Check</button>
+    <span id="naturep1q4-result"></span><br><br>
+
+    <label>What’s your hobby?</label>
+    <p class="template">I ______ ______ ______ (1-8 words).</p>
+    <textarea id="naturep1q5"></textarea>
+    <button onclick="checkPart1('naturep1q5', 'I enjoy bird watching')">Check</button>
+    <span id="naturep1q5-result"></span>
+
+    <h3>Part 2: Specific Question (20-30 words)</h3>
+    <label>Please tell me about your free time and hobbies?</label>
+    <p class="template">I spend my free time [activity] with [who]. I enjoy [hobby] because [reason].</p>
+    <textarea id="naturep2"></textarea>
+    <button onclick="checkPart2('naturep2', 'I spend my free time hiking with friends. I enjoy nature because it calms me down.')">Check</button>
+    <span id="naturep2-result"></span>
+
+    <h3>Part 3: Chat with Members</h3>
+    <p>A (40 words):</p>
+    <label>Hi! Welcome to the club. Where do you like to visit?</label>
+    <p class="template">I like visiting [place] because [reason]. It has [feature] and I enjoy [activity].</p>
+    <textarea id="naturep3a"></textarea>
+    <button onclick="checkPart3('naturep3a', 'I like visiting Sapa because it’s cool and peaceful with stunning views everywhere. It has misty green hills all around, and I enjoy trekking there with my friends.')">Check</button>
+    <span id="naturep3a-result"></span><br><br>
+
+    <p>B (40 words):</p>
+    <label>Hi! Why did you decide to join the club?</label>
+    <p class="template">I joined because [reason]. It’s [description] and I want to [goal].</p>
+    <textarea id="naturep3b"></textarea>
+    <button onclick="checkPart3('naturep3b', 'I joined because I love nature and want to help save it daily. It’s inspiring and beautiful to me, and I want to protect forests for future generations.')">Check</button>
+    <span id="naturep3b-result"></span><br><br>
+
+    <p>C (40 words):</p>
+    <label>The bigger the club, the more environmentally conscious people are, right?</label>
+    <p class="template">I [agree/disagree] because [reason]. For example, [observation] shows [impact].</p>
+    <textarea id="naturep3c"></textarea>
+    <button onclick="checkPart3('naturep3c', 'I agree because larger clubs spread awareness and encourage green actions widely. For example, big groups plant more trees yearly, and it shows a cleaner environment for everyone.')">Check</button>
+    <span id="naturep3c-result"></span>
+</div>
+<!-- SCIENCE CLUB -->
+<div class="section">
+    <h2>SCIENCE CLUB</h2>
+    <h3>Part 1: Basic Questions (1-8 words)</h3>
+    <label>What is your favorite color?</label>
+    <p class="template">My ______ ______ ______ (1-8 words).</p>
+    <textarea id="sciencep1q1"></textarea>
+    <button onclick="checkPart1('sciencep1q1', 'My favorite is bright yellow')">Check</button>
+    <span id="sciencep1q1-result"></span><br><br>
+
+    <label>What is your first school?</label>
+    <p class="template">______ ______ ______ (1-8 words).</p>
+    <textarea id="sciencep1q2"></textarea>
+    <button onclick="checkPart1('sciencep1q2', 'Le Loi Primary')">Check</button>
+    <span id="sciencep1q2-result"></span><br><br>
+
+    <label>What do you do in your free time?</label>
+    <p class="template">I ______ ______ ______ (1-8 words).</p>
+    <textarea id="sciencep1q3"></textarea>
+    <button onclick="checkPart1('sciencep1q3', 'I build cool science models')">Check</button>
+    <span id="sciencep1q3-result"></span><br><br>
+
+    <label>What is your favorite sport?</label>
+    <p class="template">______ ______ ______ (1-8 words).</p>
+    <textarea id="sciencep1q4"></textarea>
+    <button onclick="checkPart1('sciencep1q4', 'Swimming is my favorite')">Check</button>
+    <span id="sciencep1q4-result"></span><br><br>
+
+    <label>What did you do last night?</label>
+    <p class="template">I ______ ______ ______ (1-8 words).</p>
+    <textarea id="sciencep1q5"></textarea>
+    <button onclick="checkPart1('sciencep1q5', 'I watched a science documentary')">Check</button>
+    <span id="sciencep1q5-result"></span>
+
+    <h3>Part 2: Specific Question (20-30 words)</h3>
+    <label>Do you like Science? Why?</label>
+    <p class="template">Yes/No, I like it because [reason]. It helps me [benefit] and I enjoy [activity].</p>
+    <textarea id="sciencep2"></textarea>
+    <button onclick="checkPart2('sciencep2', 'Yes, I like it because it explains life. It helps me learn and I enjoy experiments.')">Check</button>
+    <span id="sciencep2-result"></span>
+
+    <h3>Part 3: Chat with Members</h3>
+    <p>A (40 words):</p>
+    <label>Why do you decide to join in our Science Club? How often can you go?</label>
+    <p class="template">I joined because [reason]. I can go [frequency] and it’s [benefit].</p>
+    <textarea id="sciencep3a"></textarea>
+    <button onclick="checkPart3('sciencep3a', 'I joined because I’m curious about how the world works and love experiments. I can go every weekend to learn, and it’s exciting to explore new ideas there.')">Check</button>
+    <span id="sciencep3a-result"></span><br><br>
+
+    <p>B (40 words):</p>
+    <label>In the past, you learnt about Science in school. Do you remember something?</label>
+    <p class="template">I remember [concept] because [reason]. It’s [description] and I still use [application].</p>
+    <textarea id="sciencep3b"></textarea>
+    <button onclick="checkPart3('sciencep3b', 'I remember gravity because it affects everything we do every single day. It’s fascinating and always relevant, and I still use it to understand how objects move around.')">Check</button>
+    <span id="sciencep3b-result"></span><br><br>
+
+    <p>C (40 words):</p>
+    <label>Who is your favorite inventor or scientist? Why?</label>
+    <p class="template">My favorite is [name] because [reason]. They [achievement] and I admire [quality].</p>
+    <textarea id="sciencep3c"></textarea>
+    <button onclick="checkPart3('sciencep3c', 'My favorite is Tesla because he changed the world with electric power. They invented brilliant solutions for energy, and I admire his creative genius every single day.')">Check</button>
+    <span id="sciencep3c-result"></span>
+</div>
+<!-- GARDEN CLUB -->
+<div class="section">
+    <h2>GARDEN CLUB</h2>
+    <h3>Part 1: Basic Questions (1-8 words)</h3>
+    <label>What’s your favorite plant?</label>
+    <p class="template">I ______ ______ ______ (1-8 words).</p>
+    <textarea id="gardenp1q1"></textarea>
+    <button onclick="checkPart1('gardenp1q1', 'I love colorful tulips')">Check</button>
+    <span id="gardenp1q1-result"></span><br><br>
+
+    <label>How do you spend weekends?</label>
+    <p class="template">I ______ ______ ______ (1-8 words).</p>
+    <textarea id="gardenp1q2"></textarea>
+    <button onclick="checkPart1('gardenp1q2', 'I weed my backyard')">Check</button>
+    <span id="gardenp1q2-result"></span><br><br>
+
+    <label>What’s the weather like today?</label>
+    <p class="template">It’s ______ ______ ______ (1-8 words).</p>
+    <textarea id="gardenp1q3"></textarea>
+    <button onclick="checkPart1('gardenp1q3', 'It’s sunny and mild')">Check</button>
+    <span id="gardenp1q3-result"></span><br><br>
+
+    <label>Where do you live?</label>
+    <p class="template">I ______ ______ ______ (1-8 words).</p>
+    <textarea id="gardenp1q4"></textarea>
+    <button onclick="checkPart1('gardenp1q4', 'I live near a river')">Check</button>
+    <span id="gardenp1q4-result"></span><br><br>
+
+    <label>What’s your hobby?</label>
+    <p class="template">I ______ ______ ______ (1-8 words).</p>
+    <textarea id="gardenp1q5"></textarea>
+    <button onclick="checkPart1('gardenp1q5', 'I enjoy growing herbs')">Check</button>
+    <span id="gardenp1q5-result"></span>
+
+    <h3>Part 2: Specific Question (20-30 words)</h3>
+    <label>Why did you join our club?</label>
+    <p class="template">I joined because [reason]. It’s [description] and I want to [goal].</p>
+    <textarea id="gardenp2"></textarea>
+    <button onclick="checkPart2('gardenp2', 'I joined because I love plants. It’s relaxing and I want to learn gardening tips.')">Check</button>
+    <span id="gardenp2-result"></span>
+
+    <h3>Part 3: Chat with Members</h3>
+    <p>A (40 words):</p>
+    <label>Hi! Describe your garden?</label>
+    <p class="template">My garden is [description] with [features]. I enjoy [activity] and it’s [benefit].</p>
+    <textarea id="gardenp3a"></textarea>
+    <button onclick="checkPart3('gardenp3a', 'My garden is tiny with roses and fresh herbs growing all around it. I enjoy watering them every morning quietly, and it’s calming for my mind every day.')">Check</button>
+    <span id="gardenp3a-result"></span><br><br>
+
+    <p>B (40 words):</p>
+    <label>Is gardening popular in your country?</label>
+    <p class="template">Yes/No, it’s [popular/not] because [reason]. In [place], people [activity] and it’s [benefit/drawback].</p>
+    <textarea id="gardenp3b"></textarea>
+    <button onclick="checkPart3('gardenp3b', 'Yes, it’s popular because it gives fresh food and joy to many families. In rural areas, people garden daily for meals, and it’s healthy for everyone around them.')">Check</button>
+    <span id="gardenp3b-result"></span><br><br>
+
+    <p>C (40 words):</p>
+    <label>What is your favorite season?</label>
+    <p class="template">I like [season] because [reason]. It’s [description] and I enjoy [activity].</p>
+    <textarea id="gardenp3c"></textarea>
+    <button onclick="checkPart3('gardenp3c', 'I like spring because flowers bloom and the air feels fresh every day. It’s warm and colorful outside then, and I enjoy planting new seeds with my family.')">Check</button>
+    <span id="gardenp3c-result"></span>
+</div>
+<!-- BOOK CLUB -->
+<div class="section">
+    <h2>BOOK CLUB</h2>
+    <h3>Part 1: Basic Questions (1-8 words)</h3>
+    <label>What’s your favorite hobby?</label>
+    <p class="template">I ______ ______ ______ (1-8 words).</p>
+    <textarea id="bookp1q1"></textarea>
+    <button onclick="checkPart1('bookp1q1', 'I’m into reading thrillers')">Check</button>
+    <span id="bookp1q1-result"></span><br><br>
+
+    <label>How do you get to work?</label>
+    <p class="template">I ______ ______ ______ (1-8 words).</p>
+    <textarea id="bookp1q2"></textarea>
+    <button onclick="checkPart1('bookp1q2', 'I drive every day')">Check</button>
+    <span id="bookp1q2-result"></span><br><br>
+
+    <label>What do you do in the evening?</label>
+    <p class="template">I ______ ______ ______ (1-8 words).</p>
+    <textarea id="bookp1q3"></textarea>
+    <button onclick="checkPart1('bookp1q3', 'I read before bed')">Check</button>
+    <span id="bookp1q3-result"></span><br><br>
+
+    <label>What kinds of movies do you like?</label>
+    <p class="template">I ______ ______ ______ (1-8 words).</p>
+    <textarea id="bookp1q4"></textarea>
+    <button onclick="checkPart1('bookp1q4', 'I love mystery films')">Check</button>
+    <span id="bookp1q4-result"></span><br><br>
+
+    <label>What’s your favorite food?</label>
+    <p class="template">I ______ ______ ______ (1-8 words).</p>
+    <textarea id="bookp1q5"></textarea>
+    <button onclick="checkPart1('bookp1q5', 'I enjoy warm soup')">Check</button>
+    <span id="bookp1q5-result"></span>
+
+    <h3>Part 2: Specific Question (20-30 words)</h3>
+    <label>Please tell me about your free time and hobbies?</label>
+    <p class="template">I spend my free time [activity] with [who]. I enjoy [hobby] because [reason].</p>
+    <textarea id="bookp2"></textarea>
+    <button onclick="checkPart2('bookp2', 'I spend my free time reading with tea. I enjoy books because they expand my mind.')">Check</button>
+    <span id="bookp2-result"></span>
+
+    <h3>Part 3: Chat with Members</h3>
+    <p>A (40 words):</p>
+    <label>Hi! Welcome to the club. When and where do you like reading books?</label>
+    <p class="template">I read [time] at [place] because [reason]. It’s [description] and I enjoy [benefit].</p>
+    <textarea id="bookp3a"></textarea>
+    <button onclick="checkPart3('bookp3a', 'I read evenings at home because it’s quiet and peaceful after busy days. It’s relaxing and cozy for me, and I enjoy unwinding with a good story nightly.')">Check</button>
+    <span id="bookp3a-result"></span><br><br>
+
+    <p>B (40 words):</p>
+    <label>Hi! I would like to give my friend a book. What would you suggest?</label>
+    <p class="template">I suggest [book] because [reason]. It’s [description] and perfect for [type of person].</p>
+    <textarea id="bookp3b"></textarea>
+    <button onclick="checkPart3('bookp3b', 'I suggest “The Alchemist” because it inspires dreams and hope in every reader. It’s uplifting and beautifully written, and perfect for friends who seek adventure in life.')">Check</button>
+    <span id="bookp3b-result"></span><br><br>
+
+    <p>C (40 words):</p>
+    <label>Online books replace traditional books? What do you think?</label>
+    <p class="template">I think [yes/no] because [reason]. For example, [observation] shows [impact].</p>
+    <textarea id="bookp3c"></textarea>
+    <button onclick="checkPart3('bookp3c', 'I think no because paper books feel special and irreplaceable to many readers. For example, people still buy novels yearly, and it shows love for physical reading experiences.')">Check</button>
+    <span id="bookp3c-result"></span>
+</div>
+<!-- FOOD CLUB -->
+<div class="section">
+    <h2>FOOD CLUB</h2>
+    <h3>Part 1: Basic Questions (1-8 words)</h3>
+    <label>What do you do in the evening?</label>
+    <p class="template">I ______ ______ ______ (1-8 words).</p>
+    <textarea id="foodp1q1"></textarea>
+    <button onclick="checkPart1('foodp1q1', 'I cook tasty dinners')">Check</button>
+    <span id="foodp1q1-result"></span><br><br>
+
+    <label>What’s your hobby?</label>
+    <p class="template">I ______ ______ ______ (1-8 words).</p>
+    <textarea id="foodp1q2"></textarea>
+    <button onclick="checkPart1('foodp1q2', 'I’m crazy about baking')">Check</button>
+    <span id="foodp1q2-result"></span><br><br>
+
+    <label>The sport you love?</label>
+    <p class="template">______ ______ ______ (1-8 words).</p>
+    <textarea id="foodp1q3"></textarea>
+    <button onclick="checkPart1('foodp1q3', 'Tennis is my passion')">Check</button>
+    <span id="foodp1q3-result"></span><br><br>
+
+    <label>Favorite time of year?</label>
+    <p class="template">I ______ ______ ______ (1-8 words).</p>
+    <textarea id="foodp1q4"></textarea>
+    <button onclick="checkPart1('foodp1q4', 'I love festive winter')">Check</button>
+    <span id="foodp1q4-result"></span><br><br>
+
+    <label>Where do you go on weekends?</label>
+    <p class="template">I ______ ______ ______ (1-8 words).</p>
+    <textarea id="foodp1q5"></textarea>
+    <button onclick="checkPart1('foodp1q5', 'I explore food stalls')">Check</button>
+    <span id="foodp1q5-result"></span>
+
+    <h3>Part 2: Specific Question (20-30 words)</h3>
+    <label>What was the last time you ate out and where did you eat it?</label>
+    <p class="template">I ate out [time] at [place]. It was [description] and I liked [reason].</p>
+    <textarea id="foodp2"></textarea>
+    <button onclick="checkPart2('foodp2', 'I ate out last Friday at a café. It was cozy and I liked the fresh pasta.')">Check</button>
+    <span id="foodp2-result"></span>
+
+    <h3>Part 3: Chat with Members</h3>
+    <p>A (40 words):</p>
+    <label>Kelly had a truly amazing meal of her life, tell me about the most memorable meal of your life?</label>
+    <p class="template">My memorable meal was [time] with [who]. It was [description] because [reason].</p>
+    <textarea id="foodp3a"></textarea>
+    <button onclick="checkPart3('foodp3a', 'My memorable meal was last Christmas with my whole family around the table. It was delicious and warm because we cooked traditional dishes together and shared old stories.')">Check</button>
+    <span id="foodp3a-result"></span><br><br>
+
+    <p>B (40 words):</p>
+    <label>Some people like to eat out with friends, do you like eating out or eating at home?</label>
+    <p class="template">I prefer [out/home] because [reason]. It’s [description] and I enjoy [activity].</p>
+    <textarea id="foodp3b"></textarea>
+    <button onclick="checkPart3('foodp3b', 'I prefer home because it’s cheaper and safer for me and my family. It’s cozy and comforting every time, and I enjoy cooking meals with them every night.')">Check</button>
+    <span id="foodp3b-result"></span><br><br>
+
+    <p>C (40 words):</p>
+    <label>Nowadays, people have too many unhealthy food choices. Should there be a tax on fast food?</label>
+    <p class="template">I [agree/disagree] because [reason]. For example, [observation] shows [impact].</p>
+    <textarea id="foodp3c"></textarea>
+    <button onclick="checkPart3('foodp3c', 'I agree because it pushes people to eat healthier and avoid junk food. For example, high prices reduce fast food sales, and it shows better diets for everyone.')">Check</button>
+    <span id="foodp3c-result"></span>
+</div>
+<!-- COMMUNITY CLUB -->
+<div class="section">
+    <h2>COMMUNITY CLUB</h2>
+    <h3>Part 1: Basic Questions (1-8 words, min 3)</h3>
+    <label>What’s the weather like today?</label>
+    <p class="template">It is ______ ______ ______ (1-8 words).</p>
+    <textarea id="communityp1q1"></textarea>
+    <button onclick="checkPart1('communityp1q1', 'It is warm and sunny')">Check</button> <!-- 5 words -->
+    <span id="communityp1q1-result"></span><br><br>
+
+    <label>What do you usually do in the evening?</label>
+    <p class="template">I ______ ______ ______ (1-8 words).</p>
+    <textarea id="communityp1q2"></textarea>
+    <button onclick="checkPart1('communityp1q2', 'I help neighbors with chores')">Check</button> <!-- 5 words -->
+    <span id="communityp1q2-result"></span><br><br>
+
+    <label>Where would you like to live?</label>
+    <p class="template">I ______ ______ ______ (1-8 words).</p>
+    <textarea id="communityp1q3"></textarea>
+    <button onclick="checkPart1('communityp1q3', 'I’d live in a town')">Check</button> <!-- 5 words -->
+    <span id="communityp1q3-result"></span><br><br>
+
+    <label>Which season of the year do you like?</label>
+    <p class="template">I ______ ______ ______ (1-8 words).</p>
+    <textarea id="communityp1q4"></textarea>
+    <button onclick="checkPart1('communityp1q4', 'I love vibrant spring days')">Check</button> <!-- 5 words -->
+    <span id="communityp1q4-result"></span><br><br>
+
+    <label>Where do you like to go in the summer?</label>
+    <p class="template">I ______ ______ ______ (1-8 words).</p>
+    <textarea id="communityp1q5"></textarea>
+    <button onclick="checkPart1('communityp1q5', 'I visit local community centers')">Check</button> <!-- 5 words -->
+    <span id="communityp1q5-result"></span>
+
+    <h3>Part 2: Specific Question (20-30 words)</h3>
+    <label>Why did you decide to join the club?</label>
+    <p class="template">I joined because [reason]. It’s [description] and I want to [goal].</p>
+    <textarea id="communityp2"></textarea>
+    <button onclick="checkPart2('communityp2', 'I joined because I enjoy helping people in my neighborhood. It’s meaningful and fun, and I want to build stronger ties with others.')">Check</button> <!-- 24 words -->
+    <span id="communityp2-result"></span>
+
+    <h3>Part 3: Chat with Members</h3>
+    <p>A (40 words):</p>
+    <label>My friend wants to go to the hair salon, but her car isn’t working. Can you suggest some ways?</label>
+    <p class="template">I suggest [option] because [reason]. Another idea is [option] and it’s [benefit].</p>
+    <textarea id="communityp3a"></textarea>
+    <button onclick="checkPart3('communityp3a', 'I suggest a taxi because it’s fast and easy for her to travel. Another idea is biking to the salon, and it’s healthy and free for short distances.')">Check</button>
+    <span id="communityp3a-result"></span><br><br>
+
+    <p>B (40 words):</p>
+    <label>Volunteering provides great learning opportunities and helps others a lot. Do you agree?</label>
+    <p class="template">I [agree/disagree] because [reason]. For example, [observation] shows [impact].</p>
+    <textarea id="communityp3b"></textarea>
+    <button onclick="checkPart3('communityp3b', 'I agree because volunteering teaches skills and connects people in meaningful ways daily. For example, helping at food drives shows how to care and builds stronger communities everywhere.')">Check</button>
+    <span id="communityp3b-result"></span><br><br>
+
+    <p>C (40 words):</p>
+    <label>Do you agree that volunteering is a form of learning, especially for young people?</label>
+    <p class="template">I [agree/disagree] because [reason]. For example, [observation] shows [impact].</p>
+    <textarea id="communityp3c"></textarea>
+    <button onclick="checkPart3('communityp3c', 'I agree because it builds life skills and confidence in young people daily. For example, teens volunteering at shelters learn responsibility, and it shows growth in character.')">Check</button>
+    <span id="communityp3c-result"></span>
+</div>
+
     <script>
-        function checkPart1(id, correctAnswer, templateClass) {
+        function checkPart1(id, correctAnswer) {
             let userAnswer = document.getElementById(id).value.trim().toLowerCase();
             let correctAnswerLower = correctAnswer.toLowerCase();
             let result = document.getElementById(id + "-result");
-            let correctDiv = document.getElementById(id + "-correct");
-            let template = document.querySelector(`.${templateClass}`);
             let words = userAnswer.split(/\s+/).filter(word => word.length > 0);
 
-            template.style.display = "block"; // Hiện template khi nhấn Check
-            if (userAnswer === correctAnswerLower && words.length >= 1 && words.length <= 5) {
+            if (userAnswer === correctAnswerLower) {
                 result.textContent = "Correct!";
                 result.className = "result";
-                correctDiv.style.display = "none";
             } else {
-                result.textContent = "Error: Incorrect answer.";
+                result.innerHTML = "Error: Incorrect answer. <br><span class='correct-answer'>Correct answer: " + correctAnswer + "</span>";
                 result.className = "error";
-                correctDiv.style.display = "block";
             }
         }
 
-        function checkPart2(id, correctAnswer, templateClass) {
+        function checkPart2(id, correctAnswer) {
             let userAnswer = document.getElementById(id).value.trim().toLowerCase();
             let correctAnswerLower = correctAnswer.toLowerCase();
             let result = document.getElementById(id + "-result");
-            let correctDiv = document.getElementById(id + "-correct");
-            let template = document.querySelector(`.${templateClass}`);
             let words = userAnswer.split(/\s+/).filter(word => word.length > 0);
 
-            template.style.display = "block"; // Hiện template khi nhấn Check
-            if (userAnswer === correctAnswerLower && words.length >= 20 && words.length <= 30) {
+            if (userAnswer === correctAnswerLower) {
                 result.textContent = "Correct!";
                 result.className = "result";
-                correctDiv.style.display = "none";
             } else {
-                result.textContent = "Error: Incorrect answer.";
+                result.innerHTML = "Error: Incorrect answer. <br><span class='correct-answer'>Correct answer: " + correctAnswer + "</span>";
                 result.className = "error";
-                correctDiv.style.display = "block";
             }
         }
 
-        function checkPart3(id, correctAnswer, templateClass) {
+        function checkPart3(id, correctAnswer) {
             let userAnswer = document.getElementById(id).value.trim().toLowerCase();
             let correctAnswerLower = correctAnswer.toLowerCase();
             let result = document.getElementById(id + "-result");
-            let correctDiv = document.getElementById(id + "-correct");
-            let template = document.querySelector(`.${templateClass}`);
             let words = userAnswer.split(/\s+/).filter(word => word.length > 0);
 
-            template.style.display = "block"; // Hiện template khi nhấn Check
-            if (userAnswer === correctAnswerLower && words.length >= 30 && words.length <= 40) {
+            if (userAnswer === correctAnswerLower) {
                 result.textContent = "Correct!";
                 result.className = "result";
-                correctDiv.style.display = "none";
             } else {
-                result.textContent = "Error: Incorrect answer.";
+                result.innerHTML = "Error: Incorrect answer. <br><span class='correct-answer'>Correct answer: " + correctAnswer + "</span>";
                 result.className = "error";
-                correctDiv.style.display = "block";
             }
         }
     </script>
