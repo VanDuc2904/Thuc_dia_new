@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentence Ordering Exercise - All Topics</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .topic {
+            margin-bottom: 30px;
+        }
+        .instructions {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+        .content {
+            display: flex;
+            justify-content: space-between;
+        }
+        .left, .right {
+            width: 48%;
+        }
+        .left .sentence, .right .sentence {
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            min-height: 30px;
+            cursor: move;
+        }
+        .left .sentence:empty {
+            border-style: dashed;
+            background-color: #fff;
+        }
+        .right .sentence {
+            background-color: #e6f7ff;
+            cursor: grab;
+        }
+        .left .sentence[draggable="true"] {
+            cursor: grab;
+        }
+        .sentence.dragging {
+            opacity: 0.5;
+        }
+        button {
+            padding: 10px 20px;
+            margin-top: 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+        .correct {
+            color: #4CAF50;
+        }
+        .incorrect {
+            color: #d32f2f;
+        }
+        .correct-answer {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .correct-answer p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>QUESTION 2</h2>
+        <p class="instructions">The sentences below are from a report. Put the sentences in the right order. The first sentence is done for you.</p>
+
+        <!-- Topic 1: Quy trình nộp report -->
+        <div class="topic">
+            <h3>2.1. Topic: Quy trình nộp report</h3>
+            <div class="content">
+                <div class="left">
+                    <div class="sentence">1. Before you start to write your report, you should look at websites for the information you need.</div>
+                    <div class="sentence dropzone"></div>
+                    <div class="sentence dropzone"></div>
+                    <div class="sentence dropzone"></div>
+                    <div class="sentence dropzone"></div>
+                </div>
+                <div class="right" id="right-report">
+                    <div class="sentence draggable" draggable="true">Remember to save links to websites and include them in your report.</div>
+                    <div class="sentence draggable" draggable="true">You should also include a list of books that you use for reference.</div>
+                    <div class="sentence draggable" draggable="true">When you have finished your report, correct all the mistakes.</div>
+                    <div class="sentence draggable" draggable="true">After you make the corrections, send your report by email.</div>
+                </div>
+            </div>
+            <button onclick="checkAnswers('report')">Check Answers</button>
+            <div id="result-report" class="result"></div>
+            <div id="correct-answer-report" class="correct-answer" style="display: none;">
+                <p><strong>Correct Order:</strong></p>
+                <p>2. Remember to save links to websites and include them in your report.</p>
+                <p>3. You should also include a list of books that you use for reference.</p>
+                <p>4. When you have finished your report, correct all the mistakes.</p>
+                <p>5. After you make the corrections, send your report by email.</p>
+            </div>
+        </div>
+
+        <!-- Topic 2: Traffic Lights -->
+        <div class="topic">
+            <h3>2.2. Topic: Traffic Lights</h3>
+            <div class="content">
+                <div class="left">
+                    <div class="sentence">1. They were out of order and the traffic moved very slowly.</div>
+                    <div class="sentence dropzone"></div>
+                    <div class="sentence dropzone"></div>
+                    <div class="sentence dropzone"></div>
+                    <div class="sentence dropzone"></div>
+                </div>
+                <div class="right" id="right-traffic">
+                    <div class="sentence draggable" draggable="true">This created long delays in the roads to the city’s business district.</div>
+                    <div class="sentence draggable" draggable="true">As a result of these delays, many people were not able to get to work on time.</div>
+                    <div class="sentence draggable" draggable="true">Fortunately, in the evening, the traffic lights were working again.</div>
+                    <div class="sentence draggable" draggable="true">Therefore, there were no further delays for people going back home.</div>
+                </div>
+            </div>
+            <button onclick="checkAnswers('traffic')">Check Answers</button>
+            <div id="result-traffic" class="result"></div>
+            <div id="correct-answer-traffic" class="correct-answer" style="display: none;">
+                <p><strong>Correct Order:</strong></p>
+                <p>2. This created long delays in the roads to the city’s business district.</p>
+                <p>3. As a result of these delays, many people were not able to get to work on time.</p>
+                <p>4. Fortunately, in the evening, the traffic lights were working again.</p>
+                <p>5. Therefore, there were no further delays for people going back home.</p>
+            </div>
+        </div>
+
+        <!-- Topic 3: Quy trình nộp bài papers work -->
+        <div class="topic">
+            <h3>2.3. Topic: Quy trình nộp bài papers work</h3>
+            <div class="content">
+                <div class="left">
+                    <div class="sentence">1. In your account, press “open new window”.</div>
+                    <div class="sentence dropzone"></div>
+                    <div class="sentence dropzone"></div>
+                    <div class="sentence dropzone"></div>
+                    <div class="sentence dropzone"></div>
+                </div>
+                <div class="right" id="right-papers">
+                    <div class="sentence draggable" draggable="true">When you do this, a new window will open.</div>
+                    <div class="sentence draggable" draggable="true">Simply drag and drop your files there.</div>
+                    <div class="sentence draggable" draggable="true">Once you put the files there, press the “send” button.</div>
+                    <div class="sentence draggable" draggable="true">After you send your work, you should check your email.</div>
+                </div>
+            </div>
+            <button onclick="checkAnswers('papers')">Check Answers</button>
+            <div id="result-papers" class="result"></div>
+            <div id="correct-answer-papers" class="correct-answer" style="display: none;">
+                <p><strong>Correct Order:</strong></p>
+                <p>2. When you do this, a new window will open.</p>
+                <p>3. Simply drag and drop your files there.</p>
+                <p>4. Once you put the files there, press the “send” button.</p>
+                <p>5. After you send your work, you should check your email.</p>
+            </div>
+        </div>
+
+        <!-- Topic 4: Betty’s Life -->
+        <div class="topic">
+            <h3>2.4. Topic: Betty’s Life</h3>
+            <div class="content">
+                <div class="left">
+                    <div class="sentence">1. She was born in Shanghai in 1933 to a American mother and a father from Scotland.</div>
+                    <div class="sentence dropzone"></div>
+                    <div class="sentence dropzone"></div>
+                    <div class="sentence dropzone"></div>
+                    <div class="sentence dropzone"></div>
+                </div>
+                <div class="right" id="right-betty">
+                    <div class="sentence draggable" draggable="true">At the time, Shanghai is a city filled with many people from different countries.</div>
+                    <div class="sentence draggable" draggable="true">After she finished her school, she went to Wellesley College, a famous university in USA.</div>
+                    <div class="sentence draggable" draggable="true">However, she missed China, and applied for a job in Hong Kong, where she taught from 1959 to 1972, and learnt to speak Cantonese, the local language.</div>
+                    <div class="sentence draggable" draggable="true">In the 1980s, she finally returned to China and still lives with her Shanghai husband, George Wang.</div>
+                </div>
+            </div>
+            <button onclick="checkAnswers('betty')">Check Answers</button>
+            <div id="result-betty" class="result"></div>
+            <div id="correct-answer-betty" class="correct-answer" style="display: none;">
+                <p><strong>Correct Order:</strong></p>
+                <p>2. At the time, Shanghai is a city filled with many people from different countries.</p>
+                <p>3. After she finished her school, she went to Wellesley College, a famous university in USA.</p>
+                <p>4. However, she missed China, and applied for a job in Hong Kong, where she taught from 1959 to 1972, and learnt to speak Cantonese, the local language.</p>
+                <p>5. In the 1980s, she finally returned to China and still lives with her Shanghai husband, George Wang.</p>
+            </div>
+        </div>
+
+        <!-- Topic 5: Tom Harper (2.1) -->
+        <div class="topic">
+            <h3>2.5. Topic: Tom Harper (Part 1)</h3>
+            <div class="content">
+                <div class="left">
+                    <div class="sentence">1. When he was young, he began writing short stories for a magazine.</div>
+                    <div class="sentence dropzone"></div>
+                    <div class="sentence dropzone"></div>
+                    <div class="sentence dropzone"></div>
+                    <div class="sentence dropzone"></div>
+                </div>
+                <div class="right" id="right-tom1">
+                    <div class="sentence draggable" draggable="true">He soon wrote regularly for the magazine, but he was not satisfied.</div>
+                    <div class="sentence draggable" draggable="true">He almost left the magazine, but then he decided to create some unusual new characters.</div>
+                    <div class="sentence draggable" draggable="true">The characters he imagined were one of the most famous in the world.</div>
+                    <div class="sentence draggable" draggable="true">This popularity made Tom Harper rich and successful.</div>
+                </div>
+            </div>
+            <button onclick="checkAnswers('tom1')">Check Answers</button>
+            <div id="result-tom1" class="result"></div>
+            <div id="correct-answer-tom1" class="correct-answer" style="display: none;">
+                <p><strong>Correct Order:</strong></p>
+                <p>2. He soon wrote regularly for the magazine, but he was not satisfied.</p>
+                <p>3. He almost left the magazine, but then he decided to create some unusual new characters.</p>
+                <p>4. The characters he imagined were one of the most famous in the world.</p>
+                <p>5. This popularity made Tom Harper rich and successful.</p>
+            </div>
+        </div>
+
+        <!-- Topic 6: Quy trình dùng máy in printer -->
+        <div class="topic">
+            <h3>2.6. Topic: Quy trình dùng máy in printer</h3>
+            <div class="content">
+                <div class="left">
+                    <div class="sentence">1. First, you need to find an appropriate place to put your printer.</div>
+                    <div class="sentence dropzone"></div>
+                    <div class="sentence dropzone"></div>
+                    <div class="sentence dropzone"></div>
+                    <div class="sentence dropzone"></div>
+                </div>
+                <div class="right" id="right-printer">
+                    <div class="sentence draggable" draggable="true">When your printer is in place, turn it on using the switch.</div>
+                    <div class="sentence draggable" draggable="true">A light comes on at the front of the printer.</div>
+                    <div class="sentence draggable" draggable="true">If the light is green, your printer is ready to use.</div>
+                    <div class="sentence draggable" draggable="true">Before using the printer, you need to put papers into it.</div>
+                </div>
+            </div>
+            <button onclick="checkAnswers('printer')">Check Answers</button>
+            <div id="result-printer" class="result"></div>
+            <div id="correct-answer-printer" class="correct-answer" style="display: none;">
+                <p><strong>Correct Order:</strong></p>
+                <p>2. When your printer is in place, turn it on using the switch.</p>
+                <p>3. A light comes on at the front of the printer.</p>
+                <p>4. If the light is green, your printer is ready to use.</p>
+                <p>5. Before using the printer, you need to put papers into it.</p>
+            </div>
+        </div>
+
+        <!-- Topic 7: Hand in Assignment -->
+        <div class="topic">
+            <h3>2.7. Topic: Hand in Assignment</h3>
+            <div class="content">
+                <div class="left">
+                    <div class="sentence">1. First, it is a good idea to check your report and correct mistakes.</div>
+                    <div class="sentence dropzone"></div>
+                    <div class="sentence dropzone"></div>
+                    <div class="sentence dropzone"></div>
+                    <div class="sentence dropzone"></div>
+                </div>
+                <div class="right" id="right-assignment">
+                    <div class="sentence draggable" draggable="true">When you are sure there are no mistakes left, print out your report.</div>
+                    <div class="sentence draggable" draggable="true">Next, complete a cover sheet with your name and your student number, and attach it to your printed assignment.</div>
+                    <div class="sentence draggable" draggable="true">Bring your assignment with the attached cover sheet to the front desk in the main hall.</div>
+                    <div class="sentence draggable" draggable="true">The staff member will take your report and confirm that everything is complete.</div>
+                </div>
+            </div>
+            <button onclick="checkAnswers('assignment')">Check Answers</button>
+            <div id="result-assignment" class="result"></div>
+            <div id="correct-answer-assignment" class="correct-answer" style="display: none;">
+                <p><strong>Correct Order:</strong></p>
+                <p>2. When you are sure there are no mistakes left, print out your report.</p>
+                <p>3. Next, complete a cover sheet with your name and your student number, and attach it to your printed assignment.</p>
+                <p>4. Bring your assignment with the attached cover sheet to the front desk in the main hall.</p>
+                <p>5. The staff member will take your report and confirm that everything is complete.</p>
+            </div>
+        </div>
+
+        <!-- Topic 8: Fire Instructions -->
+        <div class="topic">
+            <h3>2.8. Topic: Fire Instructions</h3>
+            <div class="content">
+                <div class="left">
+                    <div class="sentence">1. When you hear the alarm, leave your bags and belongings at the desk.</div>
+                    <div class="sentence dropzone"></div>
+                    <div class="sentence dropzone"></div>
+                    <div class="sentence dropzone"></div>
+                    <div class="sentence dropzone"></div>
+                </div>
+                <div class="right" id="right-fire">
+                    <div class="sentence draggable" draggable="true">Next, walk calmly to the doors marked Emergency Exit.</div>
+                    <div class="sentence draggable" draggable="true">Through these doors, there are stairs leading you to the ground floor.</div>
+                    <div class="sentence draggable" draggable="true">When you reach the bottom of these stairs, leave the building through the front entrance.</div>
+                    <div class="sentence draggable" draggable="true">Outside, gather on the grass and wait for further instructions.</div>
+                </div>
+            </div>
+            <button onclick="checkAnswers('fire')">Check Answers</button>
+            <div id="result-fire" class="result"></div>
+            <div id="correct-answer-fire" class="correct-answer" style="display: none;">
+                <p><strong>Correct Order:</strong></p>
+                <p>2. Next, walk calmly to the doors marked Emergency Exit.</p>
+                <p>3. Through these doors, there are stairs leading you to the ground floor.</p>
+                <p>4. When you reach the bottom of these stairs, leave the building through the front entrance.</p>
+                <p>5. Outside, gather on the grass and wait for further instructions.</p>
+            </div>
+        </div>
+
+        <!-- Topic 9: Enter the Conference Hall -->
+        <div class="topic">
+            <h3>2.9. Topic: Enter the Conference Hall</h3>
+            <div class="content">
+                <div class="left">
+                    <div class="sentence">1. When you collect your pack, go to the lifts on the right.</div>
+                    <div class="sentence dropzone"></div>
+                    <div class="sentence dropzone"></div>
+                    <div class="sentence dropzone"></div>
+                    <div class="sentence dropzone"></div>
+                </div>
+                <div class="right" id="right-conference">
+                    <div class="sentence draggable" draggable="true">Take the lift to the third floor and go to the main desk.</div>
+                    <div class="sentence draggable" draggable="true">Show your pass from the conference pack to a member of staff at the desk.</div>
+                    <div class="sentence draggable" draggable="true">He or she will tell you your seat number for the talk at the main hall.</div>
+                    <div class="sentence draggable" draggable="true">Once you are in the hall, someone will help you find your seat.</div>
+                </div>
+            </div>
+            <button onclick="checkAnswers('conference')">Check Answers</button>
+            <div id="result-conference" class="result"></div>
+            <div id="correct-answer-conference" class="correct-answer" style="display: none;">
+                <p><strong>Correct Order:</strong></p>
+                <p>2. Take the lift to the third floor and go to the main desk.</p>
+                <p>3. Show your pass from the conference pack to a member of staff at the desk.</p>
+                <p>4. He or she will tell you your seat number for the talk at the main hall.</p>
+                <p>5. Once you are in the hall, someone will help you find your seat.</p>
+            </div>
+        </div>
+
+        <!-- Topic 10: Instructions for New Students -->
+        <div class="topic">
+            <h3>2.10. Topic: Instructions for New Students</h3>
+            <div class="content">
+                <div class="left">
+                    <div class="sentence">1. When you arrive at the university, go to the help desk.</div>
+                    <div class="sentence dropzone"></div>
+                    <div class="sentence dropzone"></div>
+                    <div class="sentence dropzone"></div>
+                    <div class="sentence dropzone"></div>
+                </div>
+                <div class="right" id="right-students">
+                    <div class="sentence draggable" draggable="true">A member of staff will ask for your name and your address.</div>
+                    <div class="sentence draggable" draggable="true">He or she will enter your information into the computer and give you an identification card.</div>
+                    <div class="sentence draggable" draggable="true">You can use this card to borrow books from library and access lesson materials online.</div>
+                    <div class="sentence draggable" draggable="true">You will find these in material links on your home page.</div>
+                </div>
+            </div>
+            <button onclick="checkAnswers('students')">Check Answers</button>
+            <div id="result-students" class="result"></div>
+            <div id="correct-answer-students" class="correct-answer" style="display: none;">
+                <p><strong>Correct Order:</strong></p>
+                <p>2. A member of staff will ask for your name and your address.</p>
+                <p>3. He or she will enter your information into the computer and give you an identification card.</p>
+                <p>4. You can use this card to borrow books from library and access lesson materials online.</p>
+                <p>5. You will find these in material links on your home page.</p>
+            </div>
+        </div>
+
+        <!-- Topic 11: Signs on the Coast Road -->
+        <div class="topic">
+            <h3>2.11. Topic: Signs on the Coast Road</h3>
+            <div class="content">
+                <div class="left">
+                    <div class="sentence">1. This report gives information about the traffic on the coast road.</div>
+                    <div class="sentence dropzone"></div>
+                    <div class="sentence dropzone"></div>
+                    <div class="sentence dropzone"></div>
+                    <div class="sentence dropzone"></div>
+                    <div class="sentence dropzone"></div>
+                </div>
+                <div class="right" id="right-coast">
+                    <div class="sentence draggable" draggable="true">The road is busy during the summer when tourists visit.</div>
+                    <div class="sentence draggable" draggable="true">They don’t know many of them are here for the first time.</div>
+                    <div class="sentence draggable" draggable="true">For this reason it is easy for them to take a wrong turn and get lost.</div>
+                    <div class="sentence draggable" draggable="true">These will help tourists to find their way to our beautiful town.</div>
+                    <div class="sentence draggable" draggable="true">This is why we believe there should be more signs along the road.</div>
+                </div>
+            </div>
+            <button onclick="checkAnswers('coast')">Check Answers</button>
+            <div id="result-coast" class="result"></div>
+            <div id="correct-answer-coast" class="correct-answer" style="display: none;">
+                <p><strong>Correct Order:</strong></p>
+                <p>2. The road is busy during the summer when tourists visit.</p>
+                <p>3. They don’t know many of them are here for the first time.</p>
+                <p>4. For this reason it is easy for them to take a wrong turn and get lost.</p>
+                <p>5. These will help tourists to find their way to our beautiful town.</p>
+                <p>6. This is why we believe there should be more signs along the road.</p>
+            </div>
+        </div>
+
+        <!-- Topic 12: Tom Harper (2.2) -->
+        <div class="topic">
+            <h3>2.12. Topic: Tom Harper (Part 2)</h3>
+            <div class="content">
+                <div class="left">
+                    <div class="sentence">1. As a child, he moved to a special school because he was so clever.</div>
+                    <div class="sentence dropzone"></div>
+                    <div class="sentence dropzone"></div>
+                    <div class="sentence dropzone"></div>
+                    <div class="sentence dropzone"></div>
+                </div>
+                <div class="right" id="right-tom2">
+                    <div class="sentence draggable" draggable="true">His best friend in his new class was a girl named Lavime.</div>
+                    <div class="sentence draggable" draggable="true">She later became his wife and helped him with his earliest scientific discoveries.</div>
+                    <div class="sentence draggable" draggable="true">These were so advanced that he soon became famous all over the world.</div>
+                    <div class="sentence draggable" draggable="true">Princeton University in the USA offered him a job because he was so famous.</div>
+                </div>
+            </div>
+            <button onclick="checkAnswers('tom2')">Check Answers</button>
+            <div id="result-tom2" class="result"></div>
+            <div id="correct-answer-tom2" class="correct-answer" style="display: none;">
+                <p><strong>Correct Order:</strong></p>
+                <p>2. His best friend in his new class was a girl named Lavime.</p>
+                <p>3. She later became his wife and helped him with his earliest scientific discoveries.</p>
+                <p>4. These were so advanced that he soon became famous all over the world.</p>
+                <p>5. Princeton University in the USA offered him a job because he was so famous.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Function to shuffle an array (Fisher-Yates Shuffle)
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Shuffle sentences in the right column for each topic
+        const topics = ['report', 'traffic', 'papers', 'betty', 'tom1', 'printer', 'assignment', 'fire', 'conference', 'students', 'coast', 'tom2'];
+        topics.forEach(topic => {
+            const rightColumn = document.getElementById(`right-${topic}`);
+            const sentences = Array.from(rightColumn.children);
+            const shuffledSentences = shuffleArray(sentences);
+            rightColumn.innerHTML = '';
+            shuffledSentences.forEach(sentence => rightColumn.appendChild(sentence));
+        });
+
+        const draggables = document.querySelectorAll('.draggable');
+        const dropzones = document.querySelectorAll('.dropzone');
+
+        draggables.forEach(draggable => {
+            draggable.addEventListener('dragstart', (e) => {
+                e.dataTransfer.setData('text/plain', draggable.innerHTML);
+                draggable.classList.add('dragging');
+            });
+
+            draggable.addEventListener('dragend', () => {
+                draggable.classList.remove('dragging');
+            });
+        });
+
+        dropzones.forEach(dropzone => {
+            dropzone.addEventListener('dragover', (e) => {
+                e.preventDefault();
+            });
+
+            dropzone.addEventListener('drop', (e) => {
+                e.preventDefault();
+                const data = e.dataTransfer.getData('text/plain');
+                const draggableElement = document.querySelector('.dragging');
+                if (dropzone.innerHTML === '') {
+                    dropzone.innerHTML = data;
+                    dropzone.classList.remove('dropzone');
+                    dropzone.setAttribute('draggable', 'true');
+                    draggableElement.innerHTML = '';
+                    draggableElement.classList.remove('draggable');
+                    draggableElement.classList.add('dropzone');
+                    updateDraggables();
+                    updateDropzones();
+                }
+            });
+
+            dropzone.addEventListener('dragstart', (e) => {
+                if (dropzone.innerHTML !== '') {
+                    e.dataTransfer.setData('text/plain', dropzone.innerHTML);
+                    dropzone.classList.add('dragging');
+                }
+            });
+
+            dropzone.addEventListener('dragend', () => {
+                dropzone.classList.remove('dragging');
+            });
+        });
+
+        function updateDraggables() {
+            document.querySelectorAll('.sentence').forEach(sentence => {
+                if (sentence.innerHTML !== '' && !sentence.classList.contains('dropzone')) {
+                    sentence.classList.add('draggable');
+                    sentence.setAttribute('draggable', 'true');
+                }
+            });
+        }
+
+        function updateDropzones() {
+            document.querySelectorAll('.sentence').forEach(sentence => {
+                if (sentence.innerHTML === '') {
+                    sentence.classList.add('dropzone');
+                    sentence.removeAttribute('draggable');
+                }
+            });
+        }
+
+        function checkAnswers(topic) {
+            const correctOrder = {
+                'report': [
+                    'Remember to save links to websites and include them in your report.',
+                    'You should also include a list of books that you use for reference.',
+                    'When you have finished your report, correct all the mistakes.',
+                    'After you make the corrections, send your report by email.'
+                ],
+                'traffic': [
+                    'This created long delays in the roads to the city’s business district.',
+                    'As a result of these delays, many people were not able to get to work on time.',
+                    'Fortunately, in the evening, the traffic lights were working again.',
+                    'Therefore, there were no further delays for people going back home.'
+                ],
+                'papers': [
+                    'When you do this, a new window will open.',
+                    'Simply drag and drop your files there.',
+                    'Once you put the files there, press the “send” button.',
+                    'After you send your work, you should check your email.'
+                ],
+                'betty': [
+                    'At the time, Shanghai is a city filled with many people from different countries.',
+                    'After she finished her school, she went to Wellesley College, a famous university in USA.',
+                    'However, she missed China, and applied for a job in Hong Kong, where she taught from 1959 to 1972, and learnt to speak Cantonese, the local language.',
+                    'In the 1980s, she finally returned to China and still lives with her Shanghai husband, George Wang.'
+                ],
+                'tom1': [
+                    'He soon wrote regularly for the magazine, but he was not satisfied.',
+                    'He almost left the magazine, but then he decided to create some unusual new characters.',
+                    'The characters he imagined were one of the most famous in the world.',
+                    'This popularity made Tom Harper rich and successful.'
+                ],
+                'printer': [
+                    'When your printer is in place, turn it on using the switch.',
+                    'A light comes on at the front of the printer.',
+                    'If the light is green, your printer is ready to use.',
+                    'Before using the printer, you need to put papers into it.'
+                ],
+                'assignment': [
+                    'When you are sure there are no mistakes left, print out your report.',
+                    'Next, complete a cover sheet with your name and your student number, and attach it to your printed assignment.',
+                    'Bring your assignment with the attached cover sheet to the front desk in the main hall.',
+                    'The staff member will take your report and confirm that everything is complete.'
+                ],
+                'fire': [
+                    'Next, walk calmly to the doors marked Emergency Exit.',
+                    'Through these doors, there are stairs leading you to the ground floor.',
+                    'When you reach the bottom of these stairs, leave the building through the front entrance.',
+                    'Outside, gather on the grass and wait for further instructions.'
+                ],
+                'conference': [
+                    'Take the lift to the third floor and go to the main desk.',
+                    'Show your pass from the conference pack to a member of staff at the desk.',
+                    'He or she will tell you your seat number for the talk at the main hall.',
+                    'Once you are in the hall, someone will help you find your seat.'
+                ],
+                'students': [
+                    'A member of staff will ask for your name and your address.',
+                    'He or she will enter your information into the computer and give you an identification card.',
+                    'You can use this card to borrow books from library and access lesson materials online.',
+                    'You will find these in material links on your home page.'
+                ],
+                'coast': [
+                    'The road is busy during the summer when tourists visit.',
+                    'They don’t know many of them are here for the first time.',
+                    'For this reason it is easy for them to take a wrong turn and get lost.',
+                    'These will help tourists to find their way to our beautiful town.',
+                    'This is why we believe there should be more signs along the road.'
+                ],
+                'tom2': [
+                    'His best friend in his new class was a girl named Lavime.',
+                    'She later became his wife and helped him with his earliest scientific discoveries.',
+                    'These were so advanced that he soon became famous all over the world.',
+                    'Princeton University in the USA offered him a job because he was so famous.'
+                ]
+            };
+
+            const topicIndex = {
+                'report': 1,
+                'traffic': 2,
+                'papers': 3,
+                'betty': 4,
+                'tom1': 5,
+                'printer': 6,
+                'assignment': 7,
+                'fire': 8,
+                'conference': 9,
+                'students': 10,
+                'coast': 11,
+                'tom2': 12
+            };
+
+            const leftSentences = document.querySelectorAll(`.topic:nth-child(${topicIndex[topic]}) .left .sentence`);
+            let userOrder = [];
+            for (let i = 1; i < leftSentences.length; i++) {
+                userOrder.push(leftSentences[i].innerHTML.trim());
+            }
+
+            const correctOrderTrimmed = correctOrder[topic].map(sentence => sentence.trim());
+
+            const result = document.getElementById(`result-${topic}`);
+            const correctAnswerDiv = document.getElementById(`correct-answer-${topic}`);
+            const isCorrect = userOrder.length === correctOrderTrimmed.length && userOrder.every((sentence, index) => sentence === correctOrderTrimmed[index]);
+
+            if (isCorrect) {
+                result.textContent = "Correct! Well done!";
+                result.className = 'correct';
+                correctAnswerDiv.style.display = 'none';
+            } else {
+                result.textContent = "Incorrect. Here is the correct order:";
+                result.className = 'incorrect';
+                correctAnswerDiv.style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>
