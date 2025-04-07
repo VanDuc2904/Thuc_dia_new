@@ -4,80 +4,81 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sắp xếp từ</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        .sentence-selector {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .sentence-selector label {
+            font-size: 16px;
+            margin-right: 10px;
+        }
+
+        .sentence-selector select {
+            padding: 5px;
+            font-size: 16px;
+        }
+
+        .word-box {
+            display: inline-block;
+            padding: 10px;
+            margin: 5px;
+            background-color: #f0f0f0;
+            cursor: move;
+            border: 1px solid #ccc;
+            touch-action: none; /* Ngăn cuộn mặc định khi kéo trên điện thoại */
+        }
+
+        #word-list, #drop-area {
+            min-height: 60px;
+            padding: 10px;
+            margin: 20px 0;
+            border: 2px dashed #ccc;
+        }
+
+        .correct-answer {
+            color: green;
+            font-size: 14px;
+            margin-top: 10px;
+            text-align: center;
+            display: none;
+        }
+
+        #result {
+            font-weight: bold;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .buttons {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 0 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
 </head>
-<style>
-    body {
-    font-family: Arial, sans-serif;
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-}
-
-h2 {
-    text-align: center;
-}
-
-.sentence-selector {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.sentence-selector label {
-    font-size: 16px;
-    margin-right: 10px;
-}
-
-.sentence-selector select {
-    padding: 5px;
-    font-size: 16px;
-}
-
-.word-box {
-    display: inline-block;
-    padding: 10px;
-    margin: 5px;
-    background-color: #f0f0f0;
-    cursor: move;
-    border: 1px solid #ccc;
-}
-
-#word-list, #drop-area {
-    min-height: 60px;
-    padding: 10px;
-    margin: 20px 0;
-    border: 2px dashed #ccc;
-}
-
-.correct-answer {
-    color: green;
-    font-size: 14px;
-    margin-top: 10px;
-    text-align: center;
-    display: none;
-}
-
-#result {
-    font-weight: bold;
-    margin-top: 10px;
-    text-align: center;
-}
-
-.buttons {
-    text-align: center;
-    margin-top: 20px;
-}
-
-button {
-    padding: 10px 20px;
-    margin: 0 10px;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-.hidden {
-    display: none;
-}
-</style>
 <body>
     <h2>Sắp xếp các từ theo thứ tự đúng</h2>
     <div class="sentence-selector">
@@ -91,6 +92,7 @@ button {
     <div class="correct-answer" id="correct-answer"></div>
     <div class="buttons">
         <button onclick="checkAnswer()">Kiểm tra</button>
+        <button onclick="showCorrectAnswer()">Xem đáp án</button>
         <button onclick="reset()">Thử lại</button>
         <button onclick="nextSentence()" id="next-sentence" class="hidden">Câu tiếp theo</button>
     </div>
@@ -152,23 +154,96 @@ button {
                 div.textContent = word;
                 div.draggable = true;
                 div.addEventListener("dragstart", dragStart);
+                div.addEventListener("touchstart", touchStart, { passive: false });
+                div.addEventListener("touchmove", touchMove, { passive: false });
+                div.addEventListener("touchend", touchEnd, { passive: false });
                 wordList.appendChild(div);
             });
             document.getElementById("drop-area").innerHTML = "Kéo và thả các từ vào đây";
             userOrder = [];
             document.getElementById("result").textContent = "";
             document.getElementById("correct-answer").textContent = "";
-            document.getElementById("correct-answer").classList.add("hidden");
+            document.getElementById("correct-answer").style.display = "none"; // Ẩn đáp án
             document.getElementById("next-sentence").classList.add("hidden");
         }
 
-        // Xử lý kéo
+        // Xử lý kéo bằng chuột
         function dragStart(e) {
             e.dataTransfer.setData("text", e.target.textContent);
             e.dataTransfer.setData("source", e.target.parentElement.id);
         }
 
-        // Xử lý thả cho #word-list
+        // Xử lý kéo bằng cảm ứng
+        let draggedElement = null;
+
+        function touchStart(e) {
+            e.preventDefault();
+            draggedElement = e.target;
+            draggedElement.style.opacity = "0.5";
+        }
+
+        function touchMove(e) {
+            e.preventDefault();
+            const touch = e.touches[0];
+            draggedElement.style.position = "absolute";
+            draggedElement.style.left = `${touch.pageX - draggedElement.offsetWidth / 2}px`;
+            draggedElement.style.top = `${touch.pageY - draggedElement.offsetHeight / 2}px`;
+        }
+
+        function touchEnd(e) {
+            e.preventDefault();
+            const touch = e.changedTouches[0];
+            const dropArea = document.getElementById("drop-area");
+            const wordList = document.getElementById("word-list");
+            const dropAreaRect = dropArea.getBoundingClientRect();
+            const wordListRect = wordList.getBoundingClientRect();
+
+            draggedElement.style.opacity = "1";
+            draggedElement.style.position = "static";
+
+            if (
+                touch.pageX >= dropAreaRect.left &&
+                touch.pageX <= dropAreaRect.right &&
+                touch.pageY >= dropAreaRect.top &&
+                touch.pageY <= dropAreaRect.bottom
+            ) {
+                if (draggedElement.parentElement.id === "word-list") {
+                    const div = document.createElement("div");
+                    div.className = "word-box";
+                    div.textContent = draggedElement.textContent;
+                    div.draggable = true;
+                    div.addEventListener("dragstart", dragStart);
+                    div.addEventListener("touchstart", touchStart, { passive: false });
+                    div.addEventListener("touchmove", touchMove, { passive: false });
+                    div.addEventListener("touchend", touchEnd, { passive: false });
+                    dropArea.appendChild(div);
+                    userOrder.push(draggedElement.textContent);
+                    draggedElement.remove();
+                }
+            } else if (
+                touch.pageX >= wordListRect.left &&
+                touch.pageX <= wordListRect.right &&
+                touch.pageY >= wordListRect.top &&
+                touch.pageY <= wordListRect.bottom
+            ) {
+                if (draggedElement.parentElement.id === "drop-area") {
+                    const div = document.createElement("div");
+                    div.className = "word-box";
+                    div.textContent = draggedElement.textContent;
+                    div.draggable = true;
+                    div.addEventListener("dragstart", dragStart);
+                    div.addEventListener("touchstart", touchStart, { passive: false });
+                    div.addEventListener("touchmove", touchMove, { passive: false });
+                    div.addEventListener("touchend", touchEnd, { passive: false });
+                    wordList.appendChild(div);
+                    userOrder = userOrder.filter(w => w !== draggedElement.textContent);
+                    draggedElement.remove();
+                }
+            }
+            draggedElement = null;
+        }
+
+        // Xử lý thả cho #word-list (chuột)
         const wordList = document.getElementById("word-list");
         wordList.addEventListener("dragover", (e) => e.preventDefault());
         wordList.addEventListener("drop", (e) => {
@@ -181,6 +256,9 @@ button {
                 div.textContent = word;
                 div.draggable = true;
                 div.addEventListener("dragstart", dragStart);
+                div.addEventListener("touchstart", touchStart, { passive: false });
+                div.addEventListener("touchmove", touchMove, { passive: false });
+                div.addEventListener("touchend", touchEnd, { passive: false });
                 wordList.appendChild(div);
                 const dropArea = document.getElementById("drop-area");
                 const draggedWord = Array.from(dropArea.children).find(w => w.textContent === word);
@@ -191,7 +269,7 @@ button {
             }
         });
 
-        // Xử lý thả cho #drop-area
+        // Xử lý thả cho #drop-area (chuột)
         const dropArea = document.getElementById("drop-area");
         dropArea.addEventListener("dragover", (e) => e.preventDefault());
         dropArea.addEventListener("drop", (e) => {
@@ -204,6 +282,9 @@ button {
                 div.textContent = word;
                 div.draggable = true;
                 div.addEventListener("dragstart", dragStart);
+                div.addEventListener("touchstart", touchStart, { passive: false });
+                div.addEventListener("touchmove", touchMove, { passive: false });
+                div.addEventListener("touchend", touchEnd, { passive: false });
                 dropArea.appendChild(div);
                 userOrder.push(word);
                 const wordList = document.getElementById("word-list");
@@ -220,23 +301,31 @@ button {
             if (userOrder.length !== sentence.correct.length) {
                 result.textContent = "Chưa đủ từ, hãy kéo hết các từ vào khu vực!";
                 result.style.color = "red";
-                correctAnswerDiv.textContent = "";
-                correctAnswerDiv.classList.add("hidden");
-                return;
-            }
-            const isCorrect = userOrder.every((word, index) => word === sentence.correct[index]);
-            if (isCorrect) {
-                result.textContent = "Đúng!";
-                result.style.color = "green";
-                correctAnswerDiv.textContent = "";
-                correctAnswerDiv.classList.add("hidden");
-                document.getElementById("next-sentence").classList.remove("hidden");
-            } else {
-                result.textContent = "Sai, thử lại!";
-                result.style.color = "red";
                 correctAnswerDiv.textContent = `Đáp án đúng: ${sentence.correct.join(" / ")}`;
-                correctAnswerDiv.classList.remove("hidden");
+                correctAnswerDiv.style.display = "block";
+            } else {
+                const isCorrect = userOrder.every((word, index) => word === sentence.correct[index]);
+                if (isCorrect) {
+                    result.textContent = "Đúng!";
+                    result.style.color = "green";
+                    correctAnswerDiv.textContent = "";
+                    correctAnswerDiv.style.display = "none";
+                    document.getElementById("next-sentence").classList.remove("hidden");
+                } else {
+                    result.textContent = "Sai, thử lại!";
+                    result.style.color = "red";
+                    correctAnswerDiv.textContent = `Đáp án đúng: ${sentence.correct.join(" / ")}`;
+                    correctAnswerDiv.style.display = "block";
+                }
             }
+        }
+
+        // Hiển thị đáp án đúng khi nhấn "Xem đáp án"
+        function showCorrectAnswer() {
+            const correctAnswerDiv = document.getElementById("correct-answer");
+            const sentence = sentences[currentSentenceIndex];
+            correctAnswerDiv.textContent = `Đáp án đúng: ${sentence.correct.join(" / ")}`;
+            correctAnswerDiv.style.display = "block";
         }
 
         // Chuyển sang câu tiếp theo
@@ -252,7 +341,7 @@ button {
             document.getElementById("drop-area").innerHTML = "Kéo và thả các từ vào đây";
             document.getElementById("result").textContent = "";
             document.getElementById("correct-answer").textContent = "";
-            document.getElementById("correct-answer").classList.add("hidden");
+            document.getElementById("correct-answer").style.display = "none";
             loadSentence();
         }
 
