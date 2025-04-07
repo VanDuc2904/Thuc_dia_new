@@ -1,681 +1,355 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz on Multiple Topics</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            line-height: 1.6;
-        }
-        .section {
-            margin-bottom: 40px;
-        }
-        .section h2 {
-            font-size: 24px;
-            color: #333;
-        }
-        .paragraph {
-            margin-bottom: 20px;
-        }
-        .question {
-            margin-top: 20px;
-        }
-        .question label {
-            display: block;
-            margin-bottom: 5px;
-        }
-        .submit-btn {
-            margin-top: 20px;
-            padding: 10px 20px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-        .submit-btn:hover {
-            background-color: #45a049;
-        }
-        select {
-            padding: 5px;
-            width: 100px;
-        }
-        .result {
-            margin-top: 5px;
-            font-size: 14px;
-        }
-        .correct {
-            color: green;
-        }
-        .incorrect {
-            color: red;
-        }
-    </style>
+    <title>Part 3: Chọn người nói</title>
 </head>
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h2 {
+    text-align: center;
+}
+
+h3 {
+    margin-top: 30px;
+    color: #333;
+}
+
+.topic-selector {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.topic-selector label {
+    font-size: 16px;
+    margin-right: 10px;
+}
+
+.topic-selector select {
+    padding: 5px;
+    font-size: 16px;
+}
+
+.sentence {
+    margin: 15px 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    position: relative;
+}
+
+.sentence p {
+    margin: 0 0 10px 0;
+    font-weight: bold;
+}
+
+select {
+    padding: 5px;
+    font-size: 16px;
+}
+
+.correct-answer {
+    color: green;
+    font-size: 14px;
+    margin-top: 5px;
+    display: none;
+}
+
+.hidden {
+    display: none;
+}
+
+#result {
+    font-weight: bold;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.buttons {
+    text-align: center;
+    margin-top: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    margin: 0 10px;
+    font-size: 16px;
+    cursor: pointer;
+}
+</style>
 <body>
-    <!-- Topic 1: Watching Television -->
-    <div class="section">
-        <h2>Reading 1 of 6</h2>
-        <p><strong>Đoạn văn của 4 người: Topic: watching television. ABDBDAD</strong></p>
-        <div class="paragraph">
-            <p><strong>A:</strong> I know I have to spend time studying but there are so many great TV shows, especially horror TV shows, once you watch it, you will be glued to it and can’t stop watching. Besides, these TV shows often last for many weeks.</p>
-            <p><strong>B:</strong> I often spend time watching news on TV in the evening when I’m free. In the past, I often watched the soccer team I like on TV, but they often lost, so I gave up watching them. Nowadays there are too many reality TV shows being shown on TV. Every time I see these shows, I turn it off and do more interesting things.</p>
-            <p><strong>C:</strong> I wasn’t good when I was in school because I often spent time watching cartoons on TV, however, I now watch nature documentaries and TV shows about science, history, and business. This helps me expand my knowledge a lot compared to when I was in school.</p>
-            <p><strong>D:</strong> My husband usually schedules TV viewing for the weekend, he usually watches football or documentaries. I’m the opposite. I just turn on the TV and it doesn’t matter what program it is, because I just need to relax. However, I also want to update news about movies, not just movies, but also songs. I also find reality TV shows very entertaining.</p>
-        </div>
-        <div class="question">
-            <p>1. Who said, "Watch TV instead of studying"?</p>
-            <select name="q1">
-                <option value="">Select</option>
-                <option value="A">A</option>
-                <option value="B">B</option>
-                <option value="C">C</option>
-                <option value="D">D</option>
-            </select>
-            <div class="result" id="result-q1"></div>
-        </div>
-        <div class="question">
-            <p>2. Who said, "Like TV programs which continue over several weeks"?</p>
-            <select name="q2">
-                <option value="">Select</option>
-                <option value="A">A</option>
-                <option value="B">B</option>
-                <option value="C">C</option>
-                <option value="D">D</option>
-            </select>
-            <div class="result" id="result-q2"></div>
-        </div>
-        <div class="question">
-            <p>3. Who said, "Avoid watching reality TV programs"?</p>
-            <select name="q3">
-                <option value="">Select</option>
-                <option value="A">A</option>
-                <option value="B">B</option>
-                <option value="C">C</option>
-                <option value="D">D</option>
-            </select>
-            <div class="result" id="result-q3"></div>
-        </div>
-        <div class="question">
-            <p>4. Who said, "Lost interest in watching football on TV"?</p>
-            <select name="q4">
-                <option value="">Select</option>
-                <option value="A">A</option>
-                <option value="B">B</option>
-                <option value="C">C</option>
-                <option value="D">D</option>
-            </select>
-            <div class="result" id="result-q4"></div>
-        </div>
-        <div class="question">
-            <p>5. Who said, "Get a lot of knowledge by watching TV"?</p>
-            <select name="q5">
-                <option value="">Select</option>
-                <option value="A">A</option>
-                <option value="B">B</option>
-                <option value="C">C</option>
-                <option value="D">D</option>
-            </select>
-            <div class="result" id="result-q5"></div>
-        </div>
-        <div class="question">
-            <p>6. Who said, "Isn’t a very selective viewer"?</p>
-            <select name="q6">
-                <option value="">Select</option>
-                <option value="A">A</option>
-                <option value="B">B</option>
-                <option value="C">C</option>
-                <option value="D">D</option>
-            </select>
-            <div class="result" id="result-q6"></div>
-        </div>
-        <div class="question">
-            <p>7. Who said, "Keep up to date on cinema and music"?</p>
-            <select name="q7">
-                <option value="">Select</option>
-                <option value="A">A</option>
-                <option value="B">B</option>
-                <option value="C">C</option>
-                <option value="D">D</option>
-            </select>
-            <div class="result" id="result-q7"></div>
-        </div>
+    <h2>Part 3: Chọn người nói câu này</h2>
+    <div class="topic-selector">
+        <label for="topic-select">Chọn chủ đề: </label>
+        <select id="topic-select" onchange="loadTopic()">
+            <!-- Các chủ đề sẽ được thêm động bằng JavaScript -->
+        </select>
     </div>
-
-    <!-- Topic 2: Exercising -->
-    <div class="section">
-        <h2>Reading 2 of 6</h2>
-        <p><strong>Đoạn văn của 4 người: Topic: exercising. AABCACD</strong></p>
-        <div class="paragraph">
-            <p><strong>A:</strong> Exercising with friends is a fantastic idea, don’t you think? It adds a fun element to the workout routine. It’s important to fuel our bodies properly, though. After a good workout, I always make sure to have a nutritious meal to replenish energy and support muscle recovery.</p>
-            <p><strong>B:</strong> Establishing a consistent workout routine has really helped me stay on track with my fitness goals. It’s amazing how much more I can accomplish when I have a structured plan in place. Plus, it keeps me accountable and ensures I make time for physical activity every day.</p>
-            <p><strong>C:</strong> Age is just a number when it comes to exercise. Whether you’re young or old, staying active is crucial for maintaining overall health and vitality. While competitions can be motivating for some, they’re not necessarily suitable for everyone. It’s important to find activities that are enjoyable and sustainable for each individual.</p>
-            <p><strong>D:</strong> Experiencing pain during exercise isn’t necessary and it’s a sign that something may be wrong. It’s important to listen to our bodies and seek expert advice when needed, whether it’s from a trainer, physical therapist, or medical professional. This approach ensures we can continue to enjoy physical activity without risking injury.</p>
-        </div>
-        <div class="question">
-            <p>1. Who said, "Work out with friends is a good idea"?</p>
-            <select name="q8">
-                <option value="">Select</option>
-                <option value="A">A</option>
-                <option value="B">B</option>
-                <option value="C">C</option>
-                <option value="D">D</option>
-            </select>
-            <div class="result" id="result-q8"></div>
-        </div>
-        <div class="question">
-            <p>2. Who said, "A proper meal is important"?</p>
-            <select name="q9">
-                <option value="">Select</option>
-                <option value="A">A</option>
-                <option value="B">B</option>
-                <option value="C">C</option>
-                <option value="D">D</option>
-            </select>
-            <div class="result" id="result-q9"></div>
-        </div>
-        <div class="question">
-            <p>3. Who said, "A routine can help us do more sport"?</p>
-            <select name="q10">
-                <option value="">Select</option>
-                <option value="A">A</option>
-                <option value="B">B</option>
-                <option value="C">C</option>
-                <option value="D">D</option>
-            </select>
-            <div class="result" id="result-q10"></div>
-        </div>
-        <div class="question">
-            <p>4. Who said, "Exercise is for both the young and the elderly"?</p>
-            <select name="q11">
-                <option value="">Select</option>
-                <option value="A">A</option>
-                <option value="B">B</option>
-                <option value="C">C</option>
-                <option value="D">D</option>
-            </select>
-            <div class="result" id="result-q11"></div>
-        </div>
-        <div class="question">
-            <p>5. Who said, "Competitions are not useful for everybody"?</p>
-            <select name="q12">
-                <option value="">Select</option>
-                <option value="A">A</option>
-                <option value="B">B</option>
-                <option value="C">C</option>
-                <option value="D">D</option>
-            </select>
-            <div class="result" id="result-q12"></div>
-        </div>
-        <div class="question">
-            <p>6. Who said, "Experience pain is not necessary"?</p>
-            <select name="q13">
-                <option value="">Select</option>
-                <option value="A">A</option>
-                <option value="B">B</option>
-                <option value="C">C</option>
-                <option value="D">D</option>
-            </select>
-            <div class="result" id="result-q13"></div>
-        </div>
-        <div class="question">
-            <p>7. Who said, "At times we seek expert advice"?</p>
-            <select name="q14">
-                <option value="">Select</option>
-                <option value="A">A</option>
-                <option value="B">B</option>
-                <option value="C">C</option>
-                <option value="D">D</option>
-            </select>
-            <div class="result" id="result-q14"></div>
-        </div>
+    <div id="topics"></div>
+    <div class="buttons">
+        <button onclick="checkAnswers()">Kiểm tra</button>
+        <button onclick="reset()">Thử lại</button>
+        <button onclick="nextTopic()" id="next-topic" class="hidden">Next Topic</button>
     </div>
+    <p id="result"></p>
 
-    <!-- Topic 3: Reading Books -->
-    <div class="section">
-        <h2>Reading 3 of 6</h2>
-        <p><strong>Đoạn văn của 4 người: Topic: reading books. ABCDABD</strong></p>
-        <div class="paragraph">
-            <p><strong>A:</strong> I used to struggle very much to finish reading a book that we were expected to read. However, now that I read for my own pleasure, I don’t mind too much. I usually don’t limit myself to reading one at a time. There are so many titles I can choose from that get me excited. I have a list of books that I want to read in the future.</p>
-            <p><strong>B:</strong> I often keep a book on the bedside table to read before going to bed. The problem is, I get tired after reading only half of a page, and I fall asleep. So, I’ve been reading that one book for half a year now and have only read chapter 2. However, when I read factual books, I find it very interesting and it keeps me awake for hours.</p>
-            <p><strong>C:</strong> My job requires reading a lot of books. These books include a lot of facts and figures and they are very boring. When I have free time, I usually want to read light books, like mystery novels or comedy. I often read on the train to work. I have a young child, so when I come home I almost don’t have time to read. Therefore, I have to read books when travelling by train. So, a book can last me 1 week.</p>
-            <p><strong>D:</strong> My wife often complains about not having time to read, and I say we have to make our own time. So, I often calculate my free time on my phone, so I can know in advance whether I should bring a book to read on the train. My wife often laughs at me for doing so, but I don’t mind, as long as I can finish reading so many books.</p>
-        </div>
-        <div class="question">
-            <p>1. Who said, "Reads many books at once"?</p>
-            <select name="q15">
-                <option value="">Select</option>
-                <option value="A">A</option>
-                <option value="B">B</option>
-                <option value="C">C</option>
-                <option value="D">D</option>
-            </select>
-            <div class="result" id="result-q15"></div>
-        </div>
-        <div class="question">
-            <p>2. Who said, "Wants to read a lot of books"?</p>
-            <select name="q16">
-                <option value="">Select</option>
-                <option value="A">A</option>
-                <option value="B">B</option>
-                <option value="C">C</option>
-                <option value="D">D</option>
-            </select>
-            <div class="result" id="result-q16"></div>
-        </div>
-        <div class="question">
-            <p>3. Who said, "Having difficulty in finishing book"?</p>
-            <select name="q17">
-                <option value="">Select</option>
-                <option value="A">A</option>
-                <option value="B">B</option>
-                <option value="C">C</option>
-                <option value="D">D</option>
-            </select>
-            <div class="result" id="result-q17"></div>
-        </div>
-        <div class="question">
-            <p>4. Who said, "Thinks that factual books are boring"?</p>
-            <select name="q18">
-                <option value="">Select</option>
-                <option value="A">A</option>
-                <option value="B">B</option>
-                <option value="C">C</option>
-                <option value="D">D</option>
-            </select>
-            <div class="result" id="result-q18"></div>
-        </div>
-        <div class="question">
-            <p>5. Who said, "Has limited time to read books"?</p>
-            <select name="q19">
-                <option value="">Select</option>
-                <option value="A">A</option>
-                <option value="B">B</option>
-                <option value="C">C</option>
-                <option value="D">D</option>
-            </select>
-            <div class="result" id="result-q19"></div>
-        </div>
-        <div class="question">
-            <p>6. Who said, "Plans their reading schedule"?</p>
-            <select name="q20">
-                <option value="">Select</option>
-                <option value="A">A</option>
-                <option value="B">B</option>
-                <option value="C">C</option>
-                <option value="D">D</option>
-            </select>
-            <div class="result" id="result-q20"></div>
-        </div>
-        <div class="question">
-            <p>7. Who said, "Reads more than another family member"?</p>
-            <select name="q21">
-                <option value="">Select</option>
-                <option value="A">A</option>
-                <option value="B">B</option>
-                <option value="C">C</option>
-                <option value="D">D</option>
-            </select>
-            <div class="result" id="result-q21"></div>
-        </div>
-    </div>
-
-    <!-- Topic 4: Volunteering to Clean a Local Park -->
-    <div class="section">
-        <h2>Reading 4 of 6</h2>
-        <p><strong>Đoạn văn của 4 người: Topic: volunteering to clean a local park. CDDAABC</strong></p>
-        <div class="paragraph">
-            <p><strong>A:</strong> My family and I often spend time at the park. My children love going to the park and they find the park a very interesting place to visit. My son has a dream of becoming a biologist so I think cleaning up this park will be very helpful for my son. I think we should pique children’s interest in cleaning. They will be more willing to volunteer and help others.</p>
-            <p><strong>B:</strong> I think this volunteering is a good idea but it doesn’t have a long-term vision. When volunteers clean up the park, it will be clean, but it will become busy again after a month when tourist season arrives. I think we should clean this park regularly about once a month. Surrounding areas such as the lake and local forest should also be cleaned up. We should also have signs telling visitors to clean up their trash. I am very upset when I see a lot of trash on both sides of the road.</p>
-            <p><strong>C:</strong> I’m a very busy person and I have to spend this weekend with my family because I only have the weekend as free time. I think young people who don’t have families should help. Besides, students and schools also have days off on weekends. I think this volunteering will be very helpful for students’ future careers.</p>
-            <p><strong>D:</strong> I feel very lucky to have this park here. My family and I often go to the park because of the natural landscape here. It’s different from the city, which is very busy and full of dust. Unfortunately, I am away this weekend so I cannot help with the cleaning. However, I know my brother and his friends will be very interested in this cleanup so I will ask them if they can help.</p>
-        </div>
-        <div class="question">
-            <p>1. Who said, "Volunteering is important for students"?</p>
-            <select name="q22">
-                <option value="">Select</option>
-                <option value="A">A</option>
-                <option value="B">B</option>
-                <option value="C">C</option>
-                <option value="D">D</option>
-            </select>
-            <div class="result" id="result-q22"></div>
-        </div>
-        <div class="question">
-            <p>2. Who said, "Local areas need cleaning"?</p>
-            <select name="q23">
-                <option value="">Select</option>
-                <option value="A">A</option>
-                <option value="B">B</option>
-                <option value="C">C</option>
-                <option value="D">D</option>
-            </select>
-            <div class="result" id="result-q23"></div>
-        </div>
-        <div class="question">
-            <p>3. Who said, "The cleaning needs to be done regularly"?</p>
-            <select name="q24">
-                <option value="">Select</option>
-                <option value="A">A</option>
-                <option value="B">B</option>
-                <option value="C">C</option>
-                <option value="D">D</option>
-            </select>
-            <div class="result" id="result-q24"></div>
-        </div>
-        <div class="question">
-            <p>4. Who said, "Can’t clean the park because of their busy work"?</p>
-            <select name="q25">
-                <option value="">Select</option>
-                <option value="A">A</option>
-                <option value="B">B</option>
-                <option value="C">C</option>
-                <option value="D">D</option>
-            </select>
-            <div class="result" id="result-q25"></div>
-        </div>
-        <div class="question">
-            <p>5. Who said, "Volunteering will help with future employment"?</p>
-            <select name="q26">
-                <option value="">Select</option>
-                <option value="A">A</option>
-                <option value="B">B</option>
-                <option value="C">C</option>
-                <option value="D">D</option>
-            </select>
-            <div class="result" id="result-q26"></div>
-        </div>
-        <div class="question">
-            <p>6. Who said, "The park is a beautiful place to relax"?</p>
-            <select name="q27">
-                <option value="">Select</option>
-                <option value="A">A</option>
-                <option value="B">B</option>
-                <option value="C">C</option>
-                <option value="D">D</option>
-            </select>
-            <div class="result" id="result-q27"></div>
-        </div>
-        <div class="question">
-            <p>7. Who said, "Ask for others to help"?</p>
-            <select name="q28">
-                <option value="">Select</option>
-                <option value="A">A</option>
-                <option value="B">B</option>
-                <option value="C">C</option>
-                <option value="D">D</option>
-            </select>
-            <div class="result" id="result-q28"></div>
-        </div>
-    </div>
-
-    <!-- Topic 5: Visit a City -->
-    <div class="section">
-        <h2>Reading 5 of 6</h2>
-        <p><strong>Đoạn văn của 4 người: Topic: visit a city. CDBAACD</strong></p>
-        <div class="paragraph">
-            <p><strong>A:</strong> I went to this city last summer and really liked the atmosphere of this city. The reason I like the atmosphere here is because it has a lot of public performances. These performances often take place in front of department stores so this prevents me from shopping inside those stores. I was very surprised when I came home with an empty bag and I didn’t buy anything.</p>
-            <p><strong>B:</strong> When I go out, I only care about two things: good food and a good play. I especially liked the lunch I had in this city, it was delicious and I really want to come back here next time. However, I guess it’s a bit expensive and I have to walk a long way to get there. However, it didn’t matter because I had a wonderful day.</p>
-            <p><strong>C:</strong> When I first came to this city, I felt very scared because this city is very big. The city has many parts and the shopping part is very far from the green part. However, we already had the bus route and we signed up to take the bus for a full day. Buses are very cheap and very convenient. I feel very lucky to not have to put pressure on my sore feet.</p>
-            <p><strong>D:</strong> I don’t like big cities and rarely go out. But I go to Stevenson city very often. I go there about five to seven times a year. There is an area outside. In that area, there are many things that I need. There is a lot of water, a natural area, a small forest and a special camping area. I really like coming to this place to rest. It also has a great coffee serving area for visitors.</p>
-        </div>
-        <div class="question">
-            <p>1. Who said, "Like the public theatre that the city puts on"?</p>
-            <select name="q29">
-                <option value="">Select</option>
-                <option value="A">A</option>
-                <option value="B">B</option>
-                <option value="C">C</option>
-                <option value="D">D</option>
-            </select>
-            <div class="result" id="result-q29"></div>
-        </div>
-        <div class="question">
-            <p>2. Who said, "Spend a lot of money on shopping"?</p>
-            <select name="q30">
-                <option value="">Select</option>
-                <option value="A">A</option>
-                <option value="B">B</option>
-                <option value="C">C</option>
-                <option value="D">D</option>
-            </select>
-            <div class="result" id="result-q30"></div>
-        </div>
-        <div class="question">
-            <p>3. Who said, "Pay a lot for their meal"?</p>
-            <select name="q31">
-                <option value="">Select</option>
-                <option value="A">A</option>
-                <option value="B">B</option>
-                <option value="C">C</option>
-                <option value="D">D</option>
-            </select>
-            <div class="result" id="result-q31"></div>
-        </div>
-        <div class="question">
-            <p>4. Who said, "Public transport system was good"?</p>
-            <select name="q32">
-                <option value="">Select</option>
-                <option value="A">A</option>
-                <option value="B">B</option>
-                <option value="C">C</option>
-                <option value="D">D</option>
-            </select>
-            <div class="result" id="result-q32"></div>
-        </div>
-        <div class="question">
-            <p>5. Who said, "Walking too much causes a problem"?</p>
-            <select name="q33">
-                <option value="">Select</option>
-                <option value="A">A</option>
-                <option value="B">B</option>
-                <option value="C">C</option>
-                <option value="D">D</option>
-            </select>
-            <div class="result" id="result-q33"></div>
-        </div>
-        <div class="question">
-            <p>6. Who said, "Like the natural resort here"?</p>
-            <select name="q34">
-                <option value="">Select</option>
-                <option value="A">A</option>
-                <option value="B">B</option>
-                <option value="C">C</option>
-                <option value="D">D</option>
-            </select>
-            <div class="result" id="result-q34"></div>
-        </div>
-        <div class="question">
-            <p>7. Who said, "Visit one part of the city"?</p>
-            <select name="q35">
-                <option value="">Select</option>
-                <option value="A">A</option>
-                <option value="B">B</option>
-                <option value="C">C</option>
-                <option value="D">D</option>
-            </select>
-            <div class="result" id="result-q35"></div>
-        </div>
-    </div>
-
-    <!-- Topic 6: Opinions on Flying -->
-    <div class="section">
-        <h2>Reading 6 of 6</h2>
-        <p><strong>Đoạn văn của 4 người: Topic: opinions on flying. ABCBDAD</strong></p>
-        <div class="paragraph">
-            <p><strong>A:</strong> I have a dream that I work as a tour guide. So I understand that I will have to fly to other countries. In my personal opinion, airplanes are currently too cheap compared to the damage they cause to the environment, so I believe we should add taxes to airline ticket prices to make people choose to use other means of transport before they think about flying. I believe that people are also very happy when they can contribute to protecting the environment.</p>
-            <p><strong>B:</strong> My family and siblings live quite far from me. So I often have to fly to visit them every month when I have time. We really appreciate the time we spend together and we are happy to be able to meet each other and share our new story. I know that travelling by plane too much is not good for the environment so I often shop online or go to work by bike instead of going by car or I reuse plastic bags and paper bags. In addition, I sometimes volunteer to clean up trash in the neighborhood.</p>
-            <p><strong>C:</strong> I was a businessman so I had to fly many times a week. I had to go to other countries to be able to sign wine trading contracts with them. I felt very tired every time I have to fly. Now, my sister and I, whenever we have free time, take the train together and we enjoy that time very much because I can travel while sightseeing and relax without any stress.</p>
-            <p><strong>D:</strong> Before I have to go somewhere I will choose other means of public transport, not the plane. Every time I go on a plane I feel extremely tired and I just hope time passes quickly so I can get off that plane. However, due to the specific nature of my job, I have to film in many different locations, so sometimes I cannot avoid having to take this public transportation.</p>
-        </div>
-        <div class="question">
-            <p>1. Who said, "Suggest making flights more expensive"?</p>
-            <select name="q36">
-                <option value="">Select</option>
-                <option value="A">A</option>
-                <option value="B">B</option>
-                <option value="C">C</option>
-                <option value="D">D</option>
-            </select>
-            <div class="result" id="result-q36"></div>
-        </div>
-        <div class="question">
-            <p>2. Who said, "Want to work in other countries"?</p>
-            <select name="q37">
-                <option value="">Select</option>
-                <option value="A">A</option>
-                <option value="B">B</option>
-                <option value="C">C</option>
-                <option value="D">D</option>
-            </select>
-            <div class="result" id="result-q37"></div>
-        </div>
-        <div class="question">
-            <p>3. Who said, "Visit relatives regularly"?</p>
-            <select name="q38">
-                <option value="">Select</option>
-                <option value="A">A</option>
-                <option value="B">B</option>
-                <option value="C">C</option>
-                <option value="D">D</option>
-            </select>
-            <div class="result" id="result-q38"></div>
-        </div>
-        <div class="question">
-            <p>4. Who said, "Try to protect the environment"?</p>
-            <select name="q39">
-                <option value="">Select</option>
-                <option value="A">A</option>
-                <option value="B">B</option>
-                <option value="C">C</option>
-                <option value="D">D</option>
-            </select>
-            <div class="result" id="result-q39"></div>
-        </div>
-        <div class="question">
-            <p>5. Who said, "Like relaxing while they travel"?</p>
-            <select name="q40">
-                <option value="">Select</option>
-                <option value="A">A</option>
-                <option value="B">B</option>
-                <option value="C">C</option>
-                <option value="D">D</option>
-            </select>
-            <div class="result" id="result-q40"></div>
-        </div>
-        <div class="question">
-            <p>6. Who said, "Find flying tiring"?</p>
-            <select name="q41">
-                <option value="">Select</option>
-                <option value="A">A</option>
-                <option value="B">B</option>
-                <option value="C">C</option>
-                <option value="D">D</option>
-            </select>
-            <div class="result" id="result-q41"></div>
-        </div>
-        <div class="question">
-            <p>7. Who said, "Need to fly for their work"?</p>
-            <select name="q42">
-                <option value="">Select</option>
-                <option value="A">A</option>
-                <option value="B">B</option>
-                <option value="C">C</option>
-                <option value="D">D</option>
-            </select>
-            <div class="result" id="result-q42"></div>
-        </div>
-    </div>
-
-    <!-- Nút Submit -->
-    <button class="submit-btn" onclick="checkAnswers()">Submit</button>
-
-    <!-- JavaScript để kiểm tra đáp án -->
     <script>
-        function checkAnswers() {
-            // Đáp án đúng cho tất cả các topic
-            const correctAnswers = {
-                // Topic 1: Watching Television (ABDBDAD)
-                q1: "A",  // "Watch TV instead of studying"
-                q2: "A",  // "Like TV programs which continue over several weeks"
-                q3: "B",  // "Avoid watching reality TV programs"
-                q4: "B",  // "Lost interest in watching football on TV"
-                q5: "C",  // "Get a lot of knowledge by watching TV"
-                q6: "D",  // "Isn’t a very selective viewer"
-                q7: "D",  // "Keep up to date on cinema and music"
+        // Danh sách các chủ đề và câu nói
+        const topics = [
+            {
+                title: "Watching television",
+                sentences: [
+                    { sentence: "watch TV instead of studying", speaker: "A" },
+                    { sentence: "like TV programs which continue over several weeks", speaker: "A" },
+                    { sentence: "avoid watching reality TV programs", speaker: "B" },
+                    { sentence: "lost interest in watching football on TV", speaker: "B" },
+                    { sentence: "get a lot of knowledge by watching TV", speaker: "C" },
+                    { sentence: "isn't a very selective viewer", speaker: "D" },
+                    { sentence: "keep up to date on cinema and music", speaker: "D" }
+                ]
+            },
+            {
+                title: "A new restaurant",
+                sentences: [
+                    { sentence: "will definitely not return to the restaurant", speaker: "D" },
+                    { sentence: "was impressed by the range of appetizers", speaker: "A" },
+                    { sentence: "didn't eat anything at the restaurant", speaker: "B" },
+                    { sentence: "thought the music was too quiet", speaker: "B" },
+                    { sentence: "thought his experience was probably unusual", speaker: "C" },
+                    { sentence: "the food was of average quality", speaker: "C" },
+                    { sentence: "enjoyed the atmosphere", speaker: "A" }
+                ]
+            },
+            {
+                title: "Eating and cooking",
+                sentences: [
+                    { sentence: "like a wide range of dishes", speaker: "Alon" },
+                    { sentence: "prefer to eat alone", speaker: "Ben" },
+                    { sentence: "like to eat with friends", speaker: "Cecilia" },
+                    { sentence: "need to save money", speaker: "Gloria" },
+                    { sentence: "like home cooked food", speaker: "Alon" }
+                ]
+            },
+            {
+                title: "Plans for a new station",
+                sentences: [
+                    { sentence: "people should plan their journeys better", speaker: "A" },
+                    { sentence: "the bus is too busy", speaker: "B" },
+                    { sentence: "the new station will improve train travel", speaker: "B" },
+                    { sentence: "the bus service is good", speaker: "C" },
+                    { sentence: "transport system doesn't need improving", speaker: "C" },
+                    { sentence: "better medical facilities are needed", speaker: "D" },
+                    { sentence: "the new station will cost too much to build", speaker: "D" }
+                ]
+            },
+            {
+                title: "Going on holiday",
+                sentences: [
+                    { sentence: "prefer to stay at home", speaker: "A" },
+                    { sentence: "like seeing tourist attractions", speaker: "B" },
+                    { sentence: "going to the beach is boring", speaker: "A" },
+                    { sentence: "holiday requires good weather", speaker: "C" },
+                    { sentence: "like going walking", speaker: "B" },
+                    { sentence: "have never been abroad", speaker: "D" },
+                    { sentence: "want to mountaineering trip", speaker: "C" }
+                ]
+            },
+            {
+                title: "Visit an island",
+                sentences: [
+                    { sentence: "forget to bring something", speaker: "Ali" },
+                    { sentence: "thought public transport could be improved", speaker: "Carla" },
+                    { sentence: "loved eating food here", speaker: "Deni" },
+                    { sentence: "spent a lot of money on transport", speaker: "Bruno" },
+                    { sentence: "liked to walk", speaker: "Carla" },
+                    { sentence: "liked buying things on the island", speaker: "Deni" },
+                    { sentence: "liked to be alone", speaker: "Alo" }
+                ]
+            }
+        ];
 
-                // Topic 2: Exercising (AABCACD)
-                q8: "A",  // "Work out with friends is a good idea"
-                q9: "A",  // "A proper meal is important"
-                q10: "B",  // "A routine can help us do more sport"
-                q11: "C",  // "Exercise is for both the young and the elderly"
-                q12: "C",  // "Competitions are not useful for everybody"
-                q13: "D",  // "Experience pain is not necessary"
-                q14: "D",  // "At times we seek expert advice"
+        let currentTopicIndex = 0;
+        let shuffledSentences = [];
 
-                // Topic 3: Reading Books (ABCDABD)
-                q15: "A",  // "Reads many books at once"
-                q16: "A",  // "Wants to read a lot of books"
-                q17: "B",  // "Having difficulty in finishing book"
-                q18: "C",  // "Thinks that factual books are boring"
-                q19: "C",  // "Has limited time to read books"
-                q20: "D",  // "Plans their reading schedule"
-                q21: "D",  // "Reads more than another family member"
+        // Xáo trộn mảng
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
 
-                // Topic 4: Volunteering to Clean a Local Park (CDDAABC)
-                q22: "A",  // "Volunteering is important for students"
-                q23: "B",  // "Local areas need cleaning"
-                q24: "B",  // "The cleaning needs to be done regularly"
-                q25: "C",  // "Can’t clean the park because of their busy work"
-                q26: "C",  // "Volunteering will help with future employment"
-                q27: "D",  // "The park is a beautiful place to relax"
-                q28: "D",  // "Ask for others to help"
+        // Tải danh sách chủ đề vào dropdown
+        function loadTopicSelector() {
+            const topicSelect = document.getElementById("topic-select");
+            topicSelect.innerHTML = "";
+            topics.forEach((topic, index) => {
+                const option = document.createElement("option");
+                option.value = index;
+                option.textContent = topic.title;
+                topicSelect.appendChild(option);
+            });
+            topicSelect.value = currentTopicIndex;
+        }
 
-                // Topic 5: Visit a City (CDBAACD)
-                q29: "A",  // "Like the public theatre that the city puts on"
-                q30: "A",  // "Spend a lot of money on shopping"
-                q31: "B",  // "Pay a lot for their meal"
-                q32: "C",  // "Public transport system was good"
-                q33: "C",  // "Walking too much causes a problem"
-                q34: "D",  // "Like the natural resort here"
-                q35: "D",  // "Visit one part of the city"
-
-                // Topic 6: Opinions on Flying (ABCBDAD)
-                q36: "A",  // "Suggest making flights more expensive"
-                q37: "A",  // "Want to work in other countries"
-                q38: "B",  // "Visit relatives regularly"
-                q39: "B",  // "Try to protect the environment"
-                q40: "C",  // "Like relaxing while they travel"
-                q41: "D",  // "Find flying tiring"
-                q42: "D"   // "Need to fly for their work"
-            };
-
-            let score = 0;
-            let totalQuestions = 42;
-
-            // Kiểm tra từng câu hỏi
-            for (let i = 1; i <= 42; i++) {
-                let questionName = "q" + i;
-                let selectedAnswer = document.querySelector(`select[name="${questionName}"]`).value;
-                let resultElement = document.getElementById(`result-${questionName}`);
-
-                if (selectedAnswer) {
-                    if (selectedAnswer === correctAnswers[questionName]) {
-                        score++;
-                        resultElement.innerHTML = `<span class="correct">Correct! The answer is ${correctAnswers[questionName]}.</span>`;
-                    } else {
-                        resultElement.innerHTML = `<span class="incorrect">Incorrect. The correct answer is ${correctAnswers[questionName]}.</span>`;
-                    }
+        // Tải câu hỏi lên giao diện
+        function loadTopic() {
+            const topic = topics[currentTopicIndex];
+            shuffledSentences = shuffle([...topic.sentences]);
+            const topicsDiv = document.getElementById("topics");
+            topicsDiv.innerHTML = `<h3>Part 3: Topic: ${topic.title}</h3>`;
+            shuffledSentences.forEach((item, index) => {
+                const div = document.createElement("div");
+                div.className = "sentence";
+                div.id = `sentence-${index}`;
+                let options = "";
+                if (topic.title === "Eating and cooking" || topic.title === "Visit an island") {
+                    options = `
+                        <option value="">Chọn người nói</option>
+                        <option value="Ali">Ali</option>
+                        <option value="Bruno">Bruno</option>
+                        <option value="Carla">Carla</option>
+                        <option value="Deni">Deni</option>
+                        <option value="Cecilia">Cecilia</option>
+                        <option value="Ben">Ben</option>
+                        <option value="Gloria">Gloria</option>
+                        <option value="Alon">Alon</option>
+                        <option value="Alo">Alo</option>
+                    `;
                 } else {
-                    resultElement.innerHTML = `<span class="incorrect">Please select an answer.</span>`;
+                    options = `
+                        <option value="">Chọn người nói</option>
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                        <option value="D">D</option>
+                    `;
                 }
+                div.innerHTML = `
+                    <p>Câu ${index + 1}: "${item.sentence}"</p>
+                    <select id="select-${index}">
+                        ${options}
+                    </select>
+                    <p class="correct-answer" id="correct-${index}"></p>
+                `;
+                topicsDiv.appendChild(div);
+            });
+            document.getElementById("next-topic").classList.add("hidden");
+            document.getElementById("result").textContent = "";
+        }
+
+        // Kiểm tra đáp án
+        function checkAnswers() {
+            const result = document.getElementById("result");
+            let allCorrect = true;
+            let allSelected = true;
+
+            shuffledSentences.forEach((item, index) => {
+                const select = document.getElementById(`select-${index}`);
+                const correctAnswer = document.getElementById(`correct-${index}`);
+                const userAnswer = select.value;
+
+                if (!userAnswer) {
+                    allSelected = false;
+                }
+
+                if (userAnswer !== item.speaker) {
+                    allCorrect = false;
+                    correctAnswer.textContent = `Đáp án đúng: ${item.speaker}`;
+                    correctAnswer.classList.remove("hidden");
+                } else {
+                    correctAnswer.textContent = "";
+                    correctAnswer.classList.add("hidden");
+                }
+            });
+
+            if (!allSelected) {
+                result.textContent = "Vui lòng chọn đáp án cho tất cả các câu!";
+                result.style.color = "red";
+                return;
             }
 
-            // Hiển thị tổng điểm
-            alert(`You got ${score} out of ${totalQuestions} correct!`);
+            if (allCorrect) {
+                result.textContent = "Đúng hết! Chúc mừng bạn!";
+                result.style.color = "green";
+                document.getElementById("next-topic").classList.remove("hidden");
+            } else {
+                result.textContent = "Có câu sai, xem đáp án và thử lại nhé!";
+                result.style.color = "red";
+            }
         }
+
+        // Chuyển sang chủ đề tiếp theo
+        function nextTopic() {
+            currentTopicIndex = (currentTopicIndex + 1) % topics.length;
+            reset();
+            loadTopicSelector(); // Cập nhật dropdown
+        }
+
+        // Reset lại giao diện
+        function reset() {
+            document.getElementById("result").textContent = "";
+            loadTopic();
+        }
+
+        // Tải chủ đề khi người dùng chọn từ dropdown
+        function loadTopic() {
+            currentTopicIndex = parseInt(document.getElementById("topic-select").value);
+            const topic = topics[currentTopicIndex];
+            shuffledSentences = shuffle([...topic.sentences]);
+            const topicsDiv = document.getElementById("topics");
+            topicsDiv.innerHTML = `<h3>Part 3: Topic: ${topic.title}</h3>`;
+            shuffledSentences.forEach((item, index) => {
+                const div = document.createElement("div");
+                div.className = "sentence";
+                div.id = `sentence-${index}`;
+                let options = "";
+                if (topic.title === "Eating and cooking" || topic.title === "Visit an island") {
+                    options = `
+                        <option value="">Chọn người nói</option>
+                        <option value="Ali">Ali</option>
+                        <option value="Bruno">Bruno</option>
+                        <option value="Carla">Carla</option>
+                        <option value="Deni">Deni</option>
+                        <option value="Cecilia">Cecilia</option>
+                        <option value="Ben">Ben</option>
+                        <option value="Gloria">Gloria</option>
+                        <option value="Alon">Alon</option>
+                        <option value="Alo">Alo</option>
+                    `;
+                } else {
+                    options = `
+                        <option value="">Chọn người nói</option>
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                        <option value="D">D</option>
+                    `;
+                }
+                div.innerHTML = `
+                    <p>Câu ${index + 1}: "${item.sentence}"</p>
+                    <select id="select-${index}">
+                        ${options}
+                    </select>
+                    <p class="correct-answer" id="correct-${index}"></p>
+                `;
+                topicsDiv.appendChild(div);
+            });
+            document.getElementById("next-topic").classList.add("hidden");
+            document.getElementById("result").textContent = "";
+        }
+
+        // Tải lần đầu
+        loadTopicSelector();
+        loadTopic();
     </script>
 </body>
 </html>
