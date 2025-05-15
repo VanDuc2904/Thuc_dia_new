@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Part 3: Chọn chủ đề cho đoạn văn về Charles Dickens</title>
+    <title>Part 3: Chọn chủ đề cho đoạn văn</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -85,11 +85,11 @@
     </style>
 </head>
 <body>
-    <h2>Part 3: Chọn chủ đề cho đoạn văn về Charles Dickens</h2>
+    <h2>Part 3: Chọn chủ đề cho đoạn văn</h2>
     <div class="topic-selector">
         <label for="topic-select">Chọn chủ đề: </label>
         <select id="topic-select" onchange="loadTopic()">
-            <!-- Chỉ có một chủ đề về Dickens -->
+            <!-- Các chủ đề sẽ được thêm động bằng JavaScript -->
         </select>
     </div>
     <div id="topics"></div>
@@ -97,11 +97,12 @@
         <button onclick="checkAnswers()">Kiểm tra</button>
         <button onclick="showCorrectAnswers()">Xem đáp án</button>
         <button onclick="reset()">Thử lại</button>
+        <button onclick="nextTopic()" id="next-topic" class="hidden">Chủ đề tiếp theo</button>
     </div>
     <p id="result"></p>
 
     <script>
-        // Danh sách chủ đề và đoạn văn
+        // Danh sách các chủ đề và đoạn văn
         const topics = [
             {
                 title: "Charles Dickens",
@@ -114,7 +115,17 @@
                     { sentence: "As Dickens's reputation grew, the question arose whether to preserve his legacy and make it live on. Dickens himself was always keen to make his mark and to maintain his uniqueness.", topic: "Trying to Protect His Property" },
                     { sentence: "To mark the 400th anniversary of Dickens’ death, there will be a number of events to help readers, and especially students, better understand his works.", topic: "Bring the Books to Life" }
                 ]
+            },
+            {
+                title: "William Shakespeare",
+                sentences: [
+                    { sentence: "Shakespeare’s works are performed worldwide in theaters and festivals.", topic: "Global Popularity" },
+                    { sentence: "His plays often explore complex themes like love, power, and betrayal.", topic: "Complex Themes" },
+                    { sentence: "Many of Shakespeare’s words and phrases are still used in modern English.", topic: "Linguistic Influence" },
+                    { sentence: "Reading Shakespeare requires understanding Elizabethan English, which can be challenging.", topic: "Language Challenges" }
+                ]
             }
+            // Thêm các chủ đề mới ở đây theo cấu trúc tương tự
         ];
 
         let currentTopicIndex = 0;
@@ -124,7 +135,7 @@
         function shuffle(array) {
             for (let i = array.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
-                [array[i], array[j]] = [array[j], array[i]];
+                [array[i], array[j]] = [array[i], array[j]];
             }
             return array;
         }
@@ -149,29 +160,28 @@
             shuffledSentences = shuffle([...topic.sentences]);
             const topicsDiv = document.getElementById("topics");
             topicsDiv.innerHTML = `<h3>Part 3: Topic: ${topic.title}</h3>`;
+            
+            // Tạo danh sách các chủ đề cho dropdown của mỗi đoạn
+            const topicOptions = topic.sentences.map(item => item.topic);
+            const optionsHtml = `
+                <option value="">Chọn chủ đề</option>
+                ${topicOptions.map(opt => `<option value="${opt}">${opt}</option>`).join('')}
+            `;
+
             shuffledSentences.forEach((item, index) => {
                 const div = document.createElement("div");
                 div.className = "sentence";
                 div.id = `sentence-${index}`;
-                const options = `
-                    <option value="">Chọn chủ đề</option>
-                    <option value="Dickens for Our Time">Dickens for Our Time</option>
-                    <option value="Difficulties for Modern Readers">Difficulties for Modern Readers</option>
-                    <option value="Keep the Reader Guessing">Keep the Reader Guessing</option>
-                    <option value="The Influence of the Media">The Influence of the Media</option>
-                    <option value="Dickens’ Early Success">Dickens’ Early Success</option>
-                    <option value="Trying to Protect His Property">Trying to Protect His Property</option>
-                    <option value="Bring the Books to Life">Bring the Books to Life</option>
-                `;
                 div.innerHTML = `
                     <p>Đoạn ${index + 1}: "${item.sentence}"</p>
                     <select id="select-${index}">
-                        ${options}
+                        ${optionsHtml}
                     </select>
                     <p class="correct-answer" id="correct-${index}"></p>
                 `;
                 topicsDiv.appendChild(div);
             });
+            document.getElementById("next-topic").classList.add("hidden");
             document.getElementById("result").textContent = "";
         }
 
@@ -209,6 +219,7 @@
             if (allCorrect) {
                 result.textContent = "Đúng hết! Chúc mừng bạn!";
                 result.style.color = "green";
+                document.getElementById("next-topic").classList.remove("hidden");
             } else {
                 result.textContent = "Có đoạn sai, xem đáp án và thử lại nhé!";
                 result.style.color = "red";
@@ -222,6 +233,14 @@
                 correctAnswer.textContent = `Đáp án đúng: ${item.topic}`;
                 correctAnswer.style.display = "block";
             });
+        }
+
+        // Chuyển sang chủ đề tiếp theo
+        function nextTopic() {
+            currentTopicIndex = (currentTopicIndex + 1) % topics.length;
+            document.getElementById("topic-select").value = currentTopicIndex;
+            reset();
+            loadTopic();
         }
 
         // Reset lại giao diện
