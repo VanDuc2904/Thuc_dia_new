@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Part 3: Chọn chủ đề cho đoạn văn về Charles Dickens</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        h3 {
+            margin-top: 30px;
+            color: #333;
+        }
+
+        .topic-selector {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .topic-selector label {
+            font-size: 16px;
+            margin-right: 10px;
+        }
+
+        .topic-selector select {
+            padding: 5px;
+            font-size: 16px;
+        }
+
+        .sentence {
+            margin: 15px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            position: relative;
+        }
+
+        .sentence p {
+            margin: 0 0 10px 0;
+            font-weight: bold;
+        }
+
+        select {
+            padding: 5px;
+            font-size: 16px;
+        }
+
+        .correct-answer {
+            color: green;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        #result {
+            font-weight: bold;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .buttons {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 0 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h2>Part 3: Chọn chủ đề cho đoạn văn về Charles Dickens</h2>
+    <div class="topic-selector">
+        <label for="topic-select">Chọn chủ đề: </label>
+        <select id="topic-select" onchange="loadTopic()">
+            <!-- Chỉ có một chủ đề về Dickens -->
+        </select>
+    </div>
+    <div id="topics"></div>
+    <div class="buttons">
+        <button onclick="checkAnswers()">Kiểm tra</button>
+        <button onclick="showCorrectAnswers()">Xem đáp án</button>
+        <button onclick="reset()">Thử lại</button>
+    </div>
+    <p id="result"></p>
+
+    <script>
+        // Danh sách chủ đề và đoạn văn
+        const topics = [
+            {
+                title: "Charles Dickens",
+                sentences: [
+                    { sentence: "The popularity of Dickens's works in our time remains a global phenomenon.", topic: "Dickens for Our Time" },
+                    { sentence: "Shakespeare’s plays are difficult to understand and sometimes require the reader to struggle or think twice to figure out the character’s thoughts.", topic: "Difficulties for Modern Readers" },
+                    { sentence: "Hamlet is a Renaissance tragedy written by Shakespeare. The play is very long and has plot twists that keep the reader guessing.", topic: "Keep the Reader Guessing" },
+                    { sentence: "Dickens’ legacy is undeniable. His works have been translated and used in over 100 countries and are studied by most schoolchildren in the world.", topic: "The Influence of the Media" },
+                    { sentence: "Dickens achieved success at a young age. His first novel, The Pickwick Papers, was published when he was only 24 and became a bestseller.", topic: "Dickens’ Early Success" },
+                    { sentence: "As Dickens's reputation grew, the question arose whether to preserve his legacy and make it live on. Dickens himself was always keen to make his mark and to maintain his uniqueness.", topic: "Trying to Protect His Property" },
+                    { sentence: "To mark the 400th anniversary of Dickens’ death, there will be a number of events to help readers, and especially students, better understand his works.", topic: "Bring the Books to Life" }
+                ]
+            }
+        ];
+
+        let currentTopicIndex = 0;
+        let shuffledSentences = [];
+
+        // Xáo trộn mảng
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Tải danh sách chủ đề vào dropdown
+        function loadTopicSelector() {
+            const topicSelect = document.getElementById("topic-select");
+            topicSelect.innerHTML = "";
+            topics.forEach((topic, index) => {
+                const option = document.createElement("option");
+                option.value = index;
+                option.textContent = topic.title;
+                topicSelect.appendChild(option);
+            });
+            topicSelect.value = currentTopicIndex;
+        }
+
+        // Tải đoạn văn lên giao diện
+        function loadTopic() {
+            currentTopicIndex = parseInt(document.getElementById("topic-select").value);
+            const topic = topics[currentTopicIndex];
+            shuffledSentences = shuffle([...topic.sentences]);
+            const topicsDiv = document.getElementById("topics");
+            topicsDiv.innerHTML = `<h3>Part 3: Topic: ${topic.title}</h3>`;
+            shuffledSentences.forEach((item, index) => {
+                const div = document.createElement("div");
+                div.className = "sentence";
+                div.id = `sentence-${index}`;
+                const options = `
+                    <option value="">Chọn chủ đề</option>
+                    <option value="Dickens for Our Time">Dickens for Our Time</option>
+                    <option value="Difficulties for Modern Readers">Difficulties for Modern Readers</option>
+                    <option value="Keep the Reader Guessing">Keep the Reader Guessing</option>
+                    <option value="The Influence of the Media">The Influence of the Media</option>
+                    <option value="Dickens’ Early Success">Dickens’ Early Success</option>
+                    <option value="Trying to Protect His Property">Trying to Protect His Property</option>
+                    <option value="Bring the Books to Life">Bring the Books to Life</option>
+                `;
+                div.innerHTML = `
+                    <p>Đoạn ${index + 1}: "${item.sentence}"</p>
+                    <select id="select-${index}">
+                        ${options}
+                    </select>
+                    <p class="correct-answer" id="correct-${index}"></p>
+                `;
+                topicsDiv.appendChild(div);
+            });
+            document.getElementById("result").textContent = "";
+        }
+
+        // Kiểm tra đáp án
+        function checkAnswers() {
+            const result = document.getElementById("result");
+            let allCorrect = true;
+            let allSelected = true;
+
+            shuffledSentences.forEach((item, index) => {
+                const select = document.getElementById(`select-${index}`);
+                const correctAnswer = document.getElementById(`correct-${index}`);
+                const userAnswer = select.value;
+
+                if (!userAnswer) {
+                    allSelected = false;
+                }
+
+                if (userAnswer !== item.topic) {
+                    allCorrect = false;
+                    correctAnswer.textContent = `Đáp án đúng: ${item.topic}`;
+                    correctAnswer.style.display = "block";
+                } else {
+                    correctAnswer.textContent = "";
+                    correctAnswer.style.display = "none";
+                }
+            });
+
+            if (!allSelected) {
+                result.textContent = "Vui lòng chọn đáp án cho tất cả các đoạn!";
+                result.style.color = "red";
+                return;
+            }
+
+            if (allCorrect) {
+                result.textContent = "Đúng hết! Chúc mừng bạn!";
+                result.style.color = "green";
+            } else {
+                result.textContent = "Có đoạn sai, xem đáp án và thử lại nhé!";
+                result.style.color = "red";
+            }
+        }
+
+        // Hiển thị tất cả đáp án đúng
+        function showCorrectAnswers() {
+            shuffledSentences.forEach((item, index) => {
+                const correctAnswer = document.getElementById(`correct-${index}`);
+                correctAnswer.textContent = `Đáp án đúng: ${item.topic}`;
+                correctAnswer.style.display = "block";
+            });
+        }
+
+        // Reset lại giao diện
+        function reset() {
+            document.getElementById("result").textContent = "";
+            shuffledSentences.forEach((_, index) => {
+                const correctAnswer = document.getElementById(`correct-${index}`);
+                if (correctAnswer) {
+                    correctAnswer.textContent = "";
+                    correctAnswer.style.display = "none";
+                }
+            });
+            loadTopic();
+        }
+
+        // Tải lần đầu
+        loadTopicSelector();
+        loadTopic();
+    </script>
+</body>
+</html>
