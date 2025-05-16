@@ -59,14 +59,13 @@
             {
                 title: "Children and Exercises",
                 sentences: [
-                    { sentence: "In recent years, children have become increasingly inactive.", topic: "Factors contributing to inactivity " },
-                    { sentence: "Currently, the issue of children not getting enough exercise is worsening, largely due to the time they spend staring at screens. ", topic: "The situation has the potential of being worst " },
-                    { sentence: "One inspiring example comes from a teacher who implemented a program called the Daily Mile.", topic: "The success of a simple idea " },
-                    { sentence: "The Daily Mile program not only enhances fitness levels among students but also has surprising benefits for their academic performance.", topic: "The wider effects of regular activity " },
-                    { sentence: "The design of our environments can significantly impact how we behave. For instance, workplaces are often designed to enhance productivity, and homes are structured to encourage communication.", topic: "Ways in which environment can influence behaviour " },
-                    { sentence: "One innovative architect from Japan has designed a kindergarten with a unique approach. The playground is structured like a running track, allowing children to run and play freely.", topic: "A design for exercise and for study " },
-                    { sentence: "The Daily Mile initiative and the Japanese architect's playground represent two ends of the economic spectrum. The Daily Mile is a cost - effective program that requires minimal investment, while the architect's design involves significant funding.", topic: "Achieving the right balance" }
-                    
+                    { sentence: "In recent years, children have become increasingly inactive.", topic: "Factors contributing to inactivity" },
+                    { sentence: "Currently, the issue of children not getting enough exercise is worsening, largely due to the time they spend staring at screens.", topic: "The situation has the potential of being worst" },
+                    { sentence: "One inspiring example comes from a teacher who implemented a program called the Daily Mile.", topic: "The success of a simple idea" },
+                    { sentence: "The Daily Mile program not only enhances fitness levels among students but also has surprising benefits for their academic performance.", topic: "The wider effects of regular activity" },
+                    { sentence: "The design of our environments can significantly impact how we behave. For instance, workplaces are often designed to enhance productivity, and homes are structured to encourage communication.", topic: "Ways in which environment can influence behaviour" },
+                    { sentence: "One innovative architect from Japan has designed a kindergarten with a unique approach. The playground is structured like a running track, allowing children to run and play freely.", topic: "A design for exercise and for study" },
+                    { sentence: "The Daily Mile initiative and the Japanese architect's playground represent two ends of the economic spectrum. The Daily Mile is a cost-effective program that requires minimal investment, while the architect's design involves significant funding.", topic: "Achieving the right balance" }
                 ]
             }
         ];
@@ -86,35 +85,46 @@
 
         function loadTopicSelector() {
             const sel = document.getElementById('topic-select');
-            sel.innerHTML = topics.map((t, i) => `<option value="${i}">${t.title}</option>`).join('');
+            sel.innerHTML = topics
+                .map((t, i) => `<option value="${i}">${t.title}</option>`)
+                .join('');
             sel.value = currentTopicIndex;
         }
 
         function loadTopic() {
+            // *** CẬP NHẬT index từ dropdown mỗi lần gọi loadTopic() ***
+            const sel = document.getElementById('topic-select');
+            currentTopicIndex = parseInt(sel.value, 10);
+
             const topic = topics[currentTopicIndex];
-            // Shuffle sentences freshly
             currentSentences = shuffle(topic.sentences);
 
             const container = document.getElementById('topics');
             container.innerHTML = `<h3>Part 3: Topic: ${topic.title}</h3>`;
 
-            // Prepare answer options
             const allTopics = topic.sentences.map(s => s.topic);
 
             currentSentences.forEach((s, idx) => {
-                const opts = shuffle(allTopics).map(o => `<option value="${o}">${o}</option>`).join('');
+                const opts = shuffle(allTopics)
+                    .map(o => `<option value="${o}">${o}</option>`)
+                    .join('');
                 const id = Math.random().toString(36).substr(2,5);
                 container.innerHTML += `
                     <div class="sentence" id="sent-${idx}-${id}">
                         <p>Đoạn ${idx+1}: "${s.sentence}"</p>
-                        <select id="sel-${idx}-${id}"><option value="">Chọn chủ đề</option>${opts}</select>
+                        <select id="sel-${idx}-${id}">
+                            <option value="">Chọn chủ đề</option>
+                            ${opts}
+                        </select>
                         <p class="correct-answer" id="corr-${idx}-${id}"></p>
                     </div>`;
             });
 
             // Animate in
-            setTimeout(() => Array.from(document.getElementsByClassName('sentence'))
-                .forEach((el,i) => setTimeout(() => el.classList.add('show'), i*100)), 50);
+            setTimeout(() => {
+                Array.from(document.getElementsByClassName('sentence'))
+                     .forEach((el, i) => setTimeout(() => el.classList.add('show'), i * 100));
+            }, 50);
 
             document.getElementById('reset-counter').textContent = `Số lần reset: ${resetCount}`;
             document.getElementById('result').textContent = '';
@@ -126,16 +136,22 @@
             let allSel = true, allCorr = true;
             currentSentences.forEach((s, i) => {
                 const selectEl = document.querySelector(`[id^=sel-${i}-]`);
-                const corrEl = document.querySelector(`[id^=corr-${i}-]`);
+                const corrEl   = document.querySelector(`[id^=corr-${i}-]`);
                 const val = selectEl.value;
                 if (!val) allSel = false;
                 if (val !== s.topic) {
                     allCorr = false;
                     corrEl.textContent = `Đáp án đúng: ${s.topic}`;
                     corrEl.style.display = 'block';
-                } else corrEl.style.display = 'none';
+                } else {
+                    corrEl.style.display = 'none';
+                }
             });
-            if (!allSel) return res.textContent = 'Vui lòng chọn đáp án cho tất cả các đoạn!', res.style.color='red';
+            if (!allSel) {
+                res.textContent = 'Vui lòng chọn đáp án cho tất cả các đoạn!';
+                res.style.color = 'red';
+                return;
+            }
             if (allCorr) {
                 res.textContent = 'Đúng hết! Chúc mừng bạn!';
                 res.style.color = 'green';
@@ -166,7 +182,7 @@
             loadTopic();
         }
 
-        // Initialize
+        // Khởi tạo lần đầu
         loadTopicSelector();
         loadTopic();
     </script>
