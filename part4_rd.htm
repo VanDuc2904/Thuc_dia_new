@@ -42,6 +42,14 @@
             border: 1px solid #ccc;
             border-radius: 5px;
             position: relative;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .sentence.show {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .sentence p {
@@ -82,6 +90,23 @@
             font-size: 16px;
             cursor: pointer;
         }
+
+        #topics {
+            transition: opacity 0.3s ease;
+        }
+
+        #reset-counter {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .loading {
+            text-align: center;
+            font-size: 16px;
+            color: #555;
+        }
     </style>
 </head>
 <body>
@@ -89,7 +114,6 @@
     <div class="topic-selector">
         <label for="topic-select">Chọn chủ đề: </label>
         <select id="topic-select" onchange="loadTopic()">
-            <!-- Các chủ đề sẽ được thêm động bằng JavaScript -->
         </select>
     </div>
     <div id="topics"></div>
@@ -100,11 +124,11 @@
         <button onclick="nextTopic()" id="next-topic" class="hidden">Chủ đề tiếp theo</button>
     </div>
     <p id="result"></p>
+    <p id="reset-counter">Số lần reset: 0</p>
 
     <script>
-        console.log("Script started");
+        console.log("Script started at", new Date().toLocaleString());
 
-        // Danh sách các chủ đề và đoạn văn
         const topics = [
             {
                 title: "Charles Dickens",
@@ -133,17 +157,23 @@
 
         let currentTopicIndex = 0;
         let shuffledSentences = [];
+        let resetCount = 0;
+        let lastSentenceOrder = null;
 
-        // Xáo trộn mảng
         function shuffle(array) {
-            for (let i = array.length - 1; i > 0; i--) {
+            const shuffled = [...array];
+            for (let i = shuffled.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
-                [array[i], array[j]] = [array[i], array[j]];
+                [shuffled[i], shuffled[j]] = [shuffled[i], shuffled[j]];
             }
-            return array;
+            return shuffled;
         }
 
-        // Tải danh sách chủ đề vào dropdown
+        function arraysEqual(arr1, arr2) {
+            if (!arr1 || !arr2 || arr1.length !== arr2.length) return false;
+            return arr1.every((item, index) => item.sentence === arr2[index].sentence);
+        }
+
         function loadTopicSelector() {
             console.log("Loading topic selector");
             const topicSelect = document.getElementById("topic-select");
@@ -157,46 +187,69 @@
             topicSelect.value = currentTopicIndex;
         }
 
-        // Tải đoạn văn lên giao diện
         function loadTopic() {
-            console.log("Loading topic:", currentTopicIndex);
+            console.log("Loading topic:", currentTopicIndex, "at", new Date().toLocaleString());
             currentTopicIndex = parseInt(document.getElementById("topic-select").value);
             const topic = topics[currentTopicIndex];
-            shuffledSentences = shuffle([...topic.sentences]);
-            console.log("Shuffled sentences order:", shuffledSentences.map(item => item.sentence));
+
+            console.log("Before shuffle - Original sentences order:", topic.sentences.map(item => item.sentence));
+            
+            let attempts = 0;
+            const maxAttempts = 50;
+            do {
+                shuffledSentences = shuffle([...topic.sentences]);
+                attempts++;
+                if (attempts >= maxAttempts) {
+                    console.warn("Max shuffle attempts reached. Using last shuffled order.");
+                    break;
+                }
+            } while (
+                lastSentenceOrder && 
+                shuffledSentences.length > 1 && 
+                arraysEqual(shuffledSentences, lastSentenceOrder)
+            );
+
+            lastSentenceOrder = [...shuffledSentences];
+            console.log("After shuffle - Shuffled sentences order:", shuffledSentences.map(item => item.sentence));
+            console.log("First sentence:", shuffledSentences[0]?.sentence);
+
             const topicsDiv = document.getElementById("topics");
             topicsDiv.innerHTML = `<h3>Part 3: Topic: ${topic.title}</h3>`;
             
-            // Tạo danh sách các chủ đề cho dropdown của mỗi đoạn
             const topicOptions = topic.sentences.map(item => item.topic);
             console.log("Topic options:", topicOptions);
             
             shuffledSentences.forEach((item, index) => {
-                // Xáo trộn danh sách topicOptions cho mỗi dropdown
-                const shuffledTopicOptions = shuffle([...topicOptions]);
+                const shuffledTopicOptions = shuffle(topicOptions);
                 console.log(`Shuffled options for sentence ${index + 1}:`, shuffledTopicOptions);
-                const optionsHtml = `
-                    <option value="">Chọn chủ đề</option>
-                    ${shuffledTopicOptions.map(opt => `<option value="${opt}">${opt}</option>`).join('')}
-                `;
-
+                const randomId = Math.random().toFixed(4);
                 const div = document.createElement("div");
                 div.className = "sentence";
-                div.id = `sentence-${index}`;
+                div.id = `sentence-${index}-${randomId}`;
                 div.innerHTML = `
-                    <p>Đoạn ${index + 1}: "${item.sentence}"</p>
-                    <select id="select-${index}">
-                        ${optionsHtml}
+                    <p>Đoạn ${index + 1} (ID: ${randomId}): "${item.sentence}"</p>
+                    <select id="select-${index}-${randomId}">
+                        <option value="">Chọn chủ đề</option>
+                        ${shuffledTopicOptions.map(opt => `<option value="${opt}">${opt}</option>`).join('')}
                     </select>
-                    <p class="correct-answer" id="correct-${index}"></p>
+                    <p class="correct-answer" id="correct-${index}-${randomId}"></p>
                 `;
                 topicsDiv.appendChild(div);
             });
+
+            setTimeout(() => {
+                document.querySelectorAll(".sentence").forEach((el, i) => {
+                    setTimeout(() => {
+                        el.classList.add("show");
+                    }, i * 100);
+                });
+            }, 50);
+
             document.getElementById("next-topic").classList.add("hidden");
             document.getElementById("result").textContent = "";
+            document.getElementById("reset-counter").textContent = `Số lần reset: ${resetCount}`;
         }
 
-        // Kiểm tra đáp án
         function checkAnswers() {
             console.log("Checking answers");
             const result = document.getElementById("result");
@@ -204,8 +257,8 @@
             let allSelected = true;
 
             shuffledSentences.forEach((item, index) => {
-                const select = document.getElementById(`select-${index}`);
-                const correctAnswer = document.getElementById(`correct-${index}`);
+                const select = document.querySelector(`select[id^="select-${index}-"]`);
+                const correctAnswer = document.querySelector(`p[id^="correct-${index}-"]`);
                 const userAnswer = select.value;
 
                 if (!userAnswer) {
@@ -238,40 +291,40 @@
             }
         }
 
-        // Hiển thị tất cả đáp án đúng
         function showCorrectAnswers() {
             console.log("Showing correct answers");
             shuffledSentences.forEach((item, index) => {
-                const correctAnswer = document.getElementById(`correct-${index}`);
+                const correctAnswer = document.querySelector(`p[id^="correct-${index}-"]`);
                 correctAnswer.textContent = `Đáp án đúng: ${item.topic}`;
                 correctAnswer.style.display = "block";
             });
         }
 
-        // Chuyển sang chủ đề tiếp theo
         function nextTopic() {
             console.log("Moving to next topic");
             currentTopicIndex = (currentTopicIndex + 1) % topics.length;
             document.getElementById("topic-select").value = currentTopicIndex;
+            resetCount = 0;
+            lastSentenceOrder = null;
             reset();
             loadTopic();
         }
 
-        // Reset lại giao diện
         function reset() {
-            console.log("Resetting");
+            console.log("Resetting at", new Date().toLocaleString());
+            resetCount++;
             document.getElementById("result").textContent = "";
-            shuffledSentences.forEach((_, index) => {
-                const correctAnswer = document.getElementById(`correct-${index}`);
-                if (correctAnswer) {
-                    correctAnswer.textContent = "";
-                    correctAnswer.style.display = "none";
-                }
-            });
-            loadTopic();
+            const topicsDiv = document.getElementById("topics");
+            topicsDiv.style.opacity = "0";
+            setTimeout(() => {
+                topicsDiv.innerHTML = `<p class="loading">Đang xáo trộn...</p>`;
+                setTimeout(() => {
+                    loadTopic();
+                    topicsDiv.style.opacity = "1";
+                }, 500);
+            }, 300);
         }
 
-        // Tải lần đầu
         console.log("Initializing");
         loadTopicSelector();
         loadTopic();
