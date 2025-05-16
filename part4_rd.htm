@@ -102,6 +102,8 @@
     <p id="result"></p>
 
     <script>
+        console.log("Script started");
+
         // Danh sách các chủ đề và đoạn văn
         const topics = [
             {
@@ -111,7 +113,7 @@
                     { sentence: "Shakespeare’s plays are difficult to understand and sometimes require the reader to struggle or think twice to figure out the character’s thoughts.", topic: "Difficulties for Modern Readers" },
                     { sentence: "Hamlet is a Renaissance tragedy written by Shakespeare. The play is very long and has plot twists that keep the reader guessing.", topic: "Keep the Reader Guessing" },
                     { sentence: "Dickens’ legacy is undeniable. His works have been translated and used in over 100 countries and are studied by most schoolchildren in the world.", topic: "The Influence of the Media" },
-                    { sentence: "Dickens achieved success at a young age. His first novel, The Pickwick Papers, was published when he was only 24 and became a bestseller.", topic: "Dickens’ Early Success" },
+                    { sentence: "Dickens achieved success at a young age. His first novel, The Pickwick Papers, was published when he was only 24 and became a bestseller.", topic: "Dickens' Early Success" },
                     { sentence: "As Dickens's reputation grew, the question arose whether to preserve his legacy and make it live on. Dickens himself was always keen to make his mark and to maintain his uniqueness.", topic: "Trying to Protect His Property" },
                     { sentence: "To mark the 400th anniversary of Dickens’ death, there will be a number of events to help readers, and especially students, better understand his works.", topic: "Bring the Books to Life" }
                 ]
@@ -125,8 +127,9 @@
                     { sentence: "Reading Shakespeare requires understanding Elizabethan English, which can be challenging.", topic: "Language Challenges" }
                 ]
             }
-            // Thêm các chủ đề mới ở đây theo cấu trúc tương tự
         ];
+
+        console.log("Topics loaded:", topics);
 
         let currentTopicIndex = 0;
         let shuffledSentences = [];
@@ -142,6 +145,7 @@
 
         // Tải danh sách chủ đề vào dropdown
         function loadTopicSelector() {
+            console.log("Loading topic selector");
             const topicSelect = document.getElementById("topic-select");
             topicSelect.innerHTML = "";
             topics.forEach((topic, index) => {
@@ -155,20 +159,27 @@
 
         // Tải đoạn văn lên giao diện
         function loadTopic() {
+            console.log("Loading topic:", currentTopicIndex);
             currentTopicIndex = parseInt(document.getElementById("topic-select").value);
             const topic = topics[currentTopicIndex];
             shuffledSentences = shuffle([...topic.sentences]);
+            console.log("Shuffled sentences order:", shuffledSentences.map(item => item.sentence));
             const topicsDiv = document.getElementById("topics");
             topicsDiv.innerHTML = `<h3>Part 3: Topic: ${topic.title}</h3>`;
             
             // Tạo danh sách các chủ đề cho dropdown của mỗi đoạn
             const topicOptions = topic.sentences.map(item => item.topic);
-            const optionsHtml = `
-                <option value="">Chọn chủ đề</option>
-                ${topicOptions.map(opt => `<option value="${opt}">${opt}</option>`).join('')}
-            `;
-
+            console.log("Topic options:", topicOptions);
+            
             shuffledSentences.forEach((item, index) => {
+                // Xáo trộn danh sách topicOptions cho mỗi dropdown
+                const shuffledTopicOptions = shuffle([...topicOptions]);
+                console.log(`Shuffled options for sentence ${index + 1}:`, shuffledTopicOptions);
+                const optionsHtml = `
+                    <option value="">Chọn chủ đề</option>
+                    ${shuffledTopicOptions.map(opt => `<option value="${opt}">${opt}</option>`).join('')}
+                `;
+
                 const div = document.createElement("div");
                 div.className = "sentence";
                 div.id = `sentence-${index}`;
@@ -187,6 +198,7 @@
 
         // Kiểm tra đáp án
         function checkAnswers() {
+            console.log("Checking answers");
             const result = document.getElementById("result");
             let allCorrect = true;
             let allSelected = true;
@@ -228,6 +240,7 @@
 
         // Hiển thị tất cả đáp án đúng
         function showCorrectAnswers() {
+            console.log("Showing correct answers");
             shuffledSentences.forEach((item, index) => {
                 const correctAnswer = document.getElementById(`correct-${index}`);
                 correctAnswer.textContent = `Đáp án đúng: ${item.topic}`;
@@ -237,6 +250,7 @@
 
         // Chuyển sang chủ đề tiếp theo
         function nextTopic() {
+            console.log("Moving to next topic");
             currentTopicIndex = (currentTopicIndex + 1) % topics.length;
             document.getElementById("topic-select").value = currentTopicIndex;
             reset();
@@ -245,6 +259,7 @@
 
         // Reset lại giao diện
         function reset() {
+            console.log("Resetting");
             document.getElementById("result").textContent = "";
             shuffledSentences.forEach((_, index) => {
                 const correctAnswer = document.getElementById(`correct-${index}`);
@@ -257,6 +272,7 @@
         }
 
         // Tải lần đầu
+        console.log("Initializing");
         loadTopicSelector();
         loadTopic();
     </script>
