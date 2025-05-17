@@ -132,7 +132,7 @@ const readingData = {
                 { id: 1, text: "I am living with a family ___ the city.", options: ["next", "near", "under"], answer: "near" },
                 { id: 2, text: "The children are ___ to me.", options: ["cruel", "noisy", "friendly"], answer: "friendly" },
                 { id: 3, text: "Seamus and Agnes ___ speaking English with me.", options: ["read", "hold", "practise"], answer: "practise" },
-                { id: 4, text: "Sometimes, I ___ to Seamus and Agnes.", options: ["see", "read", "say"], answer: "say" },
+                { id: 4, text: "Sometimes, I ___ to Seamus and Agnes.", options: ["see", "read", "say"], answer: "read" },
                 { id: 5, text: "I hate the food, ___ yesterday I ate out.", options: ["then", "so", "also"], answer: "so" }
             ]
         },
