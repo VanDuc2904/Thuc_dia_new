@@ -437,7 +437,7 @@ const readingData = {
             questions: [
                 { id: 1, text: "It is ___ what I like.", options: ["yet", "not", "just"], answer: "just" },
                 { id: 2, text: "And it is the perfect color, ___.", options: ["so", "too", "to"], answer: "too" },
-                { id: 3, text: "I am going to wear it ___ my birthday party.", options: ["to", "on", "at"], answer: "to" },
+                { id: 3, text: "I am going to wear it ___ my birthday party.", options: ["to", "on", "at"], answer: "at" },
                 { id: 4, text: "I will save you ___ cake.", options: ["many", "none", "some"], answer: "some" },
                 { id: 5, text: "___ my love to everyone.", options: ["Give", "Hold", "Receive"], answer: "Give" }
             ]
