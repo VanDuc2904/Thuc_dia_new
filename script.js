@@ -154,7 +154,10 @@ const tests = {
             { question: "What does this family do most weekends?", options: ["Goes with their friends", "Goes bowling", "Goes for a walk"], answer: "Goes for a walk" },
             { question: "What day do they meet?", options: ["Tuesday", "Thursday", "Friday"], answer: "Tuesday" },
             { question: "What career did he choose?", options: ["To work in business", "To be a teacher", "To keep studying"], answer: "To work in business" },
-            { question: "What course did he take?", options: ["Management", "Computer", "Leadership"], answer: "Computer" }
+            { question: "What course did he take?", options: ["Management", "Computer", "Leadership"], answer: "Computer" },
+            { question: "She works irregular time ?", options: ["She works irregular time", " She does not have a high salary", "She has no fixed workplace"], answer: "She works irregular time" },
+            { question: "Where does she buy food?", options: ["at a local market", "at a convenient store", "at a new shopping centre"], answer: "at a new shopping centre" },
+            { question: "What causes air pollution?", options: ["Fire from the countryside", "Pollutants from private cars", "Smoke from factories"], answer: "Fire from the countryside" }
         ],
         description: {
             title: "Topic: Do exercise",
