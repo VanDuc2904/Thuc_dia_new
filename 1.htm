@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guess the Speaker – Notes & Highlight</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; line-height: 1.6; }
+    .quiz-box { margin-bottom: 40px; padding: 20px; border: 1px solid #aaa; border-radius: 10px; background: #f9f9f9; position: relative; }
+    .question { margin-bottom: 15px; }
+    .feedback { font-weight: bold; margin-top: 10px; }
+    .correct { color: green; }
+    .wrong { color: red; }
+    select { padding: 5px; margin-bottom: 20px; }
+    textarea { width: 100%; height: 60px; margin-top: 10px; }
+    .highlighted { background-color: yellow; }
+    .controls { margin-top: 10px; }
+  </style>
+</head>
+<body>
+
+  <h2>🎯 Guess Who Said It – Notes + Highlight!</h2>
+
+  <label for="topic-select">Choose a topic:</label>
+  <select id="topic-select" onchange="loadTopic()">
+    <option value="">-- Select a topic --</option>
+  </select>
+
+  <div id="quiz-container"></div>
+
+  <script>
+    // ===== DATA =====
+    
+    const topics = {
+      "Opinions on flying": [
+        {
+          speaker: "A",
+          text: "I have a dream that I work as a tour guide. So I understand that I will have to fly to other countries. In my personal opinion, airplanes are currently too cheap compared to the damage they cause to the environment, so I believe we should add taxes to airline ticket prices to make people choose to use other means of transport before they think about flying. I believe that people are also very happy when they can contribute to protecting the environment."
+        },
+        {
+          speaker: "B",
+          text: "My family and siblings live quite far from me. So I often have to fly to visit them every month when I have time. We really appreciate the time we spend together and we are happy to be able to meet each other and share our new story. I know that traveling by plane too much is not good for the environment so I often shop online or go to work by bike instead of going by car or I reuse plastic bags and paper bags. In addition, I sometimes volunteer to clean up trash in the neighborhood."
+        },
+        {
+          speaker: "C",
+          text: "I was a businessman so I had to fly many times a week. I had to go to other countries to be able to sign wine trading contracts with them. I felt very tired every time I have to fly. Now, my sister and I, whenever we have free time, take the train together and we enjoy that time very much because I can travel while sightseeing and relax without any stress."
+        },
+        {
+          speaker: "D",
+          text: "If I have to go somewhere I will choose other means of public transport, not the plane. Every time I go on a plane I feel extremely tired and I just hope time passes quickly so I can get off that plane. However, due to the specific nature of my job, I have to film in many different locations, so sometimes I cannot avoid having to take this public transportation."
+        }
+      ],
+      "A new restaurant": [
+        {
+          speaker: "A",
+          text: "This is my first time coming to this restaurant. The food is very cheap but the quality is excellent. I was very surprised with the starter because its menu is very diverse. But there is one thing that I want the restaurant to improve. The restaurant band played live music but it was very far away, so the sound was very low and it didn't make the meal atmosphere lively. Next time turn the music louder, please!"
+        },
+        {
+          speaker: "B",
+          text: "This is a very famous restaurant that I saw in the newspaper. Sadly, I arrived later than the rest of the party, so I didn't get to order dinner. However, I ordered orange juice and mango juice and they were both delicious. What about the surroundings? Lively music along with fashionable and appropriate decor makes me feel very comfortable."
+        },
+        {
+          speaker: "C",
+          text: "I'm not sure if I will return to this restaurant. I think the staff was arguing when I got there, because the atmosphere here was not very comfortable. As for the food, I think there's nothing to write about. I ordered fish and chips, it wasn't bad, but it wasn't good either. But many people say that the food here is fabulous. So, I think I'm an exception."
+        },
+        {
+          speaker: "D",
+          text: "I don't understand why this restaurant is so famous. When I arrived and saw a menu with lots of different dishes, I saw this as a bad sign. Furthermore, the menu with traditional dishes contrasting with the modern decoration style made me feel very confused and strange. The waiters here were also not friendly. This was one of my worst experiences eating at a restaurant. "
+        }
+      ],
+      "reading books. ": [
+        {
+          speaker: "A",
+          text: "My wife often complains about not having time to read, and I say we have to make our own time. So, I often calculate my free time on my phone. so I can know in advance whether I should bring a book to read on the train. My wife often laughs at me for doing so, but I don't mind, as long as I can finish reading so many books."
+        },
+        {
+          speaker: "B",
+          text: "I used to struggle very much to finish reading a book that we were expected to read. However, now that I read for my own pleasure, I don't mind too much. I usually don't limit myself to reading one at a time. There are so many titles I can choose from that get me excited. I have a list of books that I want to read in the future."
+        },
+        {
+          speaker: "C",
+          text: "I often keep a book on the bedside table to read before going to bed. The problem is, I get tired after reading only half of a page, and I fall asleep. So, I've been reading that one book for half a year now and have only read chapter 2. However, when I read factual books, I find it very interesting and it keeps me awake for hours."
+        },
+        {
+          speaker: "D",
+          text: "My job requires reading a lot of books. These books include a lot of facts and figures and they are very boring. When I have free time, I usually want to read light books, like mystery novels or comedy. I often read on the train to work. I have a young child, so when I come home I almost don't have time to read. Therefore, I have to read books when traveling by train. So, a book can last me 1 week."
+        }
+      ],
+      "visit a city (Stevenson) ": [
+        {
+          speaker: "A",
+          text: "When I first came to this city, I felt very scared because this city is very big. The city has many parts and the shopping part is very far from the green part. However, we already had the bus route and we signed up to take the bus for a full day. Buses are very cheap and very convenient. I feel very lucky to not have to put pressure on my sore feet "
+        },
+        {
+          speaker: "B",
+          text: "I don't like big cities and rarely go out to cities. But I go to the StevenSon city very often. I go there about five to seven times a year. There is an area outside the city. In that area, there are many things that I need. There is a lot of water, a natural area, a small forest and a special camping area. I really like coming to this place to rest. It also has a great coffee serving area for visitors "
+        },
+        {
+          speaker: "C",
+          text: "I went to this city last summer and really liked the atmosphere of this city. The reason I like the atmosphere here is because it has a lot of public performances. These performances often take place in front of department stores. So this prevents me from shopping inside those stores. I was very surprised when I came home with an empty bag and I didn't buy anything. "
+        },
+        {
+          speaker: "D",
+          text: "When I go out, I only care about two things: good food and a good play. I especially liked the lunch I had in this city, it was delicious and I really want to come back here next time. However, I guess it's a bit expensive and I have to walk a long way to get there. However, it didn't matter because I had a wonderful day"
+        }
+      ],
+      "plans for a new station. ": [
+        {
+          speaker: "A",
+          text: "I see too many people who do not arrange a good time to travel to work, they often arrive at work late. I always think in advance about what time I will get to work tomorrow and what means of transport I will use."
+        },
+        {
+          speaker: "B",
+          text: "Buses are often full of people, especially during rush hour. This makes me very uncomfortable when I have to travel to work by bus. The public transportation improvement plan proposed by the city is very reasonable and it will improve the above situation a lot."
+        },
+        {
+          speaker: "C",
+          text: "In my opinion, the bus is very clean and comfortable to travel. I find it has a lot of space for everyone, and the bus system is also very large. Therefore, I think improving the public transport system is unneccessary, while the old system is still good."
+        },
+        {
+          speaker: "D",
+          text: "Building a new public transportation system will be very costly. And we all know it's at the expense of residents. I think we should use that money for something more beneficial, which is building more hospitals. Hospitals in this living area are very few."
+        }
+      ],
+      "art": [
+        {
+          speaker: "A",
+          text: "I know a little about famous painters and their works. But I don't like going to art exhibitions unless my friend invites me. I like extracurricular activities more, painting exhibitions seem too quiet to me. I like to draw, and I have been drawing ever since I can remember. My forte in drawing is animals, especially big and ferocious animals."
+        },
+        {
+          speaker: "B",
+          text: "I find going to see paintings similar to reading books. You must look and read before discussing. When I go to exhibitions with my friends, they often talk before seeing the painting, and what they talk about isn't even about the painting, that's annoy me."
+        },
+        {
+          speaker: "C",
+          text: "I find polite art very fascinating. I often go to talks about arts and I have gone to many foreign art exhibitions and artists' houses. It's great to see their works and where they worked."
+        },
+        {
+          speaker: "D",
+          text: "My parents often took me to see art exhibitions when I was a child. and I think that habit remains. Currently, I often take my children to the exhibition, which is a lovely activity for me. I often ask my children to do other activities while looking at pictures, for example, think of a story for that picture, so they don't get bored."
+        }
+      ],
+      "volunteering to clean a local park": [
+        {
+          speaker: "A",
+          text: "I feel very lucky to have this park here. My family and I often go to the park because of the natural landscape here. It's different from the city, which is very busy and full of dust. Unfortunately, I am away this weekend so I cannot help with the cleaning. However, I know my brother and his friends will be very interested in this cleanup so I will ask them if they can help."
+        },
+        {
+          speaker: "B",
+          text: "I'm a very busy person and I have to spend this weekend with my family because I only have the weekend as free time. I think young people who don't have families should help. Besides, students and schools also have days off on weekends. I think this volunteering will be very helpful for students' future careers."
+        },
+        {
+          speaker: "C",
+          text: "I think this volunteering is a good idea but it doesn't have a long-term vision. When volunteers clean up the park, it will be clean, but it will become busy again after about a month when tourist season arrives. I think we should clean this park regularly about once a month. Surrounding areas such as the lake and local forest should also be cleaned up. We should also have signs telling visitors to clean up their trash. I am very upset when I see a lot of trash on both sides of the road."
+        },
+        {
+          speaker: "D",
+          text: "My family and I often spend time at the park. My children love going to the park and they find the park a very interesting place to visit. My son has a dream of becoming a biologist so I think cleaning up this park will be very helpful for my son. I think we should pique children's interest in cleaning. They will be more willing to volunteer and help others."
+        }
+      ],
+      "going on holiday": [
+        {
+          speaker: "A",
+          text: "Last year, I went on a mountain climbing trip with my friends. It was the most horrible trip I have ever experienced. However, after that trip, I had a strong passion for walking. So now, every day I walk as a hobby, and it also helps my health a lot. I'm old so I'm no longer interested in traveling to far away places. Instead, I want to lie on a comfortable sofa and watch my favorite TV show"
+        },
+        {
+          speaker: "B",
+          text: "When I travel somewhere, I often ask for bus routes to famous tourist destinations so that I can get to those places as quickly as possible and avoid wasting time going around. Famous tourist destinations are the places I want to explore the most when traveling somewhere. I don't understand why many people just like to sit still at the beach when traveling, I find that uninteresting and time-consuming. "
+        },
+        {
+          speaker: "C",
+          text: "My family and I often plan to travel every time we have a vacation. If the weather is nice then our plans go ahead as usual, if not, we will postpone that vacation. For my family, light wind and warm sunlight are important when we go out. A few of my friends invited me to go climbing, but I'm afraid of heights so I refused them. However, in the future I really want to try mountain climbing once. "
+        },
+        {
+          speaker: "D",
+          text: "Next month's trip will be the first time I travel to another country. Normally I only travel to famous local places or in my country. These places are beautiful but I'm so excited to travel to a foreign place once in my life. "
+        }
+      ],
+      "r": [
+        {
+          speaker: "A",
+          text: ""
+        },
+        {
+          speaker: "B",
+          text: ""
+        },
+        {
+          speaker: "C",
+          text: ""
+        },
+        {
+          speaker: "D",
+          text: ""
+        }
+      ],
+      
+    };
+    
+
+    function shuffle(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    }
+
+    function shuffleSentences(text) {
+      const sentences = text.match(/[^.!?]+[.!?]+/g);
+      if (!sentences) return text;
+      return shuffle(sentences).join(" ");
+    }
+
+    function loadTopic() {
+      const selected = document.getElementById("topic-select").value;
+      const quizContainer = document.getElementById("quiz-container");
+      quizContainer.innerHTML = "";
+
+      if (!selected) return;
+
+      const questions = shuffle([...topics[selected]]);
+
+      questions.forEach((q, index) => {
+        const box = document.createElement("div");
+        box.className = "quiz-box";
+
+        const shuffledText = shuffleSentences(q.text);
+        const paragraphId = `para${index}`;
+
+        const options = ["A", "B", "C", "D"].map(letter =>
+          `<label><input type="radio" name="q${index}" value="${letter}"> ${letter}</label><br>`
+        ).join("");
+
+        box.innerHTML = `
+          <div class="question">
+            <strong>Paragraph ${index + 1}:</strong><br>
+            <span id="${paragraphId}" contenteditable="true">${shuffledText}</span>
+          </div>
+
+          <div class="controls">
+            ${options}
+            <button onclick="checkAnswer(${index}, '${q.speaker}')">Check</button>
+            <button onclick="highlightSelection('${paragraphId}')">Highlight</button>
+          </div>
+
+          <textarea placeholder="Your notes here..."></textarea>
+          <div id="feedback${index}" class="feedback"></div>
+        `;
+
+        quizContainer.appendChild(box);
+      });
+    }
+
+    function checkAnswer(index, correctAnswer) {
+      const radios = document.getElementsByName(`q${index}`);
+      let selected = null;
+      for (let r of radios) {
+        if (r.checked) {
+          selected = r.value;
+          break;
+        }
+      }
+
+      const feedback = document.getElementById(`feedback${index}`);
+      if (!selected) {
+        feedback.innerHTML = "Please choose an answer!";
+        feedback.className = "feedback wrong";
+        return;
+      }
+
+      if (selected === correctAnswer) {
+        feedback.innerHTML = "✅ Correct!";
+        feedback.className = "feedback correct";
+      } else {
+        feedback.innerHTML = `❌ Wrong! The correct answer is ${correctAnswer}.`;
+        feedback.className = "feedback wrong";
+      }
+    }
+
+    function highlightSelection(paragraphId) {
+      const para = document.getElementById(paragraphId);
+      const selection = window.getSelection();
+      const range = selection.getRangeAt(0);
+      if (!range || selection.anchorNode.parentNode !== para && !para.contains(selection.anchorNode)) {
+        alert("Please select text *inside* the paragraph to highlight.");
+        return;
+      }
+
+      const span = document.createElement("span");
+      span.className = "highlighted";
+      span.textContent = range.toString();
+
+      range.deleteContents();
+      range.insertNode(span);
+      selection.removeAllRanges();
+    }
+
+    // Load topic names
+    const topicSelect = document.getElementById("topic-select");
+    Object.keys(topics).forEach(topic => {
+      const opt = document.createElement("option");
+      opt.value = topic;
+      opt.textContent = topic;
+      topicSelect.appendChild(opt);
+    });
+  </script>
+
+</body>
+</html>
