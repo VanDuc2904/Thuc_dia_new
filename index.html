@@ -1,44 +1,237 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>APTIS Listening Practice</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <title>Hệ thống quan trắc chất lượng nước</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- CSS riêng -->
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-    <div class="container">
-        <h1>KEY LISTENING AND READING</h1>
-
-        <div class="navigation">
-            <h2>Choose a Section:</h2>
-            <div class="navigation-links">
-                <a href="reading.html" class="nav-button">Key Reading</a>
-                 <a href="keyls.html" class="nav-button">Key Listening</a>
-                <a href="kiemtra.html" class="nav-button">Đề trộn Listening</a>
-                <a href="kiemtra.html" class="nav-button">Đề trộn Reading</a>
-               <a href="part1_listening.html" class="nav-button">Key_TĐ_part1_ls</a>
-               <a href="part_2.htm" class="nav-button">Key_TĐ_part2_ls</a>
-               <a href="part3_ls.html" class="nav-button">Key_TĐ_part3_ls</a>
-                <a href="part4_listening.htm" class="nav-button">key_TĐ_part4_listening</a>
-                <a href="part1_rd.html" class="nav-button">Key_TĐ_part1_reading</a>
-                <a href="part2_rd.htm" class="nav-button">Key_TĐ_part2_reading</a>
-                <a href="part3_rd.htm" class="nav-button">Key_TĐ_part3_reading</a>
-                <a href="part4_rd.htm" class="nav-button">Key_TĐ_part4_reading</a>
-                <a href="viet.htm" class="nav-button">Test_viet</a>
-                <a href="viet2.htm" class="nav-button">Test_viet2</a>
-                <a href="1.htm" class="nav-button">DVPart4RD</a>
-                
-            </div>
-        </div>
-        
-        <div id="description-container">
-            <h2></h2>
-            <p></p>
-        </div>
+<div class="page">
+  <!-- HEADER -->
+  <header>
+    <div class="title-block">
+      <h1>HỆ THỐNG QUAN TRẮC CHẤT LƯỢNG NƯỚC</h1>
+      <div class="badge-row">
+        <span class="tag status-ok" id="overall-status">
+          <span class="tag-dot" id="overall-status-dot"></span>
+          <span id="overall-status-text">Hệ thống hoạt động ổn định</span>
+        </span>
+        <span class="tag tag-standard-main">
+          <strong>QCVN 08-MT:2015/BTNMT</strong>
+          <span>– Cột</span>
+          <select id="standard-select" class="standard-select-inline">
+            <option value="B1" selected>B1</option>
+            <option value="B2">B2</option>
+            <option value="A1">A1</option>
+            <option value="A2">A2</option>
+          </select>
+          <span>(tham chiếu)</span>
+        </span>
+      </div>
     </div>
 
-    <script src="script.js"></script>
+    <div class="header-meta">
+      <div>Thời gian hệ thống: <strong id="system-time">--:--:--</strong></div>
+      <div>Lần cập nhật gần nhất: <strong id="last-update">--:--:--</strong></div>
+    </div>
+  </header>
+
+  <main>
+    <section class="card-grid">
+      <!-- pH -->
+      <article class="card">
+        <div class="card-header">
+          <div>
+            <div class="param-name">PH</div>
+            <div class="param-unit">Không đơn vị</div>
+          </div>
+          <span class="status-chip status-good" data-status-for="pH">
+            <span class="status-chip-dot"></span>
+            <span>Đạt</span>
+          </span>
+        </div>
+        <div class="param-value" data-value-for="pH">--</div>
+        <div class="param-ref" data-ref-for="pH">
+          Giới hạn cho phép: 6,5 – 8,5
+        </div>
+        <div class="bar">
+          <div class="bar-fill" data-bar-for="pH"></div>
+        </div>
+      </article>
+
+      <!-- Nhiệt độ -->
+      <article class="card">
+        <div class="card-header">
+          <div>
+            <div class="param-name">NHIỆT ĐỘ</div>
+            <div class="param-unit">°C</div>
+          </div>
+          <span class="status-chip status-good" data-status-for="temp">
+            <span class="status-chip-dot"></span>
+            <span>Đạt</span>
+          </span>
+        </div>
+        <div class="param-value" data-value-for="temp">--</div>
+        <div class="param-ref" data-ref-for="temp">
+          Giới hạn khuyến nghị: &lt; 32°C
+        </div>
+        <div class="bar">
+          <div class="bar-fill" data-bar-for="temp"></div>
+        </div>
+      </article>
+
+      <!-- DO -->
+      <article class="card">
+        <div class="card-header">
+          <div>
+            <div class="param-name">OXY HÒA TAN (DO)</div>
+            <div class="param-unit">mg/L</div>
+          </div>
+          <span class="status-chip status-good" data-status-for="DO">
+            <span class="status-chip-dot"></span>
+            <span>Đạt</span>
+          </span>
+        </div>
+        <div class="param-value" data-value-for="DO">--</div>
+        <div class="param-ref" data-ref-for="DO">
+          Giới hạn cho phép: ≥ 5 mg/L
+        </div>
+        <div class="bar">
+          <div class="bar-fill" data-bar-for="DO"></div>
+        </div>
+      </article>
+
+      <!-- Độ đục -->
+      <article class="card">
+        <div class="card-header">
+          <div>
+            <div class="param-name">ĐỘ ĐỤC</div>
+            <div class="param-unit">NTU</div>
+          </div>
+          <span class="status-chip status-good" data-status-for="turbidity">
+            <span class="status-chip-dot"></span>
+            <span>Đạt</span>
+          </span>
+        </div>
+        <div class="param-value" data-value-for="turbidity">--</div>
+        <div class="param-ref" data-ref-for="turbidity">
+          Giới hạn khuyến nghị: &lt; 5 NTU
+        </div>
+        <div class="bar">
+          <div class="bar-fill" data-bar-for="turbidity"></div>
+        </div>
+      </article>
+
+      <!-- TDS -->
+      <article class="card">
+        <div class="card-header">
+          <div>
+            <div class="param-name">TDS (TỔNG CHẤT RẮN HÒA TAN)</div>
+            <div class="param-unit">mg/L</div>
+          </div>
+          <span class="status-chip status-good" data-status-for="TDS">
+            <span class="status-chip-dot"></span>
+            <span>Đạt</span>
+          </span>
+        </div>
+        <div class="param-value" data-value-for="TDS">--</div>
+        <div class="param-ref" data-ref-for="TDS">
+          Giới hạn khuyến nghị: &lt; 1000 mg/L
+        </div>
+        <div class="bar">
+          <div class="bar-fill" data-bar-for="TDS"></div>
+        </div>
+      </article>
+    </section>
+    <section class="bottom-layout">
+      <section class="panel">
+        <div class="panel-header">
+          <div>
+            <div class="panel-title">DIỄN BIẾN THÔNG SỐ THEO THỜI GIAN</div>
+            <div class="panel-sub">Biểu đồ theo dữ liệu quan trắc thời gian thực</div>
+          </div>
+          <div class="panel-controls">
+            <span>Thông số:</span>
+            <select id="chart-param-select">
+              <option value="pH">pH</option>
+              <option value="temp">Nhiệt độ</option>
+              <option value="DO">Oxy hòa tan(DO)</option>
+              <option value="turbidity">Độ đục</option>
+              <option value="TDS">TDS</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="chart-wrapper">
+          <canvas id="qualityChart"></canvas>
+        </div>
+        <!--<p class="panel-sub" style="margin-top:0.5rem;">
+        </p>-->
+      </section>
+      <section class="panel">
+        <div class="panel-header">
+          <div>
+            <div class="panel-title">BẢNG SỐ LIỆU MỚI NHẤT</div>
+            <div class="panel-sub">5–50 bản ghi gần nhất </div>
+          </div>
+        </div>
+
+        <div class="filter-row">
+          <label>
+            Trạm:
+            <select>
+              <option>Trạm 01</option>
+              <option>Trạm 02</option>
+              <option>Trạm 03</option>
+            </select>
+          </label>
+          <label>
+            Khoảng thời gian:
+            <input type="date" />
+          </label>
+          <label>
+            Thông số:
+            <select id="table-param-select">
+              <option value="all">Tất cả (tổng hợp)</option>
+              <option value="pH">pH</option>
+              <option value="temp">Nhiệt độ</option>
+              <option value="DO">Oxy hòa tan (DO)</option>
+              <option value="turbidity">Độ đục</option>
+              <option value="TDS">TDS</option>
+            </select>
+          </label>
+        </div>
+
+        <div style="max-height: 260px; overflow: auto; margin-top: 0.5rem;">
+          <table>
+            <thead>
+            <tr>
+              <th>Thời gian</th>
+              <th>Mô tả</th>
+              <th>Giá trị</th>
+              <th>Đơn vị</th>
+              <th>Giới hạn</th>
+              <th>Trạng thái</th>
+            </tr>
+            </thead>
+            <tbody id="data-table-body">
+              <!-- Hàng sẽ được app.js đổ vào -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </section>
+  </main>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="app.js"></script>
 </body>
 </html>
