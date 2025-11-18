@@ -1,5 +1,5 @@
 // ====== CẤU HÌNH API ======
-const API_URL = "https://script.google.com/macros/s/AKfycbz0f7o62xGfmUaVAjdsxZIqBcxzuYDUX1MxaaK4-exu-u3SnDzhkpF8XD6MIWD7XKIU1g/exec";
+const API_URL = "https://script.google.com/macros/s/AKfycbxPIWXMcpByjkO1srpe-OmTDg374IJq-7qEWOCr-pr30rqs8xMSX_o0V7UkGYUXDp6RFQ/exec";
 const PARAM_META = {
   pH:   { label: "pH",                     unit: "",     format: v => v.toFixed(2) },
   temp: { label: "Nhiệt độ",               unit: "°C",   format: v => v.toFixed(1) },
@@ -475,3 +475,4 @@ document.addEventListener("DOMContentLoaded", () => {
   fetchDataFromApi();
   setInterval(fetchDataFromApi, 10000);
 });
+
