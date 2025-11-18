@@ -1,36 +1,14 @@
-// ====== CẤU HÌNH API (Apps Script Web App URL) ======
-const API_URL = "https://script.google.com/macros/s/AKfycbxWcUQEAO3rRuRzcHjbA8BQEgBAz_FJ9y_yMkyRtytx73Tt5ym5PqHrXlpyYBeILGLBgg/exec";
-
-// ====== META thông số (tên + đơn vị + format) ======
+// ====== CẤU HÌNH API ======
+const API_URL = "https://script.google.com/macros/s/AKfycbz0f7o62xGfmUaVAjdsxZIqBcxzuYDUX1MxaaK4-exu-u3SnDzhkpF8XD6MIWD7XKIU1g/exec";
 const PARAM_META = {
-  pH: {
-    label: "pH",
-    unit: "",
-    format: (v) => v.toFixed(2)
-  },
-  temp: {
-    label: "Nhiệt độ",
-    unit: "°C",
-    format: (v) => v.toFixed(1)
-  },
-  DO: {
-    label: "Oxy hòa tan (DO)",
-    unit: "mg/L",
-    format: (v) => v.toFixed(2)
-  },
-  turbidity: {
-    label: "Độ đục",
-    unit: "NTU",
-    format: (v) => v.toFixed(1)
-  },
-  TDS: {
-    label: "TDS (Tổng chất rắn hòa tan)",
-    unit: "mg/L",
-    format: (v) => v.toFixed(0)
-  }
+  pH:   { label: "pH",                     unit: "",     format: v => v.toFixed(2) },
+  temp: { label: "Nhiệt độ",               unit: "°C",   format: v => v.toFixed(1) },
+  DO:   { label: "Oxy hòa tan (DO)",       unit: "mg/L", format: v => v.toFixed(2) },
+  turbidity: { label: "Độ đục",            unit: "NTU",  format: v => v.toFixed(1) },
+  TDS:  { label: "TDS (Tổng chất rắn hòa tan)", unit: "mg/L", format: v => v.toFixed(0) }
 };
 
-// ====== CẤU HÌNH CÁC CỘT QCVN 08-MT:2015/BTNMT ======
+// ====== QCVN 08-MT:2015/BTNMT ======
 const QCVN_STANDARDS = {
   B1: {
     thresholds: {
@@ -102,89 +80,70 @@ const QCVN_STANDARDS = {
   }
 };
 
-// Cột đang được chọn
 let ACTIVE_STANDARD_KEY = "B1";
 let ACTIVE_THRESHOLDS = QCVN_STANDARDS[ACTIVE_STANDARD_KEY].thresholds;
 
-// Giá trị hiện tại cho các card
-let currentData = {
-  pH: NaN,
-  temp: NaN,
-  DO: NaN,
-  turbidity: NaN,
-  TDS: NaN
-};
+let currentData = { pH: NaN, temp: NaN, DO: NaN, turbidity: NaN, TDS: NaN };
 
-// Lưu lại các dòng từ API để dùng cho bảng & biểu đồ
 let lastRowsData = [];
-
-// Biểu đồ Chart.js
 let qualityChart = null;
-
 function formatTime(date) {
   return date.toLocaleTimeString("vi-VN", { hour12: false });
 }
 
-// ĐỊNH DẠNG NHÃN THỜI GIAN CHO BẢNG & BIỂU ĐỒ
 function formatLabelTime(raw, index) {
-  if (raw == null || raw === "") {
-    return `#${index + 1}`;
-  }
-
-  // Nếu là số (kiểu 1,2,3) thì coi như chỉ số
-  if (typeof raw === "number") {
-    return `#${index + 1}`;
-  }
-
+  if (raw == null || raw === "") return `#${index + 1}`;
+  if (typeof raw === "number") return `#${index + 1}`;
   const s = String(raw).trim();
 
-  // Nếu string có dạng Date dài => parse sang Date rồi lấy HH:mm:ss
   if (s.includes("GMT") || s.includes("Indochina")) {
     const d = new Date(s);
     if (!isNaN(d.getTime())) {
       return d.toLocaleTimeString("vi-VN", { hour12: false });
     }
   }
-
-  // Nếu trong chuỗi có đoạn hh:mm:ss thì lấy đúng đoạn đó
   const m = s.match(/(\d{1,2}:\d{2}:\d{2})/);
-  if (m) {
-    return m[1];
-  }
-
-  // Nếu chuỗi đã là dạng ngắn (ví dụ "16:00") thì cho hiển thị luôn
+  if (m) return m[1];
   if (s.includes(":")) return s;
 
-  // Còn lại thì coi như mã bản ghi
   return `#${index + 1}`;
 }
 
-function updateSystemTime() {
-  const now = new Date();
-  const el = document.getElementById("system-time");
-  if (el) el.textContent = formatTime(now);
+function getRaw(param, obj) {
+  if (!obj) return undefined;
+  switch (param) {
+    case "pH":        return obj.pH ?? obj.ph;
+    case "temp":      return obj.temp ?? obj.temperature ?? obj.Temp;
+    case "DO":        return obj.DO ?? obj.do;
+    case "turbidity": return obj.turbidity ?? obj.tu ?? obj.Tu;
+    case "TDS":       return obj.TDS ?? obj.tds;
+    default:          return obj[param];
+  }
 }
 
-// Phân loại trạng thái theo QCVN đang chọn
+function getNumeric(param, obj) {
+  const raw = getRaw(param, obj);
+  const n = Number(raw);
+  return Number.isNaN(n) ? NaN : n;
+}
+
+function updateSystemTime() {
+  const el = document.getElementById("system-time");
+  if (el) el.textContent = formatTime(new Date());
+}
+
 function classifyStatus(param, value) {
   const th = ACTIVE_THRESHOLDS[param];
   if (!th || Number.isNaN(value)) return { status: "good", label: "Đạt" };
 
-  // pH: tách rõ Thấp / Cao
   if (param === "pH") {
-    if (value >= th.min && value <= th.max) {
-      return { status: "good", label: "Đạt" };
-    }
+    if (value >= th.min && value <= th.max) return { status: "good", label: "Đạt" };
     if (value < th.min) {
-      if (value >= th.min - 0.3) {
-        return { status: "warn", label: "Thấp (cận ngưỡng)" };
-      }
+      if (value >= th.min - 0.3) return { status: "warn", label: "Thấp (cận ngưỡng)" };
       return { status: "bad", label: "Thấp" };
     }
     if (value > th.max) {
-      if (value <= th.max + 0.3) {
-        return { status: "warn", label: "Cao (cận ngưỡng)" };
-      }
+      if (value <= th.max + 0.3) return { status: "warn", label: "Cao (cận ngưỡng)" };
       return { status: "bad", label: "Vượt ngưỡng" };
     }
   }
@@ -201,7 +160,6 @@ function classifyStatus(param, value) {
     return { status: "bad", label: "Thấp" };
   }
 
-  // turbidity & TDS: càng thấp càng tốt
   if (param === "turbidity" || param === "TDS") {
     if (value <= th.max) return { status: "good", label: "Đạt" };
     if (value <= th.max * 1.2) return { status: "warn", label: "Cảnh báo" };
@@ -211,24 +169,22 @@ function classifyStatus(param, value) {
   return { status: "good", label: "Đạt" };
 }
 
-// Cập nhật card trên cùng
 function updateCards() {
   Object.keys(currentData).forEach((key) => {
-    const value = Number(currentData[key]);
+    const value = currentData[key];
     const valueEl = document.querySelector(`[data-value-for="${key}"]`);
     const statusEl = document.querySelector(`[data-status-for="${key}"]`);
     const barEl = document.querySelector(`[data-bar-for="${key}"]`);
 
     if (valueEl && !Number.isNaN(value)) {
       const meta = PARAM_META[key];
-      if (meta && typeof meta.format === "function") {
-        valueEl.textContent = meta.format(value);
-      } else {
-        valueEl.textContent = value.toFixed(2);
-      }
+      if (meta && meta.format) valueEl.textContent = meta.format(value);
+      else valueEl.textContent = value.toFixed(2);
+    } else if (valueEl) {
+      valueEl.textContent = "--";
     }
 
-    if (statusEl && !Number.isNaN(value)) {
+    if (statusEl) {
       const { status, label } = classifyStatus(key, value);
       statusEl.classList.remove("status-good", "status-warn-chip", "status-bad-chip");
       if (status === "good") statusEl.classList.add("status-good");
@@ -237,10 +193,10 @@ function updateCards() {
       statusEl.querySelector("span:last-child").textContent = label;
     }
 
-    if (barEl && !Number.isNaN(value)) {
+    if (barEl) {
       const th = ACTIVE_THRESHOLDS[key];
       let pct = 50;
-      if (th) {
+      if (!Number.isNaN(value) && th) {
         if (key === "pH") {
           const center = (th.min + th.max) / 2;
           const span = (th.max - th.min) / 2;
@@ -265,7 +221,7 @@ function updateCards() {
   });
 }
 
-// Render bảng "Bảng số liệu mới nhất"
+// ====== Bảng ======
 function renderTableRows(rows) {
   const tbody = document.getElementById("data-table-body");
   if (!tbody) return;
@@ -280,7 +236,7 @@ function renderTableRows(rows) {
   displayRows.forEach((row, idx) => {
     const tr = document.createElement("tr");
 
-    // Thời gian hiển thị đẹp
+    // cột thời gian: chỉ hiển thị giờ / index để trục rõ
     const timeCell = document.createElement("td");
     timeCell.textContent = formatLabelTime(row.time, idx);
     tr.appendChild(timeCell);
@@ -294,26 +250,24 @@ function renderTableRows(rows) {
     statusSpan.classList.add("status-pill");
 
     if (mode === "all") {
-      // Hàng tổng hợp
       descCell.textContent = "Thông số tổng hợp (pH, T, DO, Độ đục, TDS)";
 
-      const pHVal = row.pH ?? "";
-      const tVal = row.temp ?? "";
-      const doVal = row.DO ?? "";
-      const turbVal = row.turbidity ?? "";
-      const tdsVal = row.TDS ?? "";
+      const pHVal   = getRaw("pH", row) ?? "";
+      const tVal    = getRaw("temp", row) ?? "";
+      const doVal   = getRaw("DO", row) ?? "";
+      const turbVal = getRaw("turbidity", row) ?? "";
+      const tdsVal  = getRaw("TDS", row) ?? "";
       valueCell.textContent =
         `pH ${pHVal} | T ${tVal}°C | DO ${doVal} mg/L | Đục ${turbVal} NTU | TDS ${tdsVal} mg/L`;
       unitCell.textContent = "";
 
       const statuses = [
-        classifyStatus("pH", Number(row.pH)),
-        classifyStatus("temp", Number(row.temp)),
-        classifyStatus("DO", Number(row.DO)),
-        classifyStatus("turbidity", Number(row.turbidity)),
-        classifyStatus("TDS", Number(row.TDS))
+        classifyStatus("pH",        getNumeric("pH", row)),
+        classifyStatus("temp",      getNumeric("temp", row)),
+        classifyStatus("DO",        getNumeric("DO", row)),
+        classifyStatus("turbidity", getNumeric("turbidity", row)),
+        classifyStatus("TDS",       getNumeric("TDS", row))
       ];
-
       let worst = "good";
       if (statuses.some(s => s.status === "bad")) worst = "bad";
       else if (statuses.some(s => s.status === "warn")) worst = "warn";
@@ -329,28 +283,23 @@ function renderTableRows(rows) {
         statusSpan.textContent = "Vượt ngưỡng";
       }
     } else {
-      // Hàng theo từng thông số
       const meta = PARAM_META[mode];
       descCell.textContent = meta ? meta.label : mode;
 
-      const vNum = Number(row[mode]);
+      const vNum = getNumeric(mode, row);
       let display = "";
-      if (!Number.isNaN(vNum) && meta && meta.format) {
-        display = meta.format(vNum);
-      } else if (row[mode] != null) {
-        display = String(row[mode]);
+      if (!Number.isNaN(vNum) && meta && meta.format) display = meta.format(vNum);
+      else {
+        const raw = getRaw(mode, row);
+        if (raw != null) display = String(raw);
       }
       valueCell.textContent = display;
       unitCell.textContent = meta ? meta.unit : "";
 
       const { status, label } = classifyStatus(mode, vNum);
-      if (status === "good") {
-        statusSpan.classList.add("ok");
-      } else if (status === "warn") {
-        statusSpan.classList.add("warn");
-      } else {
-        statusSpan.classList.add("bad");
-      }
+      if (status === "good")      statusSpan.classList.add("ok");
+      else if (status === "warn") statusSpan.classList.add("warn");
+      else                        statusSpan.classList.add("bad");
       statusSpan.textContent = label;
     }
 
@@ -370,7 +319,7 @@ function renderTableRows(rows) {
   });
 }
 
-// Vẽ / cập nhật biểu đồ Chart.js
+// ====== Biểu đồ ======
 function updateChart() {
   const canvas = document.getElementById("qualityChart");
   if (!canvas || !lastRowsData.length || typeof Chart === "undefined") return;
@@ -380,16 +329,14 @@ function updateChart() {
   const meta = PARAM_META[param] || { label: param, unit: "" };
 
   const rows = lastRowsData.slice();
-  const labels = rows.map((r, i) => formatLabelTime(r.time, i));
+  const labels = rows.map((r, i) => formatLabelTime(r.time, i)); // chỉ giờ / index
   const data = rows.map(r => {
-    const v = Number(r[param]);
+    const v = getNumeric(param, r);
     return Number.isNaN(v) ? null : v;
   });
 
   const ctx = canvas.getContext("2d");
-  if (qualityChart) {
-    qualityChart.destroy();
-  }
+  if (qualityChart) qualityChart.destroy();
 
   qualityChart = new Chart(ctx, {
     type: "line",
@@ -420,12 +367,7 @@ function updateChart() {
         }
       },
       plugins: {
-        legend: {
-          display: true,
-          labels: {
-            boxWidth: 12
-          }
-        },
+        legend: { display: true, labels: { boxWidth: 12 } },
         tooltip: { enabled: true }
       },
       elements: {
@@ -436,7 +378,7 @@ function updateChart() {
   });
 }
 
-// Gọi API Apps Script
+// ====== Gọi API ======
 async function fetchDataFromApi() {
   try {
     const res = await fetch(API_URL);
@@ -445,13 +387,27 @@ async function fetchDataFromApi() {
 
     if (data && data.latest) {
       currentData = {
-        pH: Number(data.latest.pH),
-        temp: Number(data.latest.temp),
-        DO: Number(data.latest.DO),
-        turbidity: Number(data.latest.turbidity),
-        TDS: Number(data.latest.TDS)
+        pH:        getNumeric("pH",        data.latest),
+        temp:      getNumeric("temp",      data.latest),
+        DO:        getNumeric("DO",        data.latest),
+        turbidity: getNumeric("turbidity", data.latest),
+        TDS:       getNumeric("TDS",       data.latest)
       };
       updateCards();
+
+      const lastUpdateEl = document.getElementById("last-update");
+      if (lastUpdateEl) {
+        if (data.latest.date) {
+          lastUpdateEl.textContent = `${data.latest.date} ${formatLabelTime(data.latest.time, 0)}`;
+        } else {
+          lastUpdateEl.textContent = formatTime(new Date());
+        }
+      }
+
+      const obsDateEl = document.getElementById("obs-date");
+      if (obsDateEl && data.latest.date) {
+        obsDateEl.textContent = data.latest.date;
+      }
     }
 
     if (data && Array.isArray(data.rows)) {
@@ -459,54 +415,42 @@ async function fetchDataFromApi() {
       renderTableRows(lastRowsData);
       updateChart();
     }
-
-    const lastUpdateEl = document.getElementById("last-update");
-    if (lastUpdateEl) {
-      lastUpdateEl.textContent = formatTime(new Date());
-    }
   } catch (err) {
     console.error("Lỗi khi gọi API Apps Script:", err);
   }
 }
 
-// Đổi chuẩn QCVN
+// ====== Đổi chuẩn QCVN ======
 function setStandard(code) {
   const standard = QCVN_STANDARDS[code];
   if (!standard) return;
-
   ACTIVE_STANDARD_KEY = code;
   ACTIVE_THRESHOLDS = standard.thresholds;
 
-  // Cập nhật text "Giới hạn..." dưới mỗi card
   const refs = standard.refsText || {};
-  const pHRefEl = document.querySelector('[data-ref-for="pH"]');
+  const pHRefEl   = document.querySelector('[data-ref-for="pH"]');
   const tempRefEl = document.querySelector('[data-ref-for="temp"]');
-  const DORefEl = document.querySelector('[data-ref-for="DO"]');
+  const DORefEl   = document.querySelector('[data-ref-for="DO"]');
   const turbRefEl = document.querySelector('[data-ref-for="turbidity"]');
-  const tdsRefEl = document.querySelector('[data-ref-for="TDS"]');
+  const tdsRefEl  = document.querySelector('[data-ref-for="TDS"]');
 
-  if (pHRefEl && refs.pH) pHRefEl.textContent = refs.pH;
-  if (tempRefEl && refs.temp) tempRefEl.textContent = refs.temp;
-  if (DORefEl && refs.DO) DORefEl.textContent = refs.DO;
+  if (pHRefEl   && refs.pH)        pHRefEl.textContent   = refs.pH;
+  if (tempRefEl && refs.temp)      tempRefEl.textContent = refs.temp;
+  if (DORefEl   && refs.DO)        DORefEl.textContent   = refs.DO;
   if (turbRefEl && refs.turbidity) turbRefEl.textContent = refs.turbidity;
-  if (tdsRefEl && refs.TDS) tdsRefEl.textContent = refs.TDS;
+  if (tdsRefEl  && refs.TDS)       tdsRefEl.textContent  = refs.TDS;
 
-  // Re-calc card + bảng theo chuẩn mới
   updateCards();
-  if (lastRowsData.length > 0) {
-    renderTableRows(lastRowsData);
-  }
+  if (lastRowsData.length > 0) renderTableRows(lastRowsData);
 }
 
-// Khởi động
+// ====== Khởi động ======
 document.addEventListener("DOMContentLoaded", () => {
   updateSystemTime();
   setInterval(updateSystemTime, 1000);
 
-  // Chuẩn ban đầu
   setStandard(ACTIVE_STANDARD_KEY);
 
-  // Event đổi cột QCVN
   const standardSelect = document.getElementById("standard-select");
   if (standardSelect) {
     standardSelect.addEventListener("change", (e) => {
@@ -514,7 +458,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Event đổi thông số bảng
   const tableParamSelect = document.getElementById("table-param-select");
   if (tableParamSelect) {
     tableParamSelect.addEventListener("change", () => {
@@ -522,7 +465,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Event đổi thông số biểu đồ
   const chartParamSelect = document.getElementById("chart-param-select");
   if (chartParamSelect) {
     chartParamSelect.addEventListener("change", () => {
@@ -530,7 +472,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Lấy dữ liệu từ Apps Script
   fetchDataFromApi();
-  setInterval(fetchDataFromApi, 30000);
+  setInterval(fetchDataFromApi, 10000);
 });
