@@ -4,18 +4,13 @@
   <meta charset="UTF-8" />
   <title>Hệ thống quan trắc chất lượng nước</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <!-- Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-  <!-- CSS riêng -->
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
 <div class="page">
-  <!-- HEADER -->
   <header>
     <div class="title-block">
       <h1>HỆ THỐNG QUAN TRẮC CHẤT LƯỢNG NƯỚC</h1>
@@ -43,7 +38,6 @@
       <div>Lần cập nhật gần nhất: <strong id="last-update">--:--:--</strong></div>
     </div>
   </header>
-
   <main>
     <section class="card-grid">
       <!-- pH -->
@@ -66,7 +60,6 @@
           <div class="bar-fill" data-bar-for="pH"></div>
         </div>
       </article>
-
       <!-- Nhiệt độ -->
       <article class="card">
         <div class="card-header">
@@ -87,7 +80,6 @@
           <div class="bar-fill" data-bar-for="temp"></div>
         </div>
       </article>
-
       <!-- DO -->
       <article class="card">
         <div class="card-header">
@@ -108,7 +100,6 @@
           <div class="bar-fill" data-bar-for="DO"></div>
         </div>
       </article>
-
       <!-- Độ đục -->
       <article class="card">
         <div class="card-header">
@@ -134,7 +125,7 @@
       <article class="card">
         <div class="card-header">
           <div>
-            <div class="param-name">TDS (TỔNG CHẤT RẮN HÒA TAN)</div>
+            <div class="param-name">TDS</div>
             <div class="param-unit">mg/L</div>
           </div>
           <span class="status-chip status-good" data-status-for="TDS">
@@ -152,11 +143,15 @@
       </article>
     </section>
     <section class="bottom-layout">
+      <!-- Biểu đồ -->
       <section class="panel">
         <div class="panel-header">
           <div>
             <div class="panel-title">DIỄN BIẾN THÔNG SỐ THEO THỜI GIAN</div>
             <div class="panel-sub">Biểu đồ theo dữ liệu quan trắc thời gian thực</div>
+            <p class="panel-sub" style="margin-top:4px;">
+              Ngày quan trắc: <strong id="obs-date">--/--/----</strong>
+            </p>
           </div>
           <div class="panel-controls">
             <span>Thông số:</span>
@@ -173,9 +168,8 @@
         <div class="chart-wrapper">
           <canvas id="qualityChart"></canvas>
         </div>
-        <!--<p class="panel-sub" style="margin-top:0.5rem;">
-        </p>-->
       </section>
+      <!-- Bảng -->
       <section class="panel">
         <div class="panel-header">
           <div>
@@ -223,7 +217,6 @@
             </tr>
             </thead>
             <tbody id="data-table-body">
-              <!-- Hàng sẽ được app.js đổ vào -->
             </tbody>
           </table>
         </div>
@@ -231,6 +224,7 @@
     </section>
   </main>
 </div>
+
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 <script src="app.js"></script>
 </body>
