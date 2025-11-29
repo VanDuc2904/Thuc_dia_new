@@ -25,15 +25,13 @@
         <span class="tag tag-standard-main">
           <strong>Standard:</strong>
           <select id="standard-select" class="standard-select-inline">
-            <!-- These labels are for manual override; JS will also sync this when station changes -->
-            <!--<option value="B1" selected>QCVN 08-MT:2015 – Column B1 (Surface water)</option>-->
-            <!--<option value="B2">QCVN 08-MT:2015 – Column B2 (Surface water)</option>-->
-            <!--<option value="A1">QCVN 08-MT:2015 – Column A1 (Surface water)</option>-->
-            <!--<option value="A2">QCVN 08-MT:2015 – Column A2 (Surface water)</option>-->
-            <option value="GND">QCVN 09:2023/BTNMT – Groundwater</option>
-            <!--<option value="DW">QCVN 01:2009/BYT – Domestic water</option>-->
+            <option value="GND" selected>QCVN 09:2023/BTNMT – Groundwater</option>
+            <!-- <option value="B1">QCVN 08-MT:2015 – B1 (Surface water)</option>
+            <option value="B2">QCVN 08-MT:2015 – Column B2 (Surface water)</option>
+            <option value="A1">QCVN 08-MT:2015 – Column A1 (Surface water)</option>
+            <option value="A2">QCVN 08-MT:2015 – Column A2 (Surface water)</option>
+            <option value="DW">QCVN 01:2009/BYT – Domestic water</option>-->
           </select>
-          <span id="standard-note">(reference)</span>
         </span>
       </div>
     </div>
@@ -90,7 +88,7 @@
       </article>
 
       <!-- Dissolved Oxygen (DO) -->
-      <!--<article class="card">
+      <article class="card">
         <div class="card-header">
           <div>
             <div class="param-name">DISSOLVED OXYGEN (DO)</div>
@@ -108,7 +106,7 @@
         <div class="bar">
           <div class="bar-fill" data-bar-for="DO"></div>
         </div>
-      </article>-->
+      </article>
 
       <!-- Turbidity -->
       <article class="card">
@@ -165,7 +163,7 @@
               Observation date: <strong id="obs-date">--/--/----</strong>
             </p>
             <p class="panel-sub" id="active-station-label">
-              Active station: <strong>Station 01 – Surface water</strong>
+              Active station: <strong>Station 02 – Groundwater</strong>
             </p>
           </div>
           <div class="panel-controls">
@@ -180,8 +178,17 @@
           </div>
         </div>
 
+        <!-- Short-term chart -->
         <div class="chart-wrapper">
           <canvas id="qualityChart"></canvas>
+        </div>
+
+        <!-- Multi-day chart -->
+        <div class="panel-sub" style="margin-top: 0.75rem;">
+          Multi-day timeline (date &amp; time)
+        </div>
+        <div class="chart-wrapper">
+          <canvas id="multiDayChart"></canvas>
         </div>
       </section>
 
@@ -198,8 +205,8 @@
           <label>
             Station:
             <select id="station-select">
-              <option value="station-01" selected>Station 02 – Groundwater</option>
-              <option value="station-02">Station 01 – Surface water</option>
+              <option value="station-02" selected>Station 02 – Groundwater</option>
+              <option value="station-01">Station 01 – Surface water</option>
               <option value="station-03">Station 03 – Domestic water</option>
             </select>
           </label>
