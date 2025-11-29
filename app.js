@@ -1,6 +1,6 @@
 // ===================== CONFIGURATION =====================
 
-// Google Apps Script endpoint (keep your original URL)
+// Google Apps Script endpoint
 const API_URL =
   "https://script.google.com/macros/s/AKfycbztkzV1kyGmECEDxhg-lKKuiNCy4x7vLQG_-svjQmQIspdUdpvmr7PeJrx1o4wPbXBLgw/exec";
 
@@ -39,10 +39,9 @@ const PARAM_META = {
 };
 
 // ===================== STANDARDS DEFINITIONS =====================
-// All thresholds are approximate and can be fine-tuned later.
 
 const QCVN_STANDARDS = {
-  // --- QCVN 08-MT:2015/BTNMT – Surface water ---
+  // QCVN 08-MT:2015/BTNMT – Surface water
   B1: {
     thresholds: {
       pH: { min: 6.5, max: 8.5 },
@@ -112,12 +111,12 @@ const QCVN_STANDARDS = {
     labelShort: "QCVN 08-MT:2015/BTNMT – Column A2 (Surface water)",
   },
 
-  // --- QCVN 09:2023/BTNMT – Groundwater ---
+  // QCVN 09:2023/BTNMT – Groundwater
   GND: {
     thresholds: {
       pH: { min: 5.5, max: 8.5 },
-      temp: { max: 32 }, // not in standard, used as a practical reference
-      DO: { min: 0, max: 999 }, // not regulated; we keep it "always OK"
+      temp: { max: 32 },        // practical reference
+      DO: { min: 0, max: 999 }, // not regulated, always OK
       turbidity: { max: 5 },
       TDS: { max: 1500 },
     },
@@ -131,12 +130,12 @@ const QCVN_STANDARDS = {
     labelShort: "QCVN 09:2023/BTNMT – Groundwater",
   },
 
-  // --- QCVN 01:2009/BYT – Domestic water ---
+  // QCVN 01:2009/BYT – Domestic water
   DW: {
     thresholds: {
       pH: { min: 6.5, max: 8.5 },
       temp: { max: 30 },
-      DO: { min: 6, max: 20 }, // typical for safe drinking water
+      DO: { min: 6, max: 20 },
       turbidity: { max: 2 },
       TDS: { max: 1000 },
     },
@@ -152,7 +151,6 @@ const QCVN_STANDARDS = {
 };
 
 // ===================== STATION PROFILES =====================
-// Auto standard switching based on station selection.
 
 const STATION_PROFILES = {
   "station-01": {
@@ -171,6 +169,7 @@ const STATION_PROFILES = {
 
 // ===================== GLOBAL STATE =====================
 
+// Ưu tiên nước ngầm
 let activeStandardKey = "GND";
 let activeThresholds = QCVN_STANDARDS[activeStandardKey].thresholds;
 
@@ -186,6 +185,7 @@ let currentData = {
 
 let lastRowsData = [];
 let qualityChart = null;
+let multiDayChart = null;
 
 // ===================== UTILITY FUNCTIONS =====================
 
@@ -199,7 +199,6 @@ function formatLabelTime(raw, index) {
 
   const s = String(raw).trim();
 
-  // Try parse full date string
   if (s.includes("GMT") || s.toLowerCase().includes("indochina")) {
     const d = new Date(s);
     if (!isNaN(d.getTime())) {
@@ -207,13 +206,21 @@ function formatLabelTime(raw, index) {
     }
   }
 
-  // Extract hh:mm:ss from string if exists
   const match = s.match(/(\d{1,2}:\d{2}:\d{2})/);
   if (match) return match[1];
 
   if (s.includes(":")) return s;
 
   return `#${index + 1}`;
+}
+
+function formatDateTimeLabel(row, index) {
+  const datePart = row.date || row.Date || "";
+  const timePart = formatLabelTime(row.time, index);
+
+  if (datePart && timePart) return `${datePart} ${timePart}`;
+  if (datePart) return datePart;
+  return timePart;
 }
 
 function getRawValue(param, obj) {
@@ -245,10 +252,8 @@ function getNumericValue(param, obj) {
 function classifyStatus(param, value) {
   const th = activeThresholds[param];
 
-  // If no thresholds or invalid value → consider as OK (no regulation)
   if (!th || Number.isNaN(value)) return { status: "good", label: "OK" };
 
-  // pH: range min–max
   if (param === "pH") {
     if (value >= th.min && value <= th.max) return { status: "good", label: "OK" };
     if (value < th.min) {
@@ -261,21 +266,18 @@ function classifyStatus(param, value) {
     }
   }
 
-  // Temperature: only upper bound
   if (param === "temp") {
     if (value <= th.max) return { status: "good", label: "OK" };
     if (value <= th.max + 2) return { status: "warn", label: "Warning" };
     return { status: "bad", label: "Above limit" };
   }
 
-  // DO: lower bound
   if (param === "DO") {
     if (value >= th.min) return { status: "good", label: "OK" };
     if (value >= th.min - 1) return { status: "warn", label: "Warning" };
     return { status: "bad", label: "Low" };
   }
 
-  // Turbidity, TDS: upper bound
   if (param === "turbidity" || param === "TDS") {
     if (value <= th.max) return { status: "good", label: "OK" };
     if (value <= th.max * 1.2) return { status: "warn", label: "Warning" };
@@ -301,7 +303,6 @@ function updateCards() {
     const statusChip = document.querySelector(`[data-status-for="${key}"]`);
     const barEl = document.querySelector(`[data-bar-for="${key}"]`);
 
-    // Value text
     if (valueEl && !Number.isNaN(value)) {
       const meta = PARAM_META[key];
       if (meta && meta.format) valueEl.textContent = meta.format(value);
@@ -310,7 +311,6 @@ function updateCards() {
       valueEl.textContent = "--";
     }
 
-    // Status chip (color + label)
     if (statusChip) {
       const lastSpan = statusChip.querySelector("span:last-child");
       statusChip.classList.remove("status-good", "status-warn-chip", "status-bad-chip");
@@ -323,7 +323,6 @@ function updateCards() {
       if (lastSpan) lastSpan.textContent = label;
     }
 
-    // Bar fill
     if (barEl) {
       const th = activeThresholds[key];
       let pct = 50;
@@ -369,15 +368,13 @@ function renderTableRows(rows) {
     ? standardObj.labelShort
     : "QCVN (reference)";
 
-  // Show newest row on top
   const displayRows = rows.slice().reverse();
 
   displayRows.forEach((row, idx) => {
     const tr = document.createElement("tr");
 
-    // Time cell
     const timeCell = document.createElement("td");
-    timeCell.textContent = formatLabelTime(row.time, idx);
+    timeCell.textContent = formatDateTimeLabel(row, idx);
     tr.appendChild(timeCell);
 
     const descCell = document.createElement("td");
@@ -389,7 +386,6 @@ function renderTableRows(rows) {
     statusSpan.classList.add("status-pill");
 
     if (mode === "all") {
-      // Combined description
       descCell.textContent =
         "Combined parameters (pH, Temp, DO, Turbidity, TDS)";
 
@@ -404,7 +400,6 @@ function renderTableRows(rows) {
         `Turb ${turbVal} NTU | TDS ${tdsVal} mg/L`;
       unitCell.textContent = "";
 
-      // Determine worst status among parameters
       const statuses = [
         classifyStatus("pH", getNumericValue("pH", row)),
         classifyStatus("temp", getNumericValue("temp", row)),
@@ -428,7 +423,6 @@ function renderTableRows(rows) {
         statusSpan.textContent = "Above limit";
       }
     } else {
-      // Single parameter mode
       const meta = PARAM_META[mode];
       descCell.textContent = meta ? meta.label : mode;
 
@@ -529,6 +523,73 @@ function updateChart() {
   });
 }
 
+function updateMultiDayChart() {
+  const canvas = document.getElementById("multiDayChart");
+  if (!canvas || !lastRowsData.length || typeof Chart === "undefined") return;
+
+  const select = document.getElementById("chart-param-select");
+  const param = select ? select.value : "pH";
+  const meta = PARAM_META[param] || { label: param, unit: "" };
+
+  const rows = lastRowsData.slice(); // keep chronological order
+  const labels = rows.map((r, i) => formatDateTimeLabel(r, i));
+  const data = rows.map((r) => {
+    const v = getNumericValue(param, r);
+    return Number.isNaN(v) ? null : v;
+  });
+
+  const ctx = canvas.getContext("2d");
+  if (multiDayChart) multiDayChart.destroy();
+
+  multiDayChart = new Chart(ctx, {
+    type: "line",
+    data: {
+      labels,
+      datasets: [
+        {
+          label: meta.unit
+            ? `${meta.label} (${meta.unit}) – Multi-day`
+            : `${meta.label} – Multi-day`,
+          data,
+          tension: 0.35,
+          pointRadius: 1.5,
+          pointHoverRadius: 3,
+          borderWidth: 2,
+          fill: false,
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        x: {
+          title: { display: true, text: "Date & Time" },
+          ticks: {
+            autoSkip: true,
+            maxTicksLimit: 10,
+            maxRotation: 45,
+            minRotation: 0,
+          },
+          grid: { display: false },
+        },
+        y: {
+          title: { display: true, text: meta.unit || "Value" },
+          grid: { color: "rgba(148,163,184,0.25)" },
+        },
+      },
+      plugins: {
+        legend: { display: true, labels: { boxWidth: 12 } },
+        tooltip: { enabled: true },
+      },
+      elements: {
+        line: { tension: 0.35 },
+        point: { radius: 1.5, hoverRadius: 3 },
+      },
+    },
+  });
+}
+
 function updateHeaderStationLabel() {
   const labelEl = document.getElementById("active-station-label");
   if (!labelEl) return;
@@ -575,7 +636,6 @@ function setStandard(code, options = { syncSelect: true }) {
   activeStandardKey = code;
   activeThresholds = standard.thresholds;
 
-  // Update dropdown if needed
   if (options.syncSelect) {
     const select = document.getElementById("standard-select");
     if (select) select.value = code;
@@ -584,9 +644,12 @@ function setStandard(code, options = { syncSelect: true }) {
   applyStandardToRefs();
   updateStandardNote();
 
-  // Re-evaluate values under new thresholds
   updateCards();
-  if (lastRowsData.length) renderTableRows(lastRowsData);
+  if (lastRowsData.length) {
+    renderTableRows(lastRowsData);
+    updateChart();
+    updateMultiDayChart();
+  }
 }
 
 function setStation(stationKey) {
@@ -595,10 +658,7 @@ function setStation(stationKey) {
 
   currentStationKey = stationKey;
 
-  // Auto-switch standard according to station profile
   setStandard(profile.defaultStandardKey, { syncSelect: true });
-
-  // Update station label on chart panel
   updateHeaderStationLabel();
 }
 
@@ -610,7 +670,6 @@ async function fetchDataFromApi() {
     if (!res.ok) throw new Error("HTTP " + res.status);
     const data = await res.json();
 
-    // Latest data for cards
     if (data && data.latest) {
       currentData = {
         pH: getNumericValue("pH", data.latest),
@@ -621,7 +680,6 @@ async function fetchDataFromApi() {
       };
       updateCards();
 
-      // Last update label
       const lastUpdateEl = document.getElementById("last-update");
       if (lastUpdateEl) {
         const timeLabel = data.latest.time
@@ -633,18 +691,17 @@ async function fetchDataFromApi() {
           : timeLabel;
       }
 
-      // Observation date
       const obsDateEl = document.getElementById("obs-date");
       if (obsDateEl && data.latest.date) {
         obsDateEl.textContent = data.latest.date;
       }
     }
 
-    // Historical records for table + chart
     if (data && Array.isArray(data.rows)) {
       lastRowsData = data.rows.slice();
       renderTableRows(lastRowsData);
       updateChart();
+      updateMultiDayChart();
     }
   } catch (err) {
     console.error("Error while calling Apps Script API:", err);
@@ -672,6 +729,7 @@ function initEventListeners() {
   if (chartParamSelect) {
     chartParamSelect.addEventListener("change", () => {
       updateChart();
+      updateMultiDayChart();
     });
   }
 
@@ -682,25 +740,19 @@ function initEventListeners() {
     });
   }
 
-  // Date filter is available but logic depends on how API provides dates.
-  // You can implement filtering here later if needed.
+  // Date filter logic có thể thêm sau khi cần lọc theo khoảng ngày
 }
 
 function initDashboard() {
-  // System time clock
   updateSystemTime();
   setInterval(updateSystemTime, 1000);
 
-  // Default station + standard
   setStation(currentStationKey);
 
-  // Fetch data periodically
   fetchDataFromApi();
   setInterval(fetchDataFromApi, 10000);
 
-  // Listeners
   initEventListeners();
 }
 
-// Start when DOM is ready
 document.addEventListener("DOMContentLoaded", initDashboard);
