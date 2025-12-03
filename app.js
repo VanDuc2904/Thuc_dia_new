@@ -2,7 +2,7 @@
 
 // Google Apps Script endpoint
 const API_URL =
-  "https://script.google.com/macros/s/AKfycbyL6n3Y8S04UDRHNenUHWm_tRw0PkiMT9QiwjVxznwCYPrRnAsC8Glt6PvItazunSDS2g/exec";
+  "https://script.google.com/macros/s/AKfycbwNgNzv0BiGp2VC8OnnYMJSJDc_f6291Rk3D1s-Vqfp8OiAKgFB_rmTEhQw_hEScOdFww/exec";
 
 // Parameters metadata
 const PARAM_META = {
@@ -115,7 +115,7 @@ const QCVN_STANDARDS = {
   GND: {
     thresholds: {
       pH: { min: 5.5, max: 8.5 },
-      temp: { max: 32 },        // practical reference
+      temp: { max: 32 },        // reference
       DO: { min: 0, max: 999 }, // not regulated, always OK
       turbidity: { max: 5 },
       TDS: { max: 1500 },
@@ -193,34 +193,21 @@ function formatTimeHHMMSS(date) {
   return date.toLocaleTimeString("en-GB", { hour12: false });
 }
 
+// Dùng nguyên chuỗi time từ backend (sheet), không parse lại
 function formatLabelTime(raw, index) {
   if (raw == null || raw === "") return `#${index + 1}`;
-  if (typeof raw === "number") return `#${index + 1}`;
-
-  const s = String(raw).trim();
-
-  if (s.includes("GMT") || s.toLowerCase().includes("indochina")) {
-    const d = new Date(s);
-    if (!isNaN(d.getTime())) {
-      return d.toLocaleTimeString("en-GB", { hour12: false });
-    }
-  }
-
-  const match = s.match(/(\d{1,2}:\d{2}:\d{2})/);
-  if (match) return match[1];
-
-  if (s.includes(":")) return s;
-
-  return `#${index + 1}`;
+  return String(raw).trim();
 }
 
+// Ghép thẳng date + time từ backend (sheet)
 function formatDateTimeLabel(row, index) {
   const datePart = row.date || row.Date || "";
-  const timePart = formatLabelTime(row.time, index);
+  const timePart = row.time || row.Time || "";
 
   if (datePart && timePart) return `${datePart} ${timePart}`;
   if (datePart) return datePart;
-  return timePart;
+  if (timePart) return timePart;
+  return `#${index + 1}`;
 }
 
 function getRawValue(param, obj) {
@@ -285,6 +272,40 @@ function classifyStatus(param, value) {
   }
 
   return { status: "good", label: "OK" };
+}
+
+// ===================== OVERALL STATUS =====================
+
+function updateOverallStatus() {
+  const el = document.getElementById("overall-status");
+  const dot = document.getElementById("overall-status-dot");
+  const text = document.getElementById("overall-status-text");
+  if (!el || !dot || !text) return;
+
+  const params = ["pH", "temp", "DO", "turbidity", "TDS"];
+  let worst = "good";
+
+  params.forEach((p) => {
+    const v = currentData[p];
+    const st = classifyStatus(p, v).status;
+    if (st === "bad") worst = "bad";
+    else if (st === "warn" && worst === "good") worst = "warn";
+  });
+
+  el.classList.remove("status-ok", "status-warn", "status-bad");
+  if (worst === "good") {
+    el.classList.add("status-ok");
+    text.textContent = "System operating normally";
+    dot.style.backgroundColor = "#059669";
+  } else if (worst === "warn") {
+    el.classList.add("status-warn");
+    text.textContent = "System at warning level";
+    dot.style.backgroundColor = "#d97706";
+  } else {
+    el.classList.add("status-bad");
+    text.textContent = "System above limit";
+    dot.style.backgroundColor = "#dc2626";
+  }
 }
 
 // ===================== UI UPDATES =====================
@@ -352,6 +373,8 @@ function updateCards() {
       }
     }
   });
+
+  updateOverallStatus();
 }
 
 function renderTableRows(rows) {
@@ -531,7 +554,7 @@ function updateMultiDayChart() {
   const param = select ? select.value : "pH";
   const meta = PARAM_META[param] || { label: param, unit: "" };
 
-  const rows = lastRowsData.slice(); // keep chronological order
+  const rows = lastRowsData.slice(); // chronological
   const labels = rows.map((r, i) => formatDateTimeLabel(r, i));
   const data = rows.map((r) => {
     const v = getNumericValue(param, r);
@@ -666,7 +689,8 @@ function setStation(stationKey) {
 
 async function fetchDataFromApi() {
   try {
-    const res = await fetch(API_URL);
+    // thêm timestamp chống cache
+    const res = await fetch(`${API_URL}?t=${Date.now()}`);
     if (!res.ok) throw new Error("HTTP " + res.status);
     const data = await res.json();
 
@@ -682,18 +706,18 @@ async function fetchDataFromApi() {
 
       const lastUpdateEl = document.getElementById("last-update");
       if (lastUpdateEl) {
-        const timeLabel = data.latest.time
-          ? formatLabelTime(data.latest.time, 0)
-          : formatTimeHHMMSS(new Date());
-        const dateLabel = data.latest.date || "";
-        lastUpdateEl.textContent = dateLabel
-          ? `${dateLabel} ${timeLabel}`
-          : timeLabel;
+        const dateLabel = data.latest.date ? String(data.latest.date) : "";
+        const timeLabel = data.latest.time ? String(data.latest.time) : "";
+
+        if (dateLabel && timeLabel) lastUpdateEl.textContent = `${dateLabel} ${timeLabel}`;
+        else if (dateLabel) lastUpdateEl.textContent = dateLabel;
+        else if (timeLabel) lastUpdateEl.textContent = timeLabel;
+        else lastUpdateEl.textContent = "";
       }
 
       const obsDateEl = document.getElementById("obs-date");
       if (obsDateEl && data.latest.date) {
-        obsDateEl.textContent = data.latest.date;
+        obsDateEl.textContent = String(data.latest.date);
       }
     }
 
@@ -739,8 +763,6 @@ function initEventListeners() {
       setStation(e.target.value);
     });
   }
-
-  // Date filter logic có thể thêm sau khi cần lọc theo khoảng ngày
 }
 
 function initDashboard() {
@@ -756,4 +778,3 @@ function initDashboard() {
 }
 
 document.addEventListener("DOMContentLoaded", initDashboard);
-
