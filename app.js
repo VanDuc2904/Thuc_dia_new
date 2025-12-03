@@ -2,7 +2,7 @@
 
 // Google Apps Script endpoint
 const API_URL =
-  "https://script.google.com/macros/s/AKfycbztkzV1kyGmECEDxhg-lKKuiNCy4x7vLQG_-svjQmQIspdUdpvmr7PeJrx1o4wPbXBLgw/exec";
+  "https://script.google.com/macros/s/AKfycbxMpgMnbKCm0ef_tK3L7C5hOC-0wgW9evlMUPeBt5xgX3neuPeGUsfvFfSmOI69WWTuTA/exec";
 
 // Parameters metadata
 const PARAM_META = {
@@ -756,3 +756,4 @@ function initDashboard() {
 }
 
 document.addEventListener("DOMContentLoaded", initDashboard);
+
