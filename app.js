@@ -192,19 +192,11 @@ let multiDayChart = null;
 function formatTimeHHMMSS(date) {
   return date.toLocaleTimeString("en-GB", { hour12: false });
 }
-
 function formatLabelTime(raw, index) {
   if (raw == null || raw === "") return `#${index + 1}`;
-  if (typeof raw === "number") return `#${index + 1}`;
+  return String(raw).trim(); // dùng đúng dữ liệu từ sheet
+}
 
-  const s = String(raw).trim();
-
-  if (s.includes("GMT") || s.toLowerCase().includes("indochina")) {
-    const d = new Date(s);
-    if (!isNaN(d.getTime())) {
-      return d.toLocaleTimeString("en-GB", { hour12: false });
-    }
-  }
 
   const match = s.match(/(\d{1,2}:\d{2}:\d{2})/);
   if (match) return match[1];
@@ -216,12 +208,14 @@ function formatLabelTime(raw, index) {
 
 function formatDateTimeLabel(row, index) {
   const datePart = row.date || row.Date || "";
-  const timePart = formatLabelTime(row.time, index);
+  const timePart = row.time || row.Time || "";
 
   if (datePart && timePart) return `${datePart} ${timePart}`;
   if (datePart) return datePart;
-  return timePart;
+  if (timePart) return timePart;
+  return `#${index + 1}`;
 }
+
 
 function getRawValue(param, obj) {
   if (!obj) return undefined;
@@ -682,14 +676,15 @@ async function fetchDataFromApi() {
 
       const lastUpdateEl = document.getElementById("last-update");
       if (lastUpdateEl) {
-        const timeLabel = data.latest.time
-          ? formatLabelTime(data.latest.time, 0)
-          : formatTimeHHMMSS(new Date());
-        const dateLabel = data.latest.date || "";
-        lastUpdateEl.textContent = dateLabel
-          ? `${dateLabel} ${timeLabel}`
-          : timeLabel;
+        const dateLabel = data.latest.date ? String(data.latest.date) : "";
+        const timeLabel = data.latest.time ? String(data.latest.time) : "";
+      
+        if (dateLabel && timeLabel) lastUpdateEl.textContent = `${dateLabel} ${timeLabel}`;
+        else if (dateLabel) lastUpdateEl.textContent = dateLabel;
+        else if (timeLabel) lastUpdateEl.textContent = timeLabel;
+        else lastUpdateEl.textContent = "";
       }
+
 
       const obsDateEl = document.getElementById("obs-date");
       if (obsDateEl && data.latest.date) {
@@ -756,4 +751,5 @@ function initDashboard() {
 }
 
 document.addEventListener("DOMContentLoaded", initDashboard);
+
 
